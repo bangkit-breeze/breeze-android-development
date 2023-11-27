@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
@@ -19,7 +21,7 @@ class SecondScreen : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_screen_second, container, false)
 
-        val next = view.findViewById<TextView>(R.id.tvNext2)
+        val next = view.findViewById<ImageButton>(R.id.btn_next)
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
 
         next.setOnClickListener {

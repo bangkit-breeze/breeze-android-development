@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.breeze.R
@@ -22,7 +23,7 @@ class ThirdScreen : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_screen_third, container, false)
-        val finish = view.findViewById<TextView>(R.id.tvFinish)
+        val finish = view.findViewById<Button>(R.id.btn_finish)
 
         finish.setOnClickListener {
             findNavController().navigate(R.id.action_onBoardingFragment_to_loginActivity)

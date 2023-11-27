@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Breeze</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome</string>
+    <string name="text_onboarding1">Welcome to BREEZE! We\'re ready to step up together to measure your carbon footprint. Thank you for joining and let\'s explore the sustainable journey together!</string>
+    <string name="text_onboarding2">Then, join our fun events to reduce your carbon emissions and win great prizes. Join us now on this sustainable journey!</string>
+    <string name="text_onboarding3">Let\'s actively participate and together help Indonesia achieve the ambitious target of 29% emission reduction by 2030. Start now!</string>
+
 </resources>
