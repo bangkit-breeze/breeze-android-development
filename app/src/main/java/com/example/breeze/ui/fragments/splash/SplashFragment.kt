@@ -28,15 +28,10 @@ class SplashFragment : Fragment() {
             }
 
         }, 3000)
-
-
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
-
         return view
-
     }
     private fun onBoardingIsFinished(): Boolean{
-
         val sharedPreferences = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean("finished",false)
     }

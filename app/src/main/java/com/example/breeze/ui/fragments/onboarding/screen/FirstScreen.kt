@@ -5,30 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
-import com.google.android.material.button.MaterialButton
+import com.example.breeze.databinding.FragmentScreenFirstBinding
 
 class FirstScreen : Fragment() {
-
+    private var _binding: FragmentScreenFirstBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_screen_first, container, false)
-
-        val next = view.findViewById<ImageButton>(R.id.btn_next)
+        _binding = FragmentScreenFirstBinding.inflate(inflater, container, false)
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
-
-        next.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             viewPager?.currentItem = 1
         }
-        return view
+        return binding.root
     }
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

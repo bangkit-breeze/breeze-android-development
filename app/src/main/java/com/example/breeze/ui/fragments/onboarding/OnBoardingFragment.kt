@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
+import com.example.breeze.databinding.FragmentOnBoardingBinding
+import com.example.breeze.databinding.FragmentScreenThirdBinding
 import com.example.breeze.ui.adapter.OnBoardingAdapter
 import com.example.breeze.ui.fragments.onboarding.screen.FirstScreen
 import com.example.breeze.ui.fragments.onboarding.screen.SecondScreen
@@ -14,36 +16,30 @@ import com.example.breeze.ui.fragments.onboarding.screen.ThirdScreen
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class OnBoardingFragment : Fragment() {
-
-
+    private var _binding: FragmentOnBoardingBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_on_boarding, container, false)
-
-
+        _binding = FragmentOnBoardingBinding.inflate(inflater, container, false)
         val fragmentList = arrayListOf<Fragment>(
             FirstScreen(),
             SecondScreen(),
             ThirdScreen()
         )
-
-        val adapter = OnBoardingAdapter(
+        binding.viewPager.adapter = OnBoardingAdapter(
             fragmentList,
             requireActivity().supportFragmentManager,
             lifecycle
         )
+        binding.dotsIndicator.attachTo(binding.viewPager)
+        return binding.root
+    }
 
-        val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
-
-        viewPager.adapter = adapter
-        val indicator = view.findViewById<DotsIndicator>(R.id.dots_indicator)
-
-        indicator.attachTo(viewPager)
-
-        return view
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

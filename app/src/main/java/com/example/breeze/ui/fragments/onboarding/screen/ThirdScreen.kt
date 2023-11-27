@@ -10,35 +10,34 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.breeze.R
+import com.example.breeze.databinding.FragmentScreenFirstBinding
+import com.example.breeze.databinding.FragmentScreenThirdBinding
 
 
 class ThirdScreen : Fragment() {
-
-
-
-
+    private var _binding: FragmentScreenThirdBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_screen_third, container, false)
-        val finish = view.findViewById<Button>(R.id.btn_finish)
-
-        finish.setOnClickListener {
+        _binding = FragmentScreenThirdBinding.inflate(inflater, container, false)
+        binding.btnFinish.setOnClickListener {
             findNavController().navigate(R.id.action_onBoardingFragment_to_loginActivity)
             onBoardingIsFinished()
         }
 
-        return view
+        return binding.root
     }
-
     private fun onBoardingIsFinished(){
-
         val sharedPreferences = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("finished",true)
         editor.apply()
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 
