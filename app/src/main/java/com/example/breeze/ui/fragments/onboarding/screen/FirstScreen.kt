@@ -1,4 +1,4 @@
-package com.example.breeze.ui.fragments.onboarding
+package com.example.breeze.ui.fragments.onboarding.screen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,23 +9,21 @@ import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
 
-class SecondScreen : Fragment() {
-
+class FirstScreen : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_screen_second, container, false)
+        val view =  inflater.inflate(R.layout.fragment_screen_first, container, false)
 
-        val next = view.findViewById<TextView>(R.id.tvNext2)
+        val next = view.findViewById<TextView>(R.id.tvNext1)
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
 
         next.setOnClickListener {
-            viewPager?.currentItem = 2
+            viewPager?.currentItem = 1
         }
-
         return view
     }
 

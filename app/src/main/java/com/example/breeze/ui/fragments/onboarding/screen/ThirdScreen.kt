@@ -1,4 +1,4 @@
-package com.example.breeze.ui.fragments.onboarding
+package com.example.breeze.ui.fragments.onboarding.screen
 
 import android.content.Context
 import android.os.Bundle

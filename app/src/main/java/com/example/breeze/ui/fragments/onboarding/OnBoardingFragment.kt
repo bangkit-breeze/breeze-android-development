@@ -7,6 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
+import com.example.breeze.ui.adapter.OnBoardingAdapter
+import com.example.breeze.ui.fragments.onboarding.screen.FirstScreen
+import com.example.breeze.ui.fragments.onboarding.screen.SecondScreen
+import com.example.breeze.ui.fragments.onboarding.screen.ThirdScreen
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class OnBoardingFragment : Fragment() {
@@ -26,7 +30,7 @@ class OnBoardingFragment : Fragment() {
             ThirdScreen()
         )
 
-        val adapter = ViewPagerAdapter(
+        val adapter = OnBoardingAdapter(
             fragmentList,
             requireActivity().supportFragmentManager,
             lifecycle
