@@ -1,40 +1,41 @@
 package com.example.breeze.ui.fragments.splash
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.breeze.R
+import com.example.breeze.ui.fragments.onboarding.OnBoardingViewModel
+import com.example.breeze.ui.fragments.onboarding.OnBoardingViewModelFactory
+import com.example.breeze.utils.Constants
+import kotlinx.coroutines.launch
 
 class SplashFragment : Fragment() {
+    private val viewModel: OnBoardingViewModel by viewModels {
+        OnBoardingViewModelFactory(requireContext())
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         Handler(Looper.getMainLooper()).postDelayed({
-            if (onBoardingIsFinished()){
-                findNavController().navigate(R.id.action_splashFragment_to_loginActivity)
-            }else{
-                findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment)
+            lifecycleScope.launch {
+                findNavController().navigate(getDestination())
             }
-
-        }, 3000)
-        val view = inflater.inflate(R.layout.fragment_splash, container, false)
-        return view
+        }, Constants.SPLASH_SCREEN_DELAY)
+        return inflater.inflate(R.layout.fragment_splash, container, false)
     }
-    private fun onBoardingIsFinished(): Boolean{
-        val sharedPreferences = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("finished",false)
+    private suspend fun getDestination(): Int {
+        return if (viewModel.isOnBoardingFinished()) {
+            R.id.action_splashFragment_to_loginActivity
+        } else {
+            R.id.action_splashFragment_to_onBoardingFragment
+        }
     }
-
-
 }
