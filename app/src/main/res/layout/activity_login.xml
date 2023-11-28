@@ -15,7 +15,9 @@
         android:src="@drawable/logo_without_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title"
@@ -29,7 +31,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:alpha="0"
+        tools:alpha="100"
+        />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title2"
@@ -41,7 +46,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:alpha="0"
+        tools:alpha="100"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -65,7 +73,10 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:alpha="0"
+            tools:alpha="100"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailEditTextLayout"
@@ -78,6 +89,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_email"
+            android:alpha="0"
+            tools:alpha="100"
             >
             <com.example.breeze.ui.customview.EmailEditText
                 android:id="@+id/et_email"
@@ -97,7 +110,10 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout"
+            android:alpha="0"
+            tools:alpha="100"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordEditTextLayout"
@@ -110,6 +126,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_password"
+            android:alpha="0"
+            tools:alpha="100"
             >
             <com.example.breeze.ui.customview.PasswordEditText
                 android:id="@+id/et_password"
@@ -132,6 +150,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout"
+            android:alpha="0"
+            tools:alpha="100"
             />
 
         <LinearLayout
@@ -145,6 +165,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_login"
+            android:alpha="0"
+            tools:alpha="100"
             >
 
             <com.google.android.material.textview.MaterialTextView
