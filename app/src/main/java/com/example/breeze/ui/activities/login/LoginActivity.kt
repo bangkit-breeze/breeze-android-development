@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
         binding.btnLogin.setOnClickListener {
-            Toast.makeText(this, "asd", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
         }
     }
 

@@ -3,6 +3,8 @@
     <style name="Base.Theme.Breeze" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/light_primary</item>
+         <item name="colorPrimaryVariant">@color/light_primary</item>
+         <item name="android:statusBarColor">@color/light_primary</item>
          <item name="colorAccent">@color/light_gray</item>
     </style>
 
@@ -11,5 +13,9 @@
     <style name="ShapeAppearanceOverlay.Material3.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
     </style>
 </resources>

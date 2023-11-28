@@ -23,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         binding.tvRegisterToLogin.setOnClickListener {
             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
         }
     }
     private fun playAnimations() {
