@@ -4,34 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorPrimary"
-    tools:context=".ui.activities.login.LoginActivity">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="102dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/logo_without_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+    android:background="?attr/colorPrimary"
+    tools:context=".ui.activities.register.RegisterActivity">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/inter_bold"
-        android:text="@string/welcome_back"
+        android:text="@string/title_register"
+        android:layout_marginTop="40dp"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
         android:alpha="0"
         tools:alpha="100"
         />
@@ -41,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
-        android:text="@string/title_login"
+        android:text="@string/title_register2"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,19 +49,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title2"
-       >
+        >
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_email"
-            android:layout_marginTop="10dp"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="@string/email"
+            android:layout_marginTop="10dp"
+            android:text="@string/full_name"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout"
+            android:alpha="0"
+            tools:alpha="100"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            android:alpha="0"
+            tools:alpha="100"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_register_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:layout_marginTop="15dp"
+            android:text="@string/email"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout"
             android:alpha="0"
             tools:alpha="100"
             />
@@ -82,7 +108,6 @@
             android:id="@+id/emailEditTextLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             app:boxStrokeColor="?attr/colorAccent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:startIconDrawable="@drawable/ic_baseline_email_24"
@@ -93,7 +118,7 @@
             tools:alpha="100"
             >
             <com.example.breeze.ui.customview.EmailEditText
-                android:id="@+id/et_email_login"
+                android:id="@+id/et_regiter_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -130,7 +155,45 @@
             tools:alpha="100"
             >
             <com.example.breeze.ui.customview.PasswordEditText
-                android:id="@+id/et_password_login"
+                android:id="@+id/et_register_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:ems="10"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_confirm_password"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="@string/confirm_password"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout"
+            android:alpha="0"
+            tools:alpha="100"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmPasswordEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="?attr/colorAccent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_confirm_password"
+            android:alpha="0"
+            tools:alpha="100"
+            >
+            <com.example.breeze.ui.customview.PasswordEditText
+                android:id="@+id/et_register_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -140,31 +203,31 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/signin"
+            android:text="@string/signup"
             android:layout_marginTop="25dp"
             android:padding="15dp"
             android:backgroundTint="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditTextLayout"
             android:alpha="0"
             tools:alpha="100"
             />
 
         <LinearLayout
-            android:id="@+id/textViewToRegister"
+            android:id="@+id/textViewToLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginHorizontal="32dp"
             android:gravity="center_horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_login"
+            app:layout_constraintTop_toBottomOf="@id/btn_register"
             android:alpha="0"
             tools:alpha="100"
             >
@@ -176,21 +239,22 @@
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:fontFamily="@font/inter"
-                android:text="@string/login_dont_have_account"
+                android:text="@string/register_have_account"
                 />
             <View
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"/>
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_login_to_register"
+                android:id="@+id/tv_register_to_login"
                 android:layout_width="wrap_content"
                 android:textSize="12sp"
                 android:fontFamily="@font/inter"
                 android:layout_height="wrap_content"
-                android:text="@string/create_account"
+                android:text="@string/signin"
                 android:textColor="?attr/colorPrimary"
                 />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
