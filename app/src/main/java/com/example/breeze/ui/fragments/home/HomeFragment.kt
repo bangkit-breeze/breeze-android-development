@@ -51,8 +51,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-   
+    private fun animateButtonClick(view: View) {
+        view.animate()
+            .scaleX(0.8f)
+            .scaleY(0.8f)
+            .setDuration(100)
+            .withEndAction {
+                view.animate()
+                    .scaleX(1.0f)
+                    .scaleY(1.0f)
+                    .setDuration(100)
+                    .start()
+            }
+            .start()
+    }
 
+   
 
     override fun onDestroyView() {
         super.onDestroyView()
