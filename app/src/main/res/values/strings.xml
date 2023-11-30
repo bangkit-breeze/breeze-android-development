@@ -26,7 +26,12 @@
     <string name="text_onboarding3">Let\'s actively participate and together help Indonesia achieve the ambitious target of 29% emission reduction by 2030. Start now!</string>
     <string name="number_dummy">60</string>
     <string name="number_dummy_percent">60%</string>
+    <string name="dummy_title_article">Reduce, reuse, and recycle</string>
+    <string name="dummy_desc_article">a simple mantra that encourages us  to be mindful of our  habits and minimize waste by finding  new uses for existing items consumtio</string>
+    <string name="dummy_title_event_popular">Plant Tree Apple</string>
+    <string name="dummy_desc_event_popular">Sometimes the most productive with the pla</string>
     <string name="name_dummy">Hi, Muhamad Yazid</string>
+    <string name="dummy_location">Bogor, Indonesia</string>
     <string name="level_dummy">Level 1</string>
     <string name="exp_dummy">0</string>
     <string name="exp">Exp</string>
@@ -43,5 +48,4 @@
     <string name="text_title_highlights">Highlights</string>
     <string name="text_title_event_popular">Event Popular</string>
     <string name="text_see_all">See All</string>
-    <string name="text_title_article">Tips for sustainability</string>
-</resources>
+    <string name="text_

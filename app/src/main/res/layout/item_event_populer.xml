@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/iv_gambar"
+                android:id="@+id/iv_event"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:src="@drawable/ic_launcher_background"
@@ -39,7 +39,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plant Tree Apple"
+                android:text="@string/dummy_title_event_popular"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:layout_marginBottom="3dp"
@@ -50,7 +50,7 @@
                 android:id="@+id/tv_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Sometimes the most productive with the plaasdas asdasd asdasd asdasd"
+                android:text="@string/dummy_desc_event_popular"
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold"
@@ -90,7 +90,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="50"
+                        android:text="@string/number_dummy"
                         android:textSize="9dp"
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/inter_medium"
@@ -115,7 +115,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bogor, Indonesia"
+                        android:text="@string/dummy_location"
                         android:textSize="9dp"
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/inter_medium"
