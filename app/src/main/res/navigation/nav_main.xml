@@ -38,4 +38,7 @@
         android:name="com.example.breeze.ui.activities.login.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+
+
+
 </navigation>

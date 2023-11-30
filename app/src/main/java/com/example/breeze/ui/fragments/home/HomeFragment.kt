@@ -13,15 +13,22 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
 import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
 import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
+import com.example.breeze.ui.adapter.OnBoardingAdapter
+import com.example.breeze.ui.adapter.QuestionAdapter
+import com.example.breeze.ui.fragments.onboarding.screen.FirstScreen
+import com.example.breeze.ui.fragments.onboarding.screen.SecondScreen
+import com.example.breeze.ui.fragments.onboarding.screen.ThirdScreen
 import com.example.breeze.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -86,7 +93,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 false
             }
 
+            imgMark.setOnClickListener {
+                showQuestionDialog()
+            }
+
         }
+    }
+
+    private fun showQuestionDialog() {
+        val customDialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog_question, null)
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(customDialogView)
+            .create()
+        val viewPager = customDialogView.findViewById<ViewPager2>(R.id.view_pager_question)
+        val dotsIndicator = customDialogView.findViewById<DotsIndicator>(R.id.dots_indicator_question)
+        val fragmentList = arrayListOf<Fragment>(
+            QuestionScreen(),
+            QuestionSecondScreen(),
+            QuestionThirdScreen()
+        )
+        viewPager.adapter = QuestionAdapter(
+            fragmentList,
+            requireActivity().supportFragmentManager,
+            lifecycle
+        )
+        dotsIndicator.attachTo(viewPager)
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
     }
 
     private fun showProgressBarDialog() {
