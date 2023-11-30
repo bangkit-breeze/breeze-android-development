@@ -267,6 +267,9 @@
                     >
 
                     <LinearLayout
+                        android:id="@+id/btn_info_food"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:layout_weight="1"
                         android:paddingHorizontal="20dp"
                         android:paddingVertical="10dp"
@@ -327,6 +330,9 @@
                         android:layout_height="wrap_content"/>
 
                     <LinearLayout
+                        android:id="@+id/btn_info_vechile"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:layout_weight="1"
                         android:paddingHorizontal="20dp"
                         android:paddingVertical="10dp"
@@ -393,6 +399,9 @@
                     >
 
                     <LinearLayout
+                        android:id="@+id/btn_info_event"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:layout_weight="1"
                         android:paddingHorizontal="20dp"
                         android:paddingVertical="10dp"
@@ -451,6 +460,9 @@
                         android:layout_height="wrap_content"/>
 
                     <LinearLayout
+                        android:id="@+id/btn_info_carbon"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:layout_weight="1"
                         android:paddingHorizontal="20dp"
                         android:paddingVertical="10dp"
