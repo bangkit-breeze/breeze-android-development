@@ -66,7 +66,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             .start()
     }
 
-   
+    private fun showFoodBottomSheet() {
+        val sheetDialog = BottomSheetDialog(requireContext())
+        val sheetBinding = BottomDialogInfoFoodBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(sheetBinding.root)
+
+        sheetBinding.btnAddTrackFood.setOnClickListener {
+            displayToast(R.string.feature_not_yet)
+        }
+
+        sheetDialog.show()
+    }
+
+    
+
+    private fun displayToast(message: Int) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
