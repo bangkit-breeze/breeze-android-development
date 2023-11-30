@@ -1,0 +1,52 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="10dp"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/bg_article"
+    android:layout_height="wrap_content">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_article"
+        android:layout_width="80dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="10dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:text="Reduce, reuse, and recycle"
+        app:layout_constraintStart_toEndOf="@+id/iv_article"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="a simple mantra that encourages us  to be mindful of our  habits and minimize waste by finding  new uses for existing items consumtio"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="15dp"
+        android:maxLines="4"
+        android:layout_marginBottom="3dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/inter"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_article"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
