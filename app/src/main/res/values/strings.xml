@@ -24,4 +24,24 @@
     <string name="text_onboarding1">Welcome to BREEZE! We\'re ready to step up together to measure your carbon footprint. Thank you for joining and let\'s explore the sustainable journey together!</string>
     <string name="text_onboarding2">Then, join our fun events to reduce your carbon emissions and win great prizes. Join us now on this sustainable journey!</string>
     <string name="text_onboarding3">Let\'s actively participate and together help Indonesia achieve the ambitious target of 29% emission reduction by 2030. Start now!</string>
+    <string name="number_dummy">60</string>
+    <string name="number_dummy_percent">60%</string>
+    <string name="name_dummy">Hi, Muhamad Yazid</string>
+    <string name="level_dummy">Level 1</string>
+    <string name="exp_dummy">0</string>
+    <string name="exp">Exp</string>
+    <string name="your_total">Your total</string>
+    <string name="carbon_footprint">carbon footprint</string>
+    <string name="exp_max_dummy">100</string>
+    <string name="kgCO2e">kgCO2e</string>
+    <string name="details">View Details</string>
+    <string name="text_explore">Explore Projects</string>
+    <string name="text_title_food">Food Tracked</string>
+    <string name="text_title_vechile">Vechile Tracked</string>
+    <string name="text_title_event">Total Event</string>
+    <string name="text_title_carbon">CO2e Removed</string>
+    <string name="text_title_highlights">Highlights</string>
+    <string name="text_title_event_popular">Event Popular</string>
+    <string name="text_see_all">See All</string>
+    <string name="text_title_article">Tips for sustainability</string>
 </resources>

@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.home.HomeFragment">
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,7 +20,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
-
                 <include
                     android:id="@+id/include"
                     layout="@layout/layout_top_home"
@@ -50,11 +48,12 @@
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_medium"
-                            android:text="Hi, Muhamad Yazid"
+                            android:text="@string/name_dummy"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
@@ -75,6 +74,7 @@
                                 android:orientation="vertical">
 
                                 <ProgressBar
+                                    android:id="@+id/progressBar_horizontal"
                                     style="?android:attr/progressBarStyleHorizontal"
                                     android:layout_width="match_parent"
                                     android:layout_height="10dp"
@@ -88,24 +88,25 @@
                                     android:layout_marginTop="3dp"
                                     android:orientation="horizontal">
 
-                                    <TextView
+                                    <com.google.android.material.textview.MaterialTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/inter_medium"
-                                        android:text="Level 1"
+                                        android:text="@string/level_dummy"
                                         android:textColor="@color/black"
                                         android:textSize="11sp" />
 
-                                    <TextView
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tv_exp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/inter_medium"
-                                        android:text="12"
+                                        android:text="@string/exp_dummy"
                                         android:textColor="@color/black"
                                         android:textSize="11sp" />
 
-                                    <TextView
+                                    <com.google.android.material.textview.MaterialTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/inter_medium"
@@ -113,20 +114,21 @@
                                         android:textColor="@color/black"
                                         android:textSize="11sp" />
 
-                                    <TextView
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tv_exp_max"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/inter_medium"
-                                        android:text="100"
+                                        android:text="@string/exp_max_dummy"
                                         android:textColor="@color/black"
                                         android:textSize="11sp" />
 
-                                    <TextView
+                                    <com.google.android.material.textview.MaterialTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="3dp"
                                         android:fontFamily="@font/inter_medium"
-                                        android:text="Exp"
+                                        android:text="@string/exp"
                                         android:textColor="@color/black"
                                         android:textSize="8sp" />
                                 </LinearLayout>
@@ -150,25 +152,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"
                             android:textSize="14sp"
                             android:textColor="@color/black"
-                            android:text="Your total"/>
-                        <TextView
+                            android:text="@string/your_total"/>
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"
                             android:textSize="14sp"
                             android:textColor="@color/black"
-                            android:text="carbon footprint"/>
+                            android:text="@string/carbon_footprint"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:orientation="horizontal"
                             android:layout_height="wrap_content">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_total_carbon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
@@ -176,22 +179,22 @@
                                 android:text="6.2"
                                 android:textColor="@color/light_secondary"
                                 android:textStyle="bold"/>
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
                                 android:textSize="11sp"
                                 android:layout_marginLeft="5dp"
                                 android:textColor="@color/black"
-                                android:text="kgCO2e"/>
+                                android:text="@string/kgCO2e"/>
                         </LinearLayout>
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"
                             android:textSize="13sp"
                             android:textColor="?attr/colorPrimary"
-                            android:text="View details"/>
+                            android:text="@string/details"/>
                     </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -199,27 +202,27 @@
                         android:layout_height="wrap_content">
 
                         <ProgressBar
-                            android:id="@+id/progress_bar"
+                            android:id="@+id/progressBar_circular"
                             android:layout_width="130dp"
                             android:layout_height="130dp"
-                            android:progress="60"
+                            android:progress="@string/number_dummy"
                             android:rotation="-90"
                             style="@style/CircularDeterminateProgressBar"
                             android:progressDrawable="@drawable/custom_circular_progressbar"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/text_view_progress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"
-                            android:text="60%"
+                            android:text="@string/number_dummy_percent"
                             android:textColor="@color/black"
-                            app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-                            app:layout_constraintEnd_toEndOf="@+id/progress_bar"
-                            app:layout_constraintStart_toStartOf="@+id/progress_bar"
-                            app:layout_constraintTop_toTopOf="@+id/progress_bar"
+                            app:layout_constraintBottom_toBottomOf="@+id/progressBar_circular"
+                            app:layout_constraintEnd_toEndOf="@+id/progressBar_circular"
+                            app:layout_constraintStart_toStartOf="@+id/progressBar_circular"
+                            app:layout_constraintTop_toTopOf="@+id/progressBar_circular"
                              />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
@@ -228,7 +231,7 @@
                     android:id="@+id/btn_explore"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:text="Explore Projects"
+                    android:text="@string/text_explore"
                     android:layout_marginTop="25dp"
                     android:padding="6dp"
                     app:cornerRadius="10dp"
@@ -241,12 +244,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_carbon"
                     />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_hihglights"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:text="Highlights"
+                    android:text="@string/text_title_highlights"
                     android:layout_marginTop="20dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_semibold"
@@ -275,11 +278,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Food Tracked"
+                                android:text="@string/text_title_food"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/inter"
@@ -299,7 +302,8 @@
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="6dp"
                             android:orientation="horizontal">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_total_food"
                                 android:layout_width="wrap_content"
                                 android:layout_height="24dp"
                                 android:text="0"
@@ -334,7 +338,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/total_vechile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -358,7 +363,7 @@
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="6dp"
                             android:orientation="horizontal">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="24dp"
                                 android:text="0"
@@ -399,11 +404,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_total_event"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Total Event"
+                                android:text="@string/text_title_event"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/inter"
@@ -423,7 +429,7 @@
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="6dp"
                             android:orientation="horizontal">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="24dp"
                                 android:text="0"
@@ -456,11 +462,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_total_carbon_removed"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="CO2e Removed"
+                                android:text="@string/text_title_carbon"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/inter"
@@ -507,7 +514,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:text="Event Populer"
+                    android:text="@string/text_title_event_popular"
                     android:layout_marginTop="20dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_semibold"
@@ -521,7 +528,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/inter_medium"
-                    android:text="See All"
+                    android:text="@string/text_see_all"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_event"
@@ -550,7 +557,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginLeft="15dp"
-                android:text="Tips for sustainability"
+                android:text="@string/text_title_article"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/inter_semibold"
