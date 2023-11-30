@@ -102,7 +102,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.show()
     }
 
-   
+    private fun showCarbonBottomSheet() {
+        val sheetDialog = BottomSheetDialog(requireContext())
+        val sheetBinding = BottomDialogInfoCarbonBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(sheetBinding.root)
+
+        sheetBinding.btnAddRemoveCarbon.setOnClickListener {
+            displayToast(R.string.feature_not_yet)
+        }
+
+        sheetDialog.show()
+    }
+
     private fun displayToast(message: Int) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
