@@ -78,6 +78,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.show()
     }
 
+    private fun showVehicleBottomSheet() {
+        val sheetDialog = BottomSheetDialog(requireContext())
+        val sheetBinding = BottomDialogInfoVechileBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(sheetBinding.root)
+
+        sheetBinding.btnAddTrackVechile.setOnClickListener {
+            displayToast(R.string.feature_not_yet)
+        }
+
+        sheetDialog.show()
+    }
+
     
 
     private fun displayToast(message: Int) {
