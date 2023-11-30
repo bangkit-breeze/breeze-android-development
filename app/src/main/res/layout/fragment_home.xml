@@ -203,6 +203,7 @@
 
                         <ProgressBar
                             android:id="@+id/progressBar_circular"
+                            android:clickable="true"
                             android:layout_width="130dp"
                             android:layout_height="130dp"
                             android:progress="@string/number_dummy"
@@ -213,7 +214,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/text_view_progress"
+                            android:id="@+id/tv_progress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"

@@ -1,10 +1,17 @@
 package com.example.breeze.ui.fragments.home
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.breeze.R
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
@@ -13,17 +20,21 @@ import com.example.breeze.databinding.BottomDialogInfoFoodBinding
 import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var alertDialog: AlertDialog.Builder
+    private var progressClickStartTime: Long = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
+        alertDialog = AlertDialog.Builder(requireContext())
         setupInfoListeners()
 
         return binding.root
@@ -48,8 +59,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 animateButtonClick( btnInfoCarbon)
                 showCarbonBottomSheet()
             }
-        }
-    }
+            progressBarCircular.setOnClickListener {
+                showProgressBarDialog()
+            }
+
 
     private fun animateButtonClick(view: View) {
         view.animate()
