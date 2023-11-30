@@ -4,6 +4,9 @@
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/light_primary</item>
          <item name="colorPrimaryVariant">@color/light_primary</item>
+
+         <item name="colorSecondary">@color/light_secondary</item>
+
          <item name="android:statusBarColor">@color/light_primary</item>
          <item name="colorAccent">@color/light_gray</item>
     </style>
@@ -17,5 +20,10 @@
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@android:color/transparent</item>
+    </style>
+
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false </item>
+        <item name="android:progressDrawable">@drawable/custom_circular_progressbar</item>
     </style>
 </resources>
