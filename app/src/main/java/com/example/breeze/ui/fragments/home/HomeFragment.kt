@@ -19,6 +19,7 @@ import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
 import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
+import com.example.breeze.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 
@@ -28,7 +29,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
 
     private lateinit var alertDialog: AlertDialog.Builder
-    private var progressClickStartTime: Long = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,19 +67,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     MotionEvent.ACTION_DOWN -> {
                         val scaleDown = ObjectAnimator.ofPropertyValuesHolder(
                             view,
-                            PropertyValuesHolder.ofFloat("scaleX", 0.8f),
-                            PropertyValuesHolder.ofFloat("scaleY", 0.8f)
+                            PropertyValuesHolder.ofFloat("scaleX", Constants.INITIAL_SCALE_FACTOR),
+                            PropertyValuesHolder.ofFloat("scaleY", Constants.INITIAL_SCALE_FACTOR)
                         )
-                        scaleDown.duration = 150
+                        scaleDown.duration = Constants.DURATION_ANIMATION_CLICKED_DELAY
                         scaleDown.start()
                     }
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                         val scaleUp = ObjectAnimator.ofPropertyValuesHolder(
                             view,
-                            PropertyValuesHolder.ofFloat("scaleX", 1f),
-                            PropertyValuesHolder.ofFloat("scaleY", 1f)
+                            PropertyValuesHolder.ofFloat("scaleX", Constants.FINAL_SCALE_FACTOR),
+                            PropertyValuesHolder.ofFloat("scaleY", Constants.FINAL_SCALE_FACTOR)
                         )
-                        scaleUp.duration = 150
+                        scaleUp.duration = Constants.DURATION_ANIMATION_CLICKED_DELAY
                         scaleUp.start()
                     }
                 }
@@ -112,14 +112,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun animateButtonClick(view: View) {
         view.animate()
-            .scaleX(0.8f)
-            .scaleY(0.8f)
-            .setDuration(100)
+            .scaleX(Constants.INITIAL_SCALE_FACTOR)
+            .scaleY(Constants.INITIAL_SCALE_FACTOR)
+            .setDuration(Constants.DURATION_ANIMATION_CLICKED_DELAY)
             .withEndAction {
                 view.animate()
-                    .scaleX(1.0f)
-                    .scaleY(1.0f)
-                    .setDuration(100)
+                    .scaleX(Constants.FINAL_SCALE_FACTOR)
+                    .scaleY(Constants.FINAL_SCALE_FACTOR)
+                    .setDuration(Constants.DURATION_ANIMATION_CLICKED_DELAY)
                     .start()
             }
             .start()
