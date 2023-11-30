@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialogbg">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_round_remove_24"
+        android:layout_gravity="center|top"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="175dp"
+        android:layout_gravity="center"
+        android:src="@drawable/info_carbon"
+        android:layout_marginTop="20dp"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter"
+        android:gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:text="Let's eliminate CO2e emissions together from some of our projects."
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:lineSpacingExtra="4dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_remove_carbon"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Okay"
+        android:layout_marginTop="25dp"
+        android:padding="6dp"
+        app:cornerRadius="30dp"
+        android:textSize="16sp"
+        app:iconTint="@color/white"
+        android:layout_marginBottom="20dp"
+        app:iconGravity="textEnd"
+        android:fontFamily="@font/inter_medium"
+        android:layout_marginHorizontal="15dp"
+        android:backgroundTint="?attr/colorPrimary" />
+
+</LinearLayout>
