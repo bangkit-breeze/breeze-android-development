@@ -62,6 +62,52 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             progressBarCircular.setOnClickListener {
                 showProgressBarDialog()
             }
+            progressBarCircular.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        val scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                            view,
+                            PropertyValuesHolder.ofFloat("scaleX", 0.8f),
+                            PropertyValuesHolder.ofFloat("scaleY", 0.8f)
+                        )
+                        scaleDown.duration = 150
+                        scaleDown.start()
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        val scaleUp = ObjectAnimator.ofPropertyValuesHolder(
+                            view,
+                            PropertyValuesHolder.ofFloat("scaleX", 1f),
+                            PropertyValuesHolder.ofFloat("scaleY", 1f)
+                        )
+                        scaleUp.duration = 150
+                        scaleUp.start()
+                    }
+                }
+                false
+            }
+
+        }
+    }
+
+    private fun showProgressBarDialog() {
+        val customDialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog_carbon, null)
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(customDialogView)
+            .create()
+
+        val ivClose = customDialogView.findViewById<ImageView>(R.id.iv_close)
+        val btnOkay = customDialogView.findViewById<MaterialButton>(R.id.btn_okay)
+
+        ivClose.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        btnOkay.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
+    }
 
 
     private fun animateButtonClick(view: View) {
