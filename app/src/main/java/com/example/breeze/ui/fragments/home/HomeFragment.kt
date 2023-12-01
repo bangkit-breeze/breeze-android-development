@@ -99,12 +99,61 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 startActivity(intent)
             }
 
+            tvDetails.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        val scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                            view,
+                            PropertyValuesHolder.ofFloat("scaleX",0.9f),
+                            PropertyValuesHolder.ofFloat("scaleY", 0.9f)
+                        )
+                        scaleDown.duration = Constants.DURATION_ANIMATION_CLICKED_DELAY
+                        scaleDown.start()
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        val scaleUp = ObjectAnimator.ofPropertyValuesHolder(
+                            view,
+                            PropertyValuesHolder.ofFloat("scaleX", Constants.FINAL_SCALE_FACTOR),
+                            PropertyValuesHolder.ofFloat("scaleY", Constants.FINAL_SCALE_FACTOR)
+                        )
+                        scaleUp.duration = Constants.DURATION_ANIMATION_CLICKED_DELAY
+                        scaleUp.start()
+                    }
+                }
+                false
+            }
+
             imgMark.setOnClickListener {
                 showQuestionDialog()
             }
 
+            imgMark.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        val scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                            view,
+                            PropertyValuesHolder.ofFloat("scaleX", Constants.INITIAL_SCALE_FACTOR),
+                            PropertyValuesHolder.ofFloat("scaleY", Constants.INITIAL_SCALE_FACTOR)
+                        )
+                        scaleDown.duration = Constants.DURATION_ANIMATION_CLICKED_DELAY
+                        scaleDown.start()
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        val scaleUp = ObjectAnimator.ofPropertyValuesHolder(
+                            view,
+                            PropertyValuesHolder.ofFloat("scaleX", Constants.FINAL_SCALE_FACTOR),
+                            PropertyValuesHolder.ofFloat("scaleY", Constants.FINAL_SCALE_FACTOR)
+                        )
+                        scaleUp.duration = Constants.DURATION_ANIMATION_CLICKED_DELAY
+                        scaleUp.start()
+                    }
+                }
+                false
+            }
+
         }
     }
+
 
     private fun showQuestionDialog() {
         val customDialogView =

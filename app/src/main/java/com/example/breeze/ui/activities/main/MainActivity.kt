@@ -49,7 +49,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        if (intent.getBooleanExtra("return_to_home", false)) {
+            returnToHomeFragment()
+        } else if (intent.getBooleanExtra("return_to_profile", false)) {
+            returnToProfileFragment()
+        } else {
+            replaceFragment(HomeFragment())
+        }
+
         replaceFragment(HomeFragment())
+    }
+
+
+    private fun returnToHomeFragment() {
+        binding.bottomNavigation.selectedItemId = R.id.bottom_home
+        replaceFragment(HomeFragment())
+    }
+    private fun returnToProfileFragment() {
+        binding.bottomNavigation.selectedItemId = R.id.bottom_profile
+        replaceFragment(ProfileFragment())
     }
 
     private fun showBottomSheet(){
@@ -76,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun replaceFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.navFragment, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit()
     }
 
 }
