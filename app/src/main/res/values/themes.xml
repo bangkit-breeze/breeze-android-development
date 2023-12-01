@@ -24,4 +24,9 @@
         <item name="android:indeterminateOnly">false </item>
         <item name="android:progressDrawable">@drawable/custom_circular_progressbar</item>
     </style>
+
+    <style name="ToolbarTitleText">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

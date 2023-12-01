@@ -226,6 +226,7 @@
                                 android:text="@string/kgCO2e"/>
                         </LinearLayout>
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"

@@ -2,6 +2,7 @@ package com.example.breeze.ui.fragments.home
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
 import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
+import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
 import com.example.breeze.ui.adapter.OnBoardingAdapter
 import com.example.breeze.ui.adapter.QuestionAdapter
 import com.example.breeze.ui.fragments.onboarding.screen.FirstScreen
@@ -91,6 +93,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     }
                 }
                 false
+            }
+            tvDetails.setOnClickListener {
+                val intent = Intent(activity, DetailCarbonActivity::class.java)
+                startActivity(intent)
             }
 
             imgMark.setOnClickListener {
