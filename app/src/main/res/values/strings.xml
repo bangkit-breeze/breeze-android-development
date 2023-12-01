@@ -50,4 +50,16 @@
     <string name="text_title_event_popular">Event Popular</string>
     <string name="text_see_all">See All</string>
     <string name="text_title_article">Tips for sustainability</string>
+    <string name="text_questione_one">You’re on a good way! Your day is going amazing</string>
+    <string name="text_questione_two">Track you’re food and your vehicle for carbon</string>
+    <string name="text_questione_tree">Achieving and sustaining carbon calorie goals</string>
+    <string name="text_food">food</string>
+    <string name="text_calorie">calorie</string>
+    <string name="text_vehicle">vehicle</string>
+    <string name="text_carbon">carbon</string>
+    <string name="good_way">good way</string>
+    <string name="amazing">amazing</string>
+    <string name="text_question_two_desc">Keep tracking the food and vehicles you consume.</string>
+    <string name="text_question_one_desc">Welcome to the Breeze app. Swipe to find out more!</string>
+    <string name="text_question_three_desc">Find your balance and aim to stay below your carbon calorie goal.</string>
 </resources>

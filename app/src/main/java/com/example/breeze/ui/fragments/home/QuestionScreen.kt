@@ -25,15 +25,15 @@ class QuestionScreen  : Fragment() {
     ): View? {
         _binding = FragmentQuestionScreenBinding.inflate(inflater, container, false)
 
-        val fullText = "You’re on a good way! Your day is going amazing"
+        val fullText = resources.getString(R.string.text_questione_one)
         val spannableString = SpannableString(fullText)
-        val goodWayStartIndex = fullText.indexOf("good way")
-        val goodWayEndIndex = goodWayStartIndex + "good way".length
+        val goodWayStartIndex = fullText.indexOf(resources.getString(R.string.good_way))
+        val goodWayEndIndex = goodWayStartIndex + resources.getString(R.string.good_way).length
         val goodWayColorSpan = ForegroundColorSpan(resources.getColor(R.color.light_primary))
         spannableString.setSpan(goodWayColorSpan, goodWayStartIndex, goodWayEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        val amazingStartIndex = fullText.indexOf("amazing")
-        val amazingEndIndex = amazingStartIndex + "amazing".length
-        val amazingColorSpan = ForegroundColorSpan(resources.getColor(R.color.light_primary)) 
+        val amazingStartIndex = fullText.indexOf(resources.getString(R.string.amazing))
+        val amazingEndIndex = amazingStartIndex + resources.getString(R.string.amazing).length
+        val amazingColorSpan = ForegroundColorSpan(resources.getColor(R.color.light_primary))
         spannableString.setSpan(amazingColorSpan, amazingStartIndex, amazingEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         binding.textView.text = spannableString
@@ -44,8 +44,6 @@ class QuestionScreen  : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    interface OnNextClickListener {
-        fun onNextClicked()
-    }
+
 
 }
