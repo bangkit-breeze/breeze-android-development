@@ -6,6 +6,7 @@
     <color name="lavender">#1BD15D</color>
     <color name="light_gray">#8B8B8B</color>
     <color name="super_light_gray">#ececec</color>
+    <color name="medium_light_gray">#efefef</color>
     <color name="gray">#848A94</color>
     <color name="light_secondary">#1F9E4D</color>
     <color name="light_progressbar">#D9D9D9</color>

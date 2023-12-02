@@ -101,7 +101,7 @@
         android:id="@+id/tv_desc_carbon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The base goal represets the monthly cc we shoul all aspire to. The figure (30,000 CC = 30kg CO2e emissions) is calculated in accordance with the paris climate targets, which wew set to prevent the wors effects of climate change"
+        android:text="@string/base_goal_escription"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:fontFamily="@font/inter"

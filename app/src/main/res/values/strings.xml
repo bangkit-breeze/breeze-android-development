@@ -59,6 +59,7 @@
     <string name="text_carbon">carbon</string>
     <string name="good_way">good way</string>
     <string name="amazing">amazing</string>
+    <string name="base_goal_escription">The base goal represets the monthly cc we shoul all aspire to. The figure (30,000 CC = 30kg CO2e emissions) is calculated in accordance with the paris climate targets, which wew set to prevent the wors effects of climate change</string>
     <string name="detail_carbon">Detail Carbon</string>
     <string name="text_question_two_desc">Keep tracking the food and vehicles you consume.</string>
     <string name="text_question_one_desc">Welcome to the Breeze app. Swipe to find out more!</string>
