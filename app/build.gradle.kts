@@ -37,6 +37,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -61,4 +62,5 @@ dependencies {
     implementation("com.makeramen:roundedimageview:2.3.0")
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
+    implementation("androidx.exifinterface:exifinterface:1.3.6")
 }
