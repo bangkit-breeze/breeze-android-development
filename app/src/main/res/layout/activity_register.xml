@@ -71,6 +71,7 @@
             android:id="@+id/nameEditTextLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:boxStrokeColor="?attr/colorAccent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:startIconDrawable="@drawable/ic_baseline_person_24"
             app:layout_constraintStart_toStartOf="parent"
