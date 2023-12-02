@@ -10,6 +10,7 @@ import com.example.breeze.databinding.FragmentEventBinding
 import com.example.breeze.ui.adapter.EventPagerAdapter
 import com.example.breeze.ui.fragments.event.screen.ActiveEventFragment
 import com.example.breeze.ui.fragments.event.screen.ExploreEventFragment
+import com.example.breeze.ui.fragments.event.screen.FinishedEventFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -35,6 +36,7 @@ class EventFragment : Fragment() {
         val adapter = EventPagerAdapter(this)
         adapter.addFragment(ExploreEventFragment())
         adapter.addFragment(ActiveEventFragment())
+        adapter.addFragment(FinishedEventFragment())
         viewPager.adapter = adapter
 
         val tabLayout: TabLayout = binding?.tabs ?: return
@@ -42,6 +44,7 @@ class EventFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "Explore"
                 1 -> "Active"
+                2 -> "Finished"
                 else -> ""
             }
         }.attach()
