@@ -14,6 +14,7 @@ import com.example.breeze.databinding.FragmentProfileBinding
 import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
 import com.example.breeze.ui.activities.profile.DetailProfileActivity
 import com.example.breeze.ui.activities.profile.EditProfileActivity
+import com.example.breeze.ui.activities.profile.exchange.ExchangeTokenActivity
 import com.example.breeze.ui.activities.profile.help.HelpCenterActivity
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -44,9 +45,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 val intent = Intent(activity, HelpCenterActivity::class.java)
                 startActivity(intent)
             }
+            binding.btnPoints.setOnClickListener {
+                val intent = Intent(activity, ExchangeTokenActivity::class.java)
+                startActivity(intent)
+            }
             val features = listOf(
-               btnPoints, btnSubscription,
-                btnSharetofriend, btnPrivacy, btnHelpcenter,
+               btnSubscription,
+                btnSharetofriend, btnPrivacy,
                 btnLanguage, btnDarkmode, btnLogout
             )
 
