@@ -19,6 +19,8 @@ class DetailProfileActivity : AppCompatActivity() {
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
         }
+
+
         binding.btnChangePassword.setOnClickListener {
             val intent = Intent(this, EditPasswordActivity::class.java)
             startActivity(intent)

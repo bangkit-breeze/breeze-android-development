@@ -13,6 +13,8 @@ import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.databinding.FragmentProfileBinding
 import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
 import com.example.breeze.ui.activities.profile.DetailProfileActivity
+import com.example.breeze.ui.activities.profile.EditProfileActivity
+import com.example.breeze.ui.activities.profile.help.HelpCenterActivity
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding? = null
@@ -36,6 +38,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
             btnProfile.setOnClickListener {
                 val intent = Intent(activity, DetailProfileActivity::class.java)
+                startActivity(intent)
+            }
+            binding.btnHelpcenter.setOnClickListener {
+                val intent = Intent(activity, HelpCenterActivity::class.java)
                 startActivity(intent)
             }
             val features = listOf(
