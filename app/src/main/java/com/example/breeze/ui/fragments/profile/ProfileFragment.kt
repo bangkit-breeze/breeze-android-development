@@ -1,5 +1,6 @@
 package com.example.breeze.ui.fragments.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.example.breeze.R
 import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.databinding.FragmentProfileBinding
+import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
+import com.example.breeze.ui.activities.profile.DetailProfileActivity
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding? = null
@@ -24,13 +27,31 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         return binding.root
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
     private fun setupInfoListeners() {
         binding?.apply {
+
             btnProfile.setOnClickListener {
-                Toast.makeText(requireContext(), "Feature not yed", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, DetailProfileActivity::class.java)
+                startActivity(intent)
+            }
+            val features = listOf(
+               btnPoints, btnSubscription,
+                btnSharetofriend, btnPrivacy, btnHelpcenter,
+                btnLanguage, btnDarkmode, btnLogout
+            )
+
+            features.forEach { btn ->
+                btn.setOnClickListener {
+                    showToast(resources.getString(R.string.feature_not_yet))
+                }
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
