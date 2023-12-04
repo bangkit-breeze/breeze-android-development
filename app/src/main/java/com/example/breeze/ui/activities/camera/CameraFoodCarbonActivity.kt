@@ -47,6 +47,9 @@ class CameraFoodCarbonActivity : AppCompatActivity() {
         binding = ActivityCameraFoodCarbonBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.close.setOnClickListener {
+            onBackPressed()
+        }
         binding.switchCamera.setOnClickListener {
             cameraSelector = if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
             else CameraSelector.DEFAULT_BACK_CAMERA
@@ -54,6 +57,25 @@ class CameraFoodCarbonActivity : AppCompatActivity() {
             startCamera()
         }
         binding.captureImage.setOnClickListener { takePhoto() }
+        binding.galerry.setOnClickListener {
+            openGallery()
+        }
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK)
+        galleryIntent.type = "image/*"
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
+            data?.data?.let { selectedImage ->
+                val intent = Intent(this, ResultCameraFoodActivity::class.java)
+                intent.putExtra(EXTRA_CAMERAX_IMAGE, selectedImage.toString())
+                startActivityForResult(intent, CAMERAX_RESULT)
+            }
+        }
     }
 
     public override fun onResume() {
@@ -97,6 +119,7 @@ class CameraFoodCarbonActivity : AppCompatActivity() {
         private const val TAG = "CameraFoodCarbonActivity"
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
         const val CAMERAX_RESULT = 200
+        private const val GALLERY_REQUEST_CODE = 201
     }
 
     private fun takePhoto() {
