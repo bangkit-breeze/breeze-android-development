@@ -2,6 +2,9 @@ package com.example.breeze.ui.activities.vehicle
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -37,7 +40,33 @@ class AddVehicleCarbonActivity : AppCompatActivity() {
             }
             binding.mainSlider.addOnChangeListener { slider, value, fromUser ->
                 slider.value = value.roundToInt().toFloat()
+                binding.etMileage.setText(value.toInt().toString())
             }
+
+
+
+            binding.etMileage.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                    val enteredValue = s.toString().toDoubleOrNull() ?: 0.0
+                    if (enteredValue > 200) {
+                        binding.etMileage.setText("200")
+                    }else {
+                        if (binding.etMileage.isFocused) {
+                            binding.etMileage.setSelection(binding.etMileage.length())  // Move cursor to the end
+                        }
+                        binding.mainSlider.value = enteredValue.toFloat()
+                    }
+                }
+            })
         }
 
     private fun handleItemClick(item: LinearLayout, textView: TextView, vehicleType: String) {
