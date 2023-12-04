@@ -247,6 +247,20 @@
             android:drawableEnd="@drawable/ic_km_small"
             android:layout_marginTop="16dp"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Add"
+            android:layout_marginTop="15dp"
+            app:cornerRadius="6dp"
+            android:textSize="16sp"
+            app:iconTint="@color/white"
+            android:layout_marginBottom="20dp"
+            app:iconGravity="textEnd"
+            android:fontFamily="@font/inter_medium"
+            android:backgroundTint="?attr/colorPrimary" />
+
     </LinearLayout>
 
     <TextView
