@@ -63,4 +63,8 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
     implementation("androidx.exifinterface:exifinterface:1.3.6")
+    val cameraxVersion = "1.2.3"
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
+    implementation("androidx.camera:camera-view:$cameraxVersion")
 }
