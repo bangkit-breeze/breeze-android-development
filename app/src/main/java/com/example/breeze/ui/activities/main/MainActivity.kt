@@ -1,9 +1,11 @@
 package com.example.breeze.ui.activities.main
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.breeze.R
 import com.example.breeze.databinding.ActivityMainBinding
@@ -15,13 +17,39 @@ import com.example.breeze.ui.fragments.home.HomeFragment
 import com.example.breeze.ui.fragments.leaderboard.LeaderBoardFragment
 import com.example.breeze.ui.fragments.profile.ProfileFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import android.Manifest
+import androidx.activity.result.contract.ActivityResultContracts
+import com.example.breeze.ui.activities.camera.CameraFoodCarbonActivity
 
 class MainActivity : AppCompatActivity() {
     private var prevSelectedItemId: Int = R.id.bottom_home
     private  val binding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
+            }
+        }
+    private fun allPermissionsGranted() =
+        ContextCompat.checkSelfPermission(
+            this,
+            REQUIRED_PERMISSION
+        ) == PackageManager.PERMISSION_GRANTED
+
+    companion object {
+        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+        }
         binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.bottom_home -> {
@@ -86,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         sheetBinding.btnFood.setOnClickListener {
-            Toast.makeText(this, "Feature not yed", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@MainActivity, CameraFoodCarbonActivity::class.java))
         }
         sheetBinding.btnVechile.setOnClickListener {
             startActivity(Intent(this@MainActivity, AddVehicleCarbonActivity::class.java))
