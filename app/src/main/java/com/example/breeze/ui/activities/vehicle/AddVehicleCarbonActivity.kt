@@ -22,8 +22,9 @@ class AddVehicleCarbonActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             binding = ActivityAddVehicleCarbonBinding.inflate(layoutInflater)
             setContentView(binding.root)
-
-
+            binding.topAppBar.setNavigationOnClickListener {
+                onBackPressed()
+            }
 
             selectedVehicle = "DefaultText"
             binding.item1.setOnClickListener { handleItemClick(binding.item1, binding.tvVehicle1, "Car") }
