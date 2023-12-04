@@ -1,5 +1,6 @@
 package com.example.breeze.ui.activities.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.breeze.R
 import com.example.breeze.databinding.ActivityMainBinding
 import com.example.breeze.databinding.BottomDialogTrackedBinding
+import com.example.breeze.ui.activities.register.RegisterActivity
+import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonActivity
 import com.example.breeze.ui.fragments.event.EventFragment
 import com.example.breeze.ui.fragments.home.HomeFragment
 import com.example.breeze.ui.fragments.leaderboard.LeaderBoardFragment
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Feature not yed", Toast.LENGTH_SHORT).show()
         }
         sheetBinding.btnVechile.setOnClickListener {
-            Toast.makeText(this, "Feature not yed", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@MainActivity, AddVehicleCarbonActivity::class.java))
         }
         sheetBinding.btnCancel.setOnClickListener{
             binding.bottomNavigation.selectedItemId = prevSelectedItemId
