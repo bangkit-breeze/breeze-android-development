@@ -1,25 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".ui.activities.camera.DetailResultCarbonFoodActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24"
-            app:title="Carbon Food"
-            app:titleTextAppearance="@style/ToolbarTitleText" />
-    </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24"
+                app:title="Carbon Food"
+                app:titleTextAppearance="@style/ToolbarTitleText" />
+        </com.google.android.material.appbar.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            >
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/black"
+                android:text="Rice Goreng"
+                />
+            <ImageView
+                android:id="@+id/myImageView"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:src="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_leaderboard"
+                android:padding="15dp"
+                android:gravity="center"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:id="@+id/iv_picture"
+                        android:layout_width="24dp"
+                        android:layout_margin="10dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_food_black" />
+                    <LinearLayout
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_carbon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="0.49 kgCO2e"
+                            />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_accuacy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/inter"
+                            android:textColor="@color/black"
+                            android:text="High Accuracy"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/black"
+                android:text="Ingredients"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ingredients"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_ingredients"
+               />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Add"
+                android:layout_marginTop="15dp"
+                app:cornerRadius="6dp"
+                android:textSize="16sp"
+                app:iconTint="@color/white"
+                android:layout_marginBottom="20dp"
+                app:iconGravity="textEnd"
+                android:fontFamily="@font/inter_medium"
+                android:backgroundTint="?attr/colorPrimary" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

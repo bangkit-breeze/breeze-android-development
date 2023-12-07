@@ -30,8 +30,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:fontFamily="@font/inter"
+            android:textSize="15sp"
+            android:fontFamily="@font/inter_medium"
             android:text="What vehicle are you using?"
             android:layout_marginBottom="10dp"
             />
@@ -220,8 +220,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:fontFamily="@font/inter"
+            android:textSize="15sp"
+            android:fontFamily="@font/inter_medium"
             android:text="Vehicle mileage"
             android:layout_marginTop="15dp"
             />
