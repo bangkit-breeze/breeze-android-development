@@ -8,8 +8,8 @@ data class ErrorResponse(
 	val data: Any? = null,
 
 	@field:SerializedName("success")
-	val success: Boolean? = null,
+	val success: Boolean,
 
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String
 )

@@ -1,6 +1,6 @@
 package com.example.breeze.data.model.auth
 
-data class RegistrationRequest(
+data class RegisterRequest(
     val fullname: String,
     val email: String,
     val password: String,
