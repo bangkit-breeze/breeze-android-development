@@ -66,4 +66,7 @@
     <string name="text_question_three_desc">Find your balance and aim to stay below your carbon calorie goal.</string>
     <string name="network_error_message">Network error occurred. Please check your internet connection</string>
     <string name="unknown_error">Unknown Error</string>
+    <string name="password_notmatch">Password does not match</string>
+    <string name="success">SUCCESS</string>
+    <string name="register_success_desc">Congratulations, your account has been successfully created.</string>
 </resources>
