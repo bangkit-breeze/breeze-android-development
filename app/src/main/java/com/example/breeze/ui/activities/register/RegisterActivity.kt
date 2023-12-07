@@ -51,7 +51,32 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun handleRegister() {
+        val name = binding.etRegisterName.text.toString().trim()
+        val email = binding.etRegiterEmail.text.toString().trim()
+        val password = binding.etRegisterPassword.text.toString().trim()
+        val passwordConfirm = binding.etRegisterConfirmPassword.text.toString().trim()
+        if (password != passwordConfirm) {
+            Toast.makeText(this, getString(R.string.password_notmatch), Toast.LENGTH_SHORT).show()
+            return
+        }
 
+        viewModel.register(name, email, password, passwordConfirm).observe(this) { result ->
+            when (result) {
+                is Result.Loading ->  showProgressDialog()
+                is Result.Success -> onRegisterSuccess()
+                is Result.Error -> onRegisterError(result.error)
+            }
+        }
+
+    }
+  
+
+    private fun hideProgressDialog() {
+        if (::progressDialog.isInitialized && progressDialog.isShowing) {
+            progressDialog.dismiss()
+        }
+    }
     private fun playAnimations() {
         val fadeInDuration = Constants.DURATION_ANIMATION_DELAY
         val titleAnimator = createFadeInAnimator(binding.tvTitle, fadeInDuration)
