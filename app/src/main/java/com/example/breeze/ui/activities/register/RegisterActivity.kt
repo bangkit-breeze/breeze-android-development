@@ -70,7 +70,39 @@ class RegisterActivity : AppCompatActivity() {
         }
 
     }
-  
+    private fun onRegisterError(errorMessage: String) {
+        hideProgressDialog()
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+    }
+    private fun showProgressDialog() {
+        progressDialog = Dialog(this@RegisterActivity)
+        progressDialog.setContentView(R.layout.custom_progressbar)
+        val progressBar: ProgressBar = progressDialog.findViewById(R.id.progressBar)
+        progressBar.isIndeterminate = true
+        progressDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        progressDialog.show()
+    }
+    private fun onRegisterSuccess() {
+        hideProgressDialog()
+        showSuccessDialog()
+        handler.postDelayed({
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
+        }, 3000)
+    }
+
+    private fun showSuccessDialog() {
+        val customDialogView = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null)
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(customDialogView)
+            .create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
+        handler.postDelayed({
+            alertDialog.dismiss()
+        }, 3000)
+    }
+
 
     private fun hideProgressDialog() {
         if (::progressDialog.isInitialized && progressDialog.isShowing) {
