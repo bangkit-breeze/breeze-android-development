@@ -17,6 +17,7 @@ android {
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"localhost:8099/api/v1/\"")
     }
 
     buildTypes {
