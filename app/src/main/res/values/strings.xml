@@ -70,4 +70,8 @@
     <string name="success">SUCCESS</string>
     <string name="register_success_desc">Congratulations, your account has been successfully created.</string>
     <string name="login_success_desc">You have successfully logged in, welcome</string>
+    <string name="logout">Log Out</string>
+    <string name="logout_desc">Are you sure want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
