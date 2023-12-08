@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
+import com.example.breeze.ui.activities.login.LoginViewModel
 import com.example.breeze.ui.activities.register.RegisterViewModel
 
 class AuthViewModelFactory private constructor(private val userRepository: UserRepository) :
@@ -12,6 +13,8 @@ class AuthViewModelFactory private constructor(private val userRepository: UserR
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>):  T =
         when {
+            modelClass.isAssignableFrom(LoginViewModel::class.java) ->
+                LoginViewModel(userRepository) as T
             modelClass.isAssignableFrom(RegisterViewModel::class.java) ->
                 RegisterViewModel(userRepository) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
