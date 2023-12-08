@@ -14,8 +14,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
+import com.example.breeze.data.model.auth.LoginResult
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
 import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
@@ -24,6 +26,7 @@ import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
 import com.example.breeze.ui.adapter.OnBoardingAdapter
 import com.example.breeze.ui.adapter.QuestionAdapter
+import com.example.breeze.ui.factory.ViewModelFactory
 import com.example.breeze.ui.fragments.onboarding.screen.FirstScreen
 import com.example.breeze.ui.fragments.onboarding.screen.SecondScreen
 import com.example.breeze.ui.fragments.onboarding.screen.ThirdScreen
@@ -38,6 +41,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
 
     private lateinit var alertDialog: AlertDialog.Builder
+    private val  homeViewModel:HomeViewModel by viewModels {
+        ViewModelFactory.getInstance(requireActivity().application)
+    }
+    private lateinit var dataUser: LoginResult
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,8 +52,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         alertDialog = AlertDialog.Builder(requireContext())
         setupInfoListeners()
-
+        setupViews()
         return binding.root
+    }
+    private fun setupViews() {
+        homeViewModel.getUserLogin().observe(viewLifecycleOwner) {
+            dataUser = it
+        }
     }
     private fun setupInfoListeners() {
         binding?.apply {
@@ -150,6 +162,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
                 false
             }
+
 
         }
     }
