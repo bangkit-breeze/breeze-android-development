@@ -51,13 +51,22 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun showToast(messageResId: Int) {
+        Toast.makeText(this, getString(messageResId), Toast.LENGTH_SHORT).show()
+    }
     private fun handleRegister() {
         val name = binding.etRegisterName.text.toString().trim()
         val email = binding.etRegiterEmail.text.toString().trim()
         val password = binding.etRegisterPassword.text.toString().trim()
         val passwordConfirm = binding.etRegisterConfirmPassword.text.toString().trim()
-        if (password != passwordConfirm) {
-            Toast.makeText(this, getString(R.string.password_notmatch), Toast.LENGTH_SHORT).show()
+        if (password != passwordConfirm || name.isEmpty() || email.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
+            when {
+                password != passwordConfirm -> showToast(R.string.password_notmatch)
+                name.isEmpty() -> showToast(R.string.fullName_required)
+                email.isEmpty() -> showToast(R.string.email_required)
+                password.isEmpty() -> showToast(R.string.password_required)
+                passwordConfirm.isEmpty() -> showToast(R.string.confirmPassword_required)
+            }
             return
         }
 

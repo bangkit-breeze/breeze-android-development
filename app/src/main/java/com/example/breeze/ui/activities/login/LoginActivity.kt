@@ -60,11 +60,19 @@ class LoginActivity : AppCompatActivity() {
             handleLogin()
         }
     }
-
+    private fun showToast(messageResId: Int) {
+        Toast.makeText(this, getString(messageResId), Toast.LENGTH_SHORT).show()
+    }
     private fun handleLogin(){
         val email = binding.etEmailLogin.text.toString().trim()
         val password = binding.etPasswordLogin.text.toString().trim()
-
+        if ( email.isEmpty() || password.isEmpty() ) {
+            when {
+                email.isEmpty() -> showToast(R.string.email_required)
+                password.isEmpty() -> showToast(R.string.password_required)
+            }
+            return
+        }
 
         viewModel.login(email, password).observe(this) { result ->
             when (result) {

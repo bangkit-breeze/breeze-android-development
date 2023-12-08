@@ -74,4 +74,9 @@
     <string name="logout_desc">Are you sure want to log out?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="fullName_required">Full must not be empty</string>
+    <string name="fill_all_fields">Fill all required</string>
+    <string name="email_required">Email must not be empty</string>
+    <string name="password_required">Password must not be empty</string>
+    <string name="confirmPassword_required">Confirm password must not be empty</string>
 </resources>
