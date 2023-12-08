@@ -1,11 +1,15 @@
 package com.example.breeze.data.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
 import com.example.breeze.data.local.datastore.UserPreferences
 import com.example.breeze.data.model.ErrorResponse
+import com.example.breeze.data.model.auth.LoginRequest
+import com.example.breeze.data.model.auth.LoginResult
 import com.example.breeze.data.model.auth.RegisterRequest
 import com.example.breeze.utils.Result
 import com.google.gson.Gson
@@ -31,8 +35,23 @@ class UserRepository private constructor(
         } catch (exception: Exception) {
             emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
         }
-
     }
+
+    fun login(email: String, password: String) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.login(LoginRequest(email, password))
+            saveSession(response.loginResult)
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            emit(handleHttpException(e))
+        } catch (exception: IOException) {
+            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+        } catch (exception: Exception) {
+            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
+        }
+    }
+
 
     private fun handleHttpException(exception: HttpException): Result.Error {
         val jsonInString = exception.response()?.errorBody()?.string()

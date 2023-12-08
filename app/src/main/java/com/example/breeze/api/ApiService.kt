@@ -1,6 +1,7 @@
 package com.example.breeze.api
 
 import com.example.breeze.data.model.auth.LoginRequest
+import com.example.breeze.data.model.auth.LoginResponse
 import com.example.breeze.data.model.auth.RegisterResponse
 import com.example.breeze.data.model.auth.RegisterRequest
 import retrofit2.http.Body
@@ -16,5 +17,5 @@ interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("login")
-    suspend fun login(@Body request: LoginRequest): LoginRequest
+    suspend fun login(@Body request: LoginRequest): LoginResponse
 }
