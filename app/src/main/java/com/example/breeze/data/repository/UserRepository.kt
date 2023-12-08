@@ -52,6 +52,11 @@ class UserRepository private constructor(
         }
     }
 
+    suspend fun saveSession(data: LoginResult) = userPref.saveSession(data)
+
+    fun getSession(): LiveData<LoginResult> = userPref.getSession().asLiveData()
+
+    suspend fun deleteSession() = userPref.deleteSession()
 
     private fun handleHttpException(exception: HttpException): Result.Error {
         val jsonInString = exception.response()?.errorBody()?.string()
