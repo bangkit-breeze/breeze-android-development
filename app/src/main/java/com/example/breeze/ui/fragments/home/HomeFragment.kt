@@ -15,8 +15,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
+import com.example.breeze.data.model.ArticleResponse
 import com.example.breeze.data.model.auth.LoginResult
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
 import com.example.breeze.databinding.BottomDialogInfoEventBinding
@@ -24,6 +26,7 @@ import com.example.breeze.databinding.BottomDialogInfoFoodBinding
 import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
+import com.example.breeze.ui.adapter.ArticlesAdapter
 import com.example.breeze.ui.adapter.OnBoardingAdapter
 import com.example.breeze.ui.adapter.QuestionAdapter
 import com.example.breeze.ui.factory.ViewModelFactory
@@ -34,7 +37,7 @@ import com.example.breeze.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-
+import com.example.breeze.utils.Result
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
@@ -45,6 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         ViewModelFactory.getInstance(requireActivity().application)
     }
     private lateinit var dataUser: LoginResult
+    private val adapter = ArticlesAdapter()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +57,35 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         alertDialog = AlertDialog.Builder(requireContext())
         setupInfoListeners()
         setupViews()
+        setupRecyclerView(adapter)
         return binding.root
+    }
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getArticles(dataUser.token).observe(this) { result ->
+            handleStoryResult(result, adapter)
+        }
+    }
+    private fun handleStoryResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
+        when (result) {
+            is Result.Loading ->  showLoadingArticle(true)
+            is Result.Success -> {
+                showLoadingArticle(false)
+                val stories = result.data.data
+                adapter.submitList(stories)
+            }
+            is Result.Error -> {
+                showLoadingArticle(false)
+                val message = result.error
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupRecyclerView(adapter: ArticlesAdapter) {
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvArticle.layoutManager = layoutManager
+        binding.rvArticle.adapter = adapter
     }
     private fun setupViews() {
         homeViewModel.getUserLogin().observe(viewLifecycleOwner) {
@@ -283,5 +315,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun showLoadingArticle(isLoading: Boolean) {
+        binding.progressBarArticle.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
