@@ -12,5 +12,6 @@ class EventViewModel(
     private val eventRepository: EventRepository
 ) : ViewModel() {
     fun getEventExplore(token: String) = eventRepository.getEventExplore(token)
+    fun getEventJoined(token: String) = eventRepository.getEventJoined(token)
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
 }

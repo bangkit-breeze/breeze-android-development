@@ -1,11 +1,10 @@
 package com.example.breeze.data.model.event
 
 import android.os.Parcelable
-import com.example.breeze.data.model.DataArticle
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-data class EventExploreResponse(
+data class EventResponse(
 
 	@field:SerializedName("data")
 	val dataEvent:List<DataEvent?>? = null,

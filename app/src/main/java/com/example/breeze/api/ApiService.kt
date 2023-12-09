@@ -6,13 +6,14 @@ import com.example.breeze.data.model.auth.LoginRequest
 import com.example.breeze.data.model.auth.LoginResponse
 import com.example.breeze.data.model.auth.RegisterResponse
 import com.example.breeze.data.model.auth.RegisterRequest
-import com.example.breeze.data.model.event.EventExploreResponse
+import com.example.breeze.data.model.event.EventResponse
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -32,5 +33,11 @@ interface ApiService {
     @GET("events")
     suspend fun getEventsExplore(
         @Header("Authorization") token: String
-    ): EventExploreResponse
+    ): EventResponse
+
+    @GET("events")
+    suspend fun getEventsJoined(
+        @Header("Authorization") token: String,
+        @Query("status") query: String = "joined"
+    ): EventResponse
 }
