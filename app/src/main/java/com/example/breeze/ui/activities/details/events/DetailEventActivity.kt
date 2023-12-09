@@ -78,6 +78,8 @@ class DetailEventActivity : AppCompatActivity() {
                     binding.btnJoinEvent.visibility = View.VISIBLE
                     binding.btnUploadEvidence.visibility = View.GONE
                     binding.btnFinished.visibility = View.GONE
+                    binding.tvJoined.visibility = View.GONE
+                    binding.tvFinished.visibility = View.GONE
                     binding.btnJoinEvent.setOnClickListener {
                         showEventDialog()
                     }
@@ -86,6 +88,8 @@ class DetailEventActivity : AppCompatActivity() {
                     binding.btnJoinEvent.visibility = View.GONE
                     binding.btnUploadEvidence.visibility = View.VISIBLE
                     binding.btnFinished.visibility = View.GONE
+                    binding.tvJoined.visibility = View.VISIBLE
+                    binding.tvFinished.visibility = View.GONE
                     binding.btnUploadEvidence.setOnClickListener {
                         startActivity(Intent(this@DetailEventActivity, FormEventActivity::class.java))
                     }
@@ -94,6 +98,8 @@ class DetailEventActivity : AppCompatActivity() {
                     binding.btnJoinEvent.visibility = View.GONE
                     binding.btnUploadEvidence.visibility = View.GONE
                     binding.btnFinished.visibility = View.VISIBLE
+                    binding.tvJoined.visibility = View.GONE
+                    binding.tvFinished.visibility = View.VISIBLE
                     binding.btnFinished.setOnClickListener {
                         Toast.makeText(this, "Anda sudah menyelesaikan event ini", Toast.LENGTH_SHORT).show()
                     }

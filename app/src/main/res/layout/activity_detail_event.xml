@@ -83,6 +83,22 @@
                     android:layout_gravity="center"
                     android:visibility="gone"
                     />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_finished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Finished"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="15dp"
+                    android:background="@drawable/shape_joined"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    />
 
             </LinearLayout>
 
