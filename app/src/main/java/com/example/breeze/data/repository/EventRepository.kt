@@ -56,6 +56,20 @@ class EventRepository private constructor(
             emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
         }
     }
+
+    fun joinEvent(token: String, id: String) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.joinEvent("Bearer $token", id)
+            emit(Result.Success(response))
+        }catch (e: HttpException) {
+            emit(handleHttpException(e))
+        } catch (exception: IOException) {
+            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+        } catch (exception: Exception) {
+            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
+        }
+    }
     private fun handleHttpException(exception: HttpException): Result.Error {
         val jsonInString = exception.response()?.errorBody()?.string()
         val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)

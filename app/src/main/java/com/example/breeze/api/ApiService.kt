@@ -7,6 +7,7 @@ import com.example.breeze.data.model.auth.LoginResponse
 import com.example.breeze.data.model.auth.RegisterResponse
 import com.example.breeze.data.model.auth.RegisterRequest
 import com.example.breeze.data.model.event.EventResponse
+import com.example.breeze.data.model.event.JoinEventResponse
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -48,9 +49,9 @@ interface ApiService {
         @Query("status") query: String = "finished"
     ): EventResponse
 
-    @GET("events/{id}/join")
+    @POST("events/{id}/join")
     suspend fun joinEvent(
         @Header("Authorization") token: String,
         @Path("id") id: String
-    ): EventResponse
+    ): JoinEventResponse
 }

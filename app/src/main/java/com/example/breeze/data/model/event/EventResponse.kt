@@ -59,5 +59,5 @@ data class DataEvent(
 	val locationLat: String? = null,
 
 	@field:SerializedName("status")
-	val status: String? = null
+	var status: String? = null
 ): Parcelable
