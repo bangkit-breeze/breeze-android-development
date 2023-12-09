@@ -6,6 +6,7 @@ import com.example.breeze.data.model.auth.LoginRequest
 import com.example.breeze.data.model.auth.LoginResponse
 import com.example.breeze.data.model.auth.RegisterResponse
 import com.example.breeze.data.model.auth.RegisterRequest
+import com.example.breeze.data.model.event.EventExploreResponse
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -27,4 +28,9 @@ interface ApiService {
     suspend fun getArticles(
         @Header("Authorization") token: String
     ): ArticleResponse
+
+    @GET("/events")
+    suspend fun getEventsExplore(
+        @Header("Authorization") token: String
+    ): EventExploreResponse
 }

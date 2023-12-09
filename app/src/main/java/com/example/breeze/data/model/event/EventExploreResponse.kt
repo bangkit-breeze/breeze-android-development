@@ -2,7 +2,7 @@ package com.example.breeze.data.model.event
 
 import com.google.gson.annotations.SerializedName
 
-data class EventResponse(
+data class EventExploreResponse(
 
 	@field:SerializedName("data")
 	val dataEvent: DataEvent? = null,
