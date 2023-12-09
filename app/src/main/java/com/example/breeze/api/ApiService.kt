@@ -40,4 +40,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("status") query: String = "joined"
     ): EventResponse
+
+    @GET("events")
+    suspend fun getEventsFinished(
+        @Header("Authorization") token: String,
+        @Query("status") query: String = "finished"
+    ): EventResponse
 }

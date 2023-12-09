@@ -13,5 +13,6 @@ class EventViewModel(
 ) : ViewModel() {
     fun getEventExplore(token: String) = eventRepository.getEventExplore(token)
     fun getEventJoined(token: String) = eventRepository.getEventJoined(token)
+    fun getEventFinished(token: String) = eventRepository.getEventFinished(token)
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
 }
