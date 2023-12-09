@@ -85,7 +85,12 @@
                 android:background="?attr/colorOnBackground"
                 android:paddingTop="10dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  />
+                />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                />
 
 
         </LinearLayout>

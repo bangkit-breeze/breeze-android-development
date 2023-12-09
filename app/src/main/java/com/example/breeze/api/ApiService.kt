@@ -29,7 +29,7 @@ interface ApiService {
         @Header("Authorization") token: String
     ): ArticleResponse
 
-    @GET("/events")
+    @GET("events")
     suspend fun getEventsExplore(
         @Header("Authorization") token: String
     ): EventExploreResponse

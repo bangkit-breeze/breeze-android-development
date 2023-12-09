@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/iv_article"
+        android:id="@+id/iv_event"
         android:layout_width="90dp"
         android:scaleType="centerCrop"
         app:riv_corner_radius="10dp"
@@ -30,7 +30,7 @@
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/black"
         android:text="Emit Less, Live More: Bersama kurangi CO2"
-        app:layout_constraintStart_toEndOf="@+id/iv_article"
+        app:layout_constraintStart_toEndOf="@+id/iv_event"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -41,7 +41,7 @@
         android:src="@drawable/ic_location_black"
         app:layout_constraintBottom_toBottomOf="@+id/tv_location"
         app:layout_constraintEnd_toStartOf="@id/tv_location"
-        app:layout_constraintStart_toEndOf="@+id/iv_article"
+        app:layout_constraintStart_toEndOf="@+id/iv_event"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -67,7 +67,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_points"
         app:layout_constraintEnd_toStartOf="@id/tv_points"
-        app:layout_constraintStart_toEndOf="@+id/iv_article"
+        app:layout_constraintStart_toEndOf="@+id/iv_event"
         app:layout_constraintTop_toBottomOf="@id/ic_location" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -93,7 +93,7 @@
         android:src="@drawable/ic_date_leave"
         app:layout_constraintBottom_toBottomOf="@+id/tv_date"
         app:layout_constraintEnd_toStartOf="@id/tv_date"
-        app:layout_constraintStart_toEndOf="@+id/iv_article"
+        app:layout_constraintStart_toEndOf="@+id/iv_event"
         app:layout_constraintTop_toBottomOf="@id/ic_points" />
 
     <com.google.android.material.textview.MaterialTextView

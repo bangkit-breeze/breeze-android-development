@@ -63,16 +63,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
         homeViewModel.getArticles(dataUser.token).observe(this) { result ->
-            handleStoryResult(result, adapter)
+            handleArticleResult(result, adapter)
         }
     }
-    private fun handleStoryResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
+    private fun handleArticleResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
         when (result) {
             is Result.Loading ->  showLoadingArticle(true)
             is Result.Success -> {
                 showLoadingArticle(false)
-                val stories = result.data.data
-                adapter.submitList(stories)
+                val articles = result.data.data
+                adapter.submitList(articles)
             }
             is Result.Error -> {
                 showLoadingArticle(false)

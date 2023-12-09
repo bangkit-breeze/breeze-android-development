@@ -1,11 +1,14 @@
 package com.example.breeze.data.model.event
 
+import android.os.Parcelable
+import com.example.breeze.data.model.DataArticle
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class EventExploreResponse(
 
 	@field:SerializedName("data")
-	val dataEvent: DataEvent? = null,
+	val dataEvent:List<DataEvent?>? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -14,6 +17,7 @@ data class EventExploreResponse(
 	val message: String? = null
 )
 
+@Parcelize
 data class DataEvent(
 
 	@field:SerializedName("end_at")
@@ -38,7 +42,7 @@ data class DataEvent(
 	val rewardPoints: Int? = null,
 
 	@field:SerializedName("location_lng")
-	val locationLng: Any? = null,
+	val locationLng: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,
@@ -53,8 +57,8 @@ data class DataEvent(
 	val id: String? = null,
 
 	@field:SerializedName("location_lat")
-	val locationLat: Any? = null,
+	val locationLat: String? = null,
 
 	@field:SerializedName("status")
 	val status: String? = null
-)
+): Parcelable
