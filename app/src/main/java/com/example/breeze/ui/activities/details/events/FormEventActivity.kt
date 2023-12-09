@@ -21,6 +21,7 @@ import com.example.breeze.R
 import com.example.breeze.data.model.auth.LoginResult
 import com.example.breeze.data.model.event.DataEvent
 import com.example.breeze.databinding.ActivityFormEventBinding
+import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.factory.EventViewModelFactory
 import com.example.breeze.utils.getImageUri
 import com.example.breeze.utils.reduceFileImage
@@ -92,6 +93,10 @@ class FormEventActivity : AppCompatActivity() {
             }
             return
         }
+        if (currentImageUri == null) {
+            showToast("Please select an image")
+            return
+        }
         currentImageUri?.let { uri ->
             val storyData = intent.getParcelableExtra<DataEvent>(STORY_INTENT_DATA)
             val imageFile = uriToFile(uri, this).reduceFileImage()
@@ -112,8 +117,8 @@ class FormEventActivity : AppCompatActivity() {
                                     }
 
                                     Handler(Looper.getMainLooper()).postDelayed({
-                                        val intent = Intent(this@FormEventActivity, DetailEventActivity::class.java)
-                                        intent.putExtra(DetailEventActivity.STORY_INTENT_DATA, storyData)
+                                        val intent = Intent(this@FormEventActivity, MainActivity::class.java)
+                                        // intent.putExtra(DetailEventActivity.STORY_INTENT_DATA, storyData)
                                         startActivity(intent)
                                         finish()
                                     }, 3000)

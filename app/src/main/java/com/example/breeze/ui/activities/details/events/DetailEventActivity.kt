@@ -94,6 +94,7 @@ class DetailEventActivity : AppCompatActivity() {
                         val intent = Intent(this@DetailEventActivity, FormEventActivity::class.java)
                         intent.putExtra(STORY_INTENT_DATA, storyData)
                         startActivity(intent)
+                        finish()
                     }
                 }
                 "FINISHED" -> {

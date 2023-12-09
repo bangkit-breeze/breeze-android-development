@@ -1,6 +1,7 @@
 package com.example.breeze.data.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
@@ -76,18 +77,18 @@ class EventRepository private constructor(
         }
     }
 
-    fun uploadEvidenceEvent( token: String, id: String, photo: File, description: String )= liveData {
+    fun uploadEvidenceEvent( token: String, id: String, file: File, description: String )= liveData {
         emit(Result.Loading)
         val authToken  = "Bearer $token"
         val requestBody = description.toRequestBody("text/plain".toMediaType())
-        val requestImageFile = photo.asRequestBody("image/jpeg".toMediaType())
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
-            "photo",
-            photo.name,
+            "file",
+            file.name,
             requestImageFile
         )
         try {
-            val response = apiService.uploadEvidenceEvent(authToken , id, multipartBody, requestBody )
+            val response = apiService.uploadEvidenceEvent(authToken , id, requestBody,  multipartBody )
             emit(Result.Success(response))
         } catch (e: HttpException) {
             emit(handleHttpException(e))
@@ -99,6 +100,7 @@ class EventRepository private constructor(
     }
     private fun handleHttpException(exception: HttpException): Result.Error {
         val jsonInString = exception.response()?.errorBody()?.string()
+        Log.e("Error Response", jsonInString ?: "Empty error response")
         val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
         val errorMessage = errorBody.message
         return Result.Error(errorMessage)
