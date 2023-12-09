@@ -91,7 +91,9 @@ class DetailEventActivity : AppCompatActivity() {
                     binding.tvJoined.visibility = View.VISIBLE
                     binding.tvFinished.visibility = View.GONE
                     binding.btnUploadEvidence.setOnClickListener {
-                        startActivity(Intent(this@DetailEventActivity, FormEventActivity::class.java))
+                        val intent = Intent(this@DetailEventActivity, FormEventActivity::class.java)
+                        intent.putExtra(STORY_INTENT_DATA, storyData)
+                        startActivity(intent)
                     }
                 }
                 "FINISHED" -> {

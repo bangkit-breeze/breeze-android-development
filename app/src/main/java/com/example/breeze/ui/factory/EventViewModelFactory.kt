@@ -7,6 +7,7 @@ import com.example.breeze.data.repository.EventRepository
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
 import com.example.breeze.ui.activities.details.events.DetailEventViewModel
+import com.example.breeze.ui.activities.details.events.FormEventViewModel
 import com.example.breeze.ui.fragments.event.EventViewModel
 
 class EventViewModelFactory private constructor(
@@ -21,6 +22,8 @@ class EventViewModelFactory private constructor(
                 EventViewModel(userRepository, eventRepository) as T
             modelClass.isAssignableFrom(DetailEventViewModel::class.java) ->
                 DetailEventViewModel(userRepository, eventRepository) as T
+            modelClass.isAssignableFrom(FormEventViewModel::class.java) ->
+                FormEventViewModel(userRepository, eventRepository) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     companion object {
