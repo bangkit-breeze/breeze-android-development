@@ -52,6 +52,21 @@ class UserRepository private constructor(
         }
     }
 
+    fun getProfile(token: String) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService. s("Bearer $token")
+            saveSession(response.loginResult)
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            emit(handleHttpException(e))
+        } catch (exception: IOException) {
+            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+        } catch (exception: Exception) {
+            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
+        }
+    }
+
     suspend fun saveSession(data: LoginResult) = userPref.saveSession(data)
 
     fun getSession(): LiveData<LoginResult> = userPref.getSession().asLiveData()

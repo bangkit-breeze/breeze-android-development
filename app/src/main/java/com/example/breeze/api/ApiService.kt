@@ -2,6 +2,7 @@ package com.example.breeze.api
 
 import com.example.breeze.data.model.ArticleResponse
 import com.example.breeze.data.model.DataArticle
+import com.example.breeze.data.model.UserProfileResponse
 import com.example.breeze.data.model.auth.LoginRequest
 import com.example.breeze.data.model.auth.LoginResponse
 import com.example.breeze.data.model.auth.RegisterResponse
@@ -68,4 +69,9 @@ interface ApiService {
         @Part("description") description: RequestBody,
         @Part file: MultipartBody.Part
     ): UploadEvidenceEventResponse
+
+    @GET("users/profile")
+    suspend fun getProfile(
+        @Header("Authorization") token: String
+    ): UserProfileResponse
 }
