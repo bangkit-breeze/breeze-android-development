@@ -52,10 +52,14 @@ class ActiveEventFragment : Fragment() {
         binding.rvArticle.layoutManager = layoutManager
         binding.rvArticle.adapter = adapter
     }
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
     private fun handleEventResult(result: Result<EventResponse>, adapter: EventAdapter) {
         when (result) {
-            is Result.Loading ->  return
+            is Result.Loading -> showLoading(true)
             is Result.Success -> {
+                showLoading(false)
                 val events = result.data.dataEvent
                 if (events.isNullOrEmpty()) {
                     binding.tvEmptyData.visibility = View.VISIBLE
@@ -65,6 +69,7 @@ class ActiveEventFragment : Fragment() {
                 }
             }
             is Result.Error -> {
+                showLoading(false)
                 val message = result.error
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
