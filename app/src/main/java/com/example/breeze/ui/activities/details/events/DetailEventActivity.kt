@@ -15,6 +15,9 @@ class DetailEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.icBack.setOnClickListener {
+            onBackPressed()
+        }
         val storyData = intent.getParcelableExtra<DataEvent>(STORY_INTENT_DATA)
 
         storyData?.let {
