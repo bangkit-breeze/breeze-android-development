@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.bumptech.glide.Glide
@@ -68,6 +69,9 @@ class DetailEventActivity : AppCompatActivity() {
                     binding.btnJoinEvent.visibility = View.GONE
                     binding.btnUploadEvidence.visibility = View.GONE
                     binding.btnFinished.visibility = View.VISIBLE
+                    binding.btnFinished.setOnClickListener {
+                        Toast.makeText(this, "Anda sudah menyelesaikan event ini", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 

@@ -13,6 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -45,5 +46,11 @@ interface ApiService {
     suspend fun getEventsFinished(
         @Header("Authorization") token: String,
         @Query("status") query: String = "finished"
+    ): EventResponse
+
+    @GET("events/{id}/join")
+    suspend fun joinEvent(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
     ): EventResponse
 }
