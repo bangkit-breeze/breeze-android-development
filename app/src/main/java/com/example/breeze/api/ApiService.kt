@@ -2,6 +2,7 @@ package com.example.breeze.api
 
 import com.example.breeze.data.model.ArticleResponse
 import com.example.breeze.data.model.DataArticle
+import com.example.breeze.data.model.LeaderBoardResponse
 import com.example.breeze.data.model.UserProfileResponse
 import com.example.breeze.data.model.auth.LoginRequest
 import com.example.breeze.data.model.auth.LoginResponse
@@ -74,4 +75,14 @@ interface ApiService {
     suspend fun getProfile(
         @Header("Authorization") token: String
     ): UserProfileResponse
+
+    @GET("leaderboard/alltime")
+    suspend fun getLeaderboardAlltime(
+        @Header("Authorization") token: String
+    ): LeaderBoardResponse
+
+    @GET("leaderboard/weekly")
+    suspend fun getLeaderboardWeekly(
+        @Header("Authorization") token: String
+    ): LeaderBoardResponse
 }

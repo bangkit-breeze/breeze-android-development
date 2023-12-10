@@ -6,6 +6,7 @@ import com.example.breeze.data.local.datastore.UserPreferences
 import com.example.breeze.data.local.datastore.dataStore
 import com.example.breeze.data.repository.ArticleRepository
 import com.example.breeze.data.repository.EventRepository
+import com.example.breeze.data.repository.LeaderBoardRepository
 import com.example.breeze.data.repository.UserRepository
 
 object Injection {
@@ -21,6 +22,10 @@ object Injection {
 
     fun provideEventRepository(application: Application): EventRepository {
         return EventRepository.getInstance(provideApiService(), application)
+    }
+
+    fun provideLeaderBoardRepository(application: Application): LeaderBoardRepository {
+        return LeaderBoardRepository.getInstance(provideApiService(), application)
     }
 
 
