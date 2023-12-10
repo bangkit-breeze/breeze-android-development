@@ -90,7 +90,7 @@ interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("emission/tracking/vehicle")
-    suspend fun addTrackVehicle(
+    suspend fun addTrackEmissionVehicle(
         @Header("Authorization") token: String,
         @Body request: TrackVehicleRequest
     ): TrackVehicleResponse
