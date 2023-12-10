@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
-                    android:text="@string/number_dummy"
+                    tools:text="@string/number_dummy"
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     android:textStyle="bold"
@@ -91,7 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_medium"
-                            android:text="@string/name_dummy"
+                            tools:text="@string/name_dummy"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
@@ -143,7 +143,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/inter_medium"
-                                        android:text=""
+                                        tools:text="@string/exp_dummy"
                                         android:textColor="@color/black"
                                         android:textSize="11sp" />
 
@@ -160,7 +160,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/inter_medium"
-                                        android:text=""
+                                        tools:text="@string/exp_max_dummy"
                                         android:textColor="@color/black"
                                         android:textSize="11sp" />
 
@@ -217,7 +217,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
                                 android:textSize="45sp"
-                                android:text="6.2"
+                                tools:text="6.2"
                                 android:textColor="@color/light_secondary"
                                 android:textStyle="bold"/>
                             <com.google.android.material.textview.MaterialTextView
@@ -352,7 +352,7 @@
                                 android:id="@+id/tv_total_food"
                                 android:layout_width="wrap_content"
                                 android:layout_height="24dp"
-                                android:text="0"
+                                tools:text="0"
                                 android:paddingTop="5dp"
                                 android:layout_gravity="bottom"
                                 android:textColor="@color/black"
@@ -416,7 +416,7 @@
                                 android:id="@+id/tv_total_vehicle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="24dp"
-                                android:text="0"
+                                tools:text="0"
                                 android:layout_gravity="bottom"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
