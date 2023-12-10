@@ -43,7 +43,7 @@
             <ImageView
                 android:id="@+id/myImageView"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="240dp"
                 android:src="@drawable/ic_launcher_background"
                 android:scaleType="centerCrop" />
 
@@ -112,7 +112,7 @@
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 tools:listitem="@layout/item_ingredients"
                />
 
@@ -125,10 +125,22 @@
                 app:cornerRadius="6dp"
                 android:textSize="16sp"
                 app:iconTint="@color/white"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 app:iconGravity="textEnd"
                 android:fontFamily="@font/inter_medium"
                 android:backgroundTint="?attr/colorPrimary" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Cancel"
+                app:cornerRadius="6dp"
+                android:textSize="16sp"
+                app:iconTint="@color/white"
+                android:layout_marginBottom="30dp"
+                app:iconGravity="textEnd"
+                android:fontFamily="@font/inter_medium"
+                android:backgroundTint="@color/light_secondary" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
