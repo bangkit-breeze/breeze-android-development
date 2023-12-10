@@ -41,7 +41,7 @@
         android:text="Muh Yazid" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_points"
+        android:id="@+id/tv_exp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"

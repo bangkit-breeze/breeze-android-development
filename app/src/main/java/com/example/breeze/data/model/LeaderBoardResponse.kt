@@ -31,9 +31,12 @@ data class LeaderboardItem(
 	@field:SerializedName("user_id")
 	val userId: String? = null,
 
+	@field:SerializedName("avatar_url")
+	val avatarUrl: String? = null,
+
 	@field:SerializedName("rank")
 	val rank: Int? = null,
 
-	@field:SerializedName("points")
-	val points: Int? = null
+	@field:SerializedName("exp")
+	val exp: Int? = null
 )
