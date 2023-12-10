@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
 import com.example.breeze.data.model.ArticleResponse
+import com.example.breeze.data.model.UserProfileResponse
 import com.example.breeze.data.model.auth.LoginResult
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
 import com.example.breeze.databinding.BottomDialogInfoEventBinding
@@ -38,6 +39,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.example.breeze.utils.Result
+import java.lang.Math.floor
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
@@ -64,6 +66,52 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onResume()
         homeViewModel.getArticles(dataUser.token).observe(this) { result ->
             handleArticleResult(result, adapter)
+        }
+        homeViewModel.getProfile(dataUser.token).observe(this){
+            handleProfile(it)
+        }
+    }
+
+    private fun handleProfile(result: Result<UserProfileResponse>){
+        when(result){
+            is Result.Loading ->  return
+            is Result.Success -> {
+                val userProfile = result.data.dataUser
+                if (userProfile != null) {
+                    binding.tvPoint.text = userProfile.points.toString()
+                    binding.tvName.text = "Hi, ${userProfile.fullName.toString()}"
+                    binding.tvTotalFood.text = userProfile.foodEmissionCount.toString()
+                    binding.tvTotalVehicle.text = userProfile.vehicleEmissionCount.toString()
+                    val totalCarbon = (userProfile.totalCo2Removed?.toFloat() ?: 0f) / 1000
+                    binding.tvTotalCarbon.text = totalCarbon.toString()
+
+
+                    var exp = userProfile.experiences
+                    if (exp != null) {
+                        if(exp < 100){
+                            binding.tvLevel.text = "Level 1"
+                            binding.tvExpMax.text = "100"
+                            binding.tvExp.text = exp.toString()
+                            binding.progressBarHorizontal.max = 100
+                            binding.progressBarHorizontal.progress = exp.toInt()
+                        }else{
+                            var level = floor(exp / 100.0).toInt()
+                            binding.tvLevel.text = "Level ${level + 1}"
+                            var expNow = exp % (level * 100)
+                            binding.tvExp.text = expNow.toString()
+                            var expMaxNow = (level + 1) * 100
+                            binding.tvExpMax.text = expMaxNow.toString()
+                            binding.progressBarHorizontal.max =  expMaxNow.toInt()
+                            binding.progressBarHorizontal.progress = expNow.toInt()
+                        }
+                    }
+
+                }
+            }
+            is Result.Error -> {
+                val message = result.error
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
     private fun handleArticleResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
