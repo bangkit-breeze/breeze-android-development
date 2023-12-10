@@ -8,6 +8,7 @@ import com.example.breeze.data.repository.LeaderBoardRepository
 import com.example.breeze.data.repository.TrackEmissionRepository
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
+import com.example.breeze.ui.activities.camera.AddFoodCarbonViewModel
 import com.example.breeze.ui.activities.details.events.DetailEventViewModel
 import com.example.breeze.ui.activities.details.events.FormEventViewModel
 import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonViewModel
@@ -24,6 +25,8 @@ class TrackEmissionViewModelFactory private constructor(
         when {
             modelClass.isAssignableFrom(AddVehicleCarbonViewModel::class.java) ->
                 AddVehicleCarbonViewModel(userRepository, trackEmissionRepository) as T
+            modelClass.isAssignableFrom(AddFoodCarbonViewModel::class.java) ->
+                AddFoodCarbonViewModel(userRepository, trackEmissionRepository) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     companion object {
