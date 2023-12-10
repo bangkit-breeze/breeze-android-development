@@ -55,8 +55,7 @@ class UserRepository private constructor(
     fun getProfile(token: String) = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService. s("Bearer $token")
-            saveSession(response.loginResult)
+            val response = apiService.getProfile("Bearer $token")
             emit(Result.Success(response))
         } catch (e: HttpException) {
             emit(handleHttpException(e))
