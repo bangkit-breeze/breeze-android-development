@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class TrackVehicleResponse(
 
 	@field:SerializedName("data")
-	val dataTrackFood: DataTrackFood? = null,
+	val dataTrackVehicle: DataTrackVehicle? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -14,7 +14,7 @@ data class TrackVehicleResponse(
 	val message: String? = null
 )
 
-data class DataTrackFood(
+data class DataTrackVehicle(
 
 	@field:SerializedName("user_id")
 	val userId: String? = null,
