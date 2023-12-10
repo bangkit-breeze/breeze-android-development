@@ -116,13 +116,13 @@
                         android:id="@+id/ic_vehicle_3"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_vehicle_nonactive"/>
+                        android:src="@drawable/ic_bike_nonactive"/>
 
                     <TextView
                         android:id="@+id/tv_vehicle_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Car"
+                        android:text="Bike"
                         android:textColor="#858585"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter"
@@ -144,13 +144,13 @@
                         android:id="@+id/ic_vehicle_4"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_bus_nonactive"/>
+                        android:src="@drawable/ic_train_nonactive"/>
 
                     <TextView
                         android:id="@+id/tv_vehicle_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bus"
+                        android:text="Train"
                         android:textColor="#858585"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter"
@@ -172,13 +172,13 @@
                         android:id="@+id/ic_vehicle_5"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_vehicle_nonactive"/>
+                        android:src="@drawable/ic_plane_nonactive"/>
 
                     <TextView
                         android:id="@+id/tv_vehicle_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Car"
+                        android:text="Plane"
                         android:textColor="#858585"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter"
@@ -200,13 +200,13 @@
                         android:id="@+id/ic_vehicle_6"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_bus_nonactive"/>
+                        android:src="@drawable/ic_ferry_nonactive"/>
 
                     <TextView
                         android:id="@+id/tv_vehicle_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bus"
+                        android:text="Ferry"
                         android:textColor="#858585"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter"

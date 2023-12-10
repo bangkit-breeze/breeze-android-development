@@ -3,6 +3,8 @@ package com.example.breeze.api
 import com.example.breeze.data.model.ArticleResponse
 import com.example.breeze.data.model.DataArticle
 import com.example.breeze.data.model.LeaderBoardResponse
+import com.example.breeze.data.model.TrackVehicleRequest
+import com.example.breeze.data.model.TrackVehicleResponse
 import com.example.breeze.data.model.UserProfileResponse
 import com.example.breeze.data.model.auth.LoginRequest
 import com.example.breeze.data.model.auth.LoginResponse
@@ -85,4 +87,11 @@ interface ApiService {
     suspend fun getLeaderboardWeekly(
         @Header("Authorization") token: String
     ): LeaderBoardResponse
+
+    @Headers("Content-Type: application/json")
+    @POST("emission/tracking/vehicle")
+    suspend fun addTrackEmissionVehicle(
+        @Header("Authorization") token: String,
+        @Body request: TrackVehicleRequest
+    ): TrackVehicleResponse
 }
