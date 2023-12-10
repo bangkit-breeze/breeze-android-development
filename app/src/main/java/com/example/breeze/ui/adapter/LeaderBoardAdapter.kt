@@ -25,7 +25,7 @@ class LeaderBoardAdapter: ListAdapter<LeaderboardItem, LeaderBoardAdapter.MyView
         fun bind(data: LeaderboardItem) = with(binding) {
             tvRanking.text = data.rank.toString()
             tvTitle.text = data.fullName.toString()
-            tvExp.text = data.exp.toString()
+            tvExp.text = "${data.exp} exp"
 
             Glide.with(itemView.context)
                 .load(data.avatarUrl)
@@ -33,7 +33,7 @@ class LeaderBoardAdapter: ListAdapter<LeaderboardItem, LeaderBoardAdapter.MyView
                 .error(R.drawable.ic_launcher_foreground)
                 .fallback(R.drawable.ic_launcher_foreground)
                 .into(ivPicture)
-            
+
         }
     }
 

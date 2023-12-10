@@ -1,6 +1,7 @@
 package com.example.breeze.data.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
@@ -31,6 +32,7 @@ class LeaderBoardRepository private constructor(
 
     private fun handleHttpException(exception: HttpException): Result.Error {
         val jsonInString = exception.response()?.errorBody()?.string()
+        Log.e("Error Response", jsonInString ?: "Empty error response")
         val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
         val errorMessage = errorBody.message
         return Result.Error(errorMessage)

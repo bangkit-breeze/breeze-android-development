@@ -51,7 +51,7 @@ class LeaderBoardFragment : Fragment() {
                 is Result.Loading -> return@observe
                 is Result.Success -> {
                     binding.tvName.text = it.data.dataUser?.fullName ?: ""
-                    binding.tvPoints.text = (it.data.dataUser?.points ?: 0).toString()
+                    binding.tvPoints.text = "${it.data.dataUser?.experiences ?: 0} Exp"
                 }
 
                 is Result.Error -> {

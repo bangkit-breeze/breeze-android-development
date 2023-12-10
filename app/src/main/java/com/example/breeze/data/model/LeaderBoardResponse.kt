@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class LeaderBoardResponse(
 
 	@field:SerializedName("data")
-	val dataLeaderboard: List<Data>? = null,
+	val dataLeaderboard: Data? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -17,7 +17,7 @@ data class LeaderBoardResponse(
 data class Data(
 
 	@field:SerializedName("leaderboard")
-	val leaderboard: List<LeaderboardItem?>? = null,
+	val leaderboards: List<LeaderboardItem?>? = null,
 
 	@field:SerializedName("userRank")
 	val userRank: Int? = null
