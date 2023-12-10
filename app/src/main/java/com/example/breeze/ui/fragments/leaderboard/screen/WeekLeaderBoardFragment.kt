@@ -5,56 +5,84 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breeze.R
+import com.example.breeze.data.model.LeaderBoardResponse
+import com.example.breeze.data.model.auth.LoginResult
+import com.example.breeze.databinding.FragmentAllLeaderBoardBinding
+import com.example.breeze.databinding.FragmentWeekLeaderBoardBinding
+import com.example.breeze.ui.adapter.LeaderBoardAdapter
+import com.example.breeze.ui.factory.LeaderBoardViewModelFactory
+import com.example.breeze.ui.fragments.leaderboard.LeaderBoardViewModel
+import com.example.breeze.utils.Result
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [WeekLeaderBoardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WeekLeaderBoardFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentWeekLeaderBoardBinding? = null
+    private val binding get() = _binding!!
+
+    private val  viewModel: LeaderBoardViewModel by viewModels {
+        LeaderBoardViewModelFactory.getInstance(requireActivity().application)
     }
-
+    private lateinit var dataUser: LoginResult
+    private val adapter = LeaderBoardAdapter()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_week_leader_board, container, false)
+        _binding =  FragmentWeekLeaderBoardBinding.inflate(inflater, container, false)
+        setupRecyclerView(adapter)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WeekLeaderBoardFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WeekLeaderBoardFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onResume() {
+        super.onResume()
+        setupViews()
+        viewModel.getLeaderBordWeekly(dataUser.token).observe(this) { result ->
+            handleEventResult(result, adapter)
+        }
+    }
+    private fun setupViews() {
+        viewModel.getUserLogin().observe(viewLifecycleOwner) {
+            dataUser = it
+        }
+    }
+    private fun setupRecyclerView(adapter: LeaderBoardAdapter) {
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvLeaderboard.layoutManager = layoutManager
+        binding.rvLeaderboard.adapter = adapter
+    }
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+    private fun handleEventResult(result: Result<LeaderBoardResponse>, adapter: LeaderBoardAdapter) {
+        when (result) {
+            is Result.Loading -> showLoading(true)
+            is Result.Success -> {
+                showLoading(false)
+                val leaderboard = result.data.dataLeaderboard
+                if (leaderboard?.leaderboards.isNullOrEmpty()) {
+                    binding.tvEmptyData.visibility = View.VISIBLE
+                } else {
+                    binding.tvEmptyData.visibility = View.GONE
+                    adapter.submitList(leaderboard?.leaderboards)
                 }
             }
+            is Result.Error -> {
+                showLoading(false)
+                val message = result.error
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 }

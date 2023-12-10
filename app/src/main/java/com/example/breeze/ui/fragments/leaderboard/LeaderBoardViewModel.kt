@@ -12,6 +12,7 @@ class LeaderBoardViewModel(
     private val leaderBoardRepository: LeaderBoardRepository
 ) : ViewModel() {
     fun getLeaderBordAllTime(token: String) = leaderBoardRepository.getLeaderBoardAllTime(token)
+    fun getLeaderBordWeekly(token: String) = leaderBoardRepository.getLeaderBoardWeekly(token)
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
     fun getProfile(token: String) = userRepository.getProfile(token)
 

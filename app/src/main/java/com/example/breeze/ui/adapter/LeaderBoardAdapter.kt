@@ -2,6 +2,7 @@ package com.example.breeze.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -23,15 +24,43 @@ class LeaderBoardAdapter: ListAdapter<LeaderboardItem, LeaderBoardAdapter.MyView
     class MyViewHolder(private val binding: ItemLeaderboardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: LeaderboardItem) = with(binding) {
-            tvRanking.text = data.rank.toString()
+            // Assuming data.rank is the user's rank
+            when (data.rank) {
+                1 -> {
+                    binding.rank1.visibility = View.VISIBLE
+                    binding.rank2.visibility = View.GONE
+                    binding.rank3.visibility = View.GONE
+                    binding.tvRanking.visibility = View.GONE
+                }
+                2 -> {
+                    binding.rank1.visibility = View.GONE
+                    binding.rank2.visibility = View.VISIBLE
+                    binding.rank3.visibility = View.GONE
+                    binding.tvRanking.visibility = View.GONE
+                }
+                3 -> {
+                    binding.rank1.visibility = View.GONE
+                    binding.rank2.visibility = View.GONE
+                    binding.rank3.visibility = View.VISIBLE
+                    binding.tvRanking.visibility = View.GONE
+                }
+                else -> {
+                    binding.rank1.visibility = View.GONE
+                    binding.rank2.visibility = View.GONE
+                    binding.rank3.visibility = View.GONE
+                    binding.tvRanking.visibility = View.VISIBLE
+                    binding.tvRanking.text = data.rank.toString()
+                }
+            }
+
             tvTitle.text = data.fullName.toString()
             tvExp.text = "${data.exp} exp"
 
             Glide.with(itemView.context)
                 .load(data.avatarUrl)
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_foreground)
-                .fallback(R.drawable.ic_launcher_foreground)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .fallback(R.drawable.ic_launcher_background)
                 .into(ivPicture)
 
         }

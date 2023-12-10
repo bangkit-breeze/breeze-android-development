@@ -80,4 +80,9 @@ interface ApiService {
     suspend fun getLeaderboardAlltime(
         @Header("Authorization") token: String
     ): LeaderBoardResponse
+
+    @GET("leaderboard/weekly")
+    suspend fun getLeaderboardWeekly(
+        @Header("Authorization") token: String
+    ): LeaderBoardResponse
 }

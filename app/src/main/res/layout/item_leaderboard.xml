@@ -10,6 +10,74 @@
     android:background="@drawable/bg_article"
     android:layout_height="wrap_content">
 
+    <LinearLayout
+        android:id="@+id/rank1"
+        android:visibility="gone"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/ic_rank_1"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_ranking_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginBottom="3dp"
+            android:text="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rank2"
+        android:layout_width="22dp"
+        android:visibility="gone"
+        android:layout_height="22dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/ic_rank_2"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_ranking_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginBottom="3dp"
+            android:text="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/rank3"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/ic_rank_3"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_ranking_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginBottom="3dp"
+            android:text="3" />
+    </LinearLayout>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_ranking"
         android:layout_width="wrap_content"
@@ -18,7 +86,8 @@
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/black"
         android:textSize="13sp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="7dp"
         android:text="1" />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -26,6 +95,7 @@
         android:layout_width="30dp"
         android:layout_marginRight="15dp"
         android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/ic_launcher_background" />
 
     <com.google.android.material.textview.MaterialTextView
