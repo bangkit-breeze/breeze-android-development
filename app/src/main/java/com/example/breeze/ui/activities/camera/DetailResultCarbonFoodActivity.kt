@@ -14,7 +14,7 @@ import kotlin.math.roundToInt
 
 class DetailResultCarbonFoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailResultCarbonFoodBinding
-    private val adapter = FoodCarbonAdapter
+    private val adapter = FoodCarbonAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailResultCarbonFoodBinding.inflate(layoutInflater)
@@ -42,8 +42,8 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
             binding.tvCarbon.text = "${data.predictResult?.totalEmissions} kgCO2e"
             val layoutManager = LinearLayoutManager(this)
             binding.rvIngredients.layoutManager = layoutManager
-            binding.rvIngredients.adapter = FoodCarbonAdapter()
-            FoodCarbonAdapter().submitList(data.predictResult?.ingredients)
+            binding.rvIngredients.adapter = adapter
+            adapter.submitList(data.predictResult?.ingredients)
         }
 
     }
