@@ -15,7 +15,7 @@ import kotlin.math.roundToInt
 
 class AddVehicleCarbonActivity : AppCompatActivity() {
     private var selectedItemId: Int = -1
-        private lateinit var binding: ActivityAddVehicleCarbonBinding
+    private lateinit var binding: ActivityAddVehicleCarbonBinding
     private var lastSelectedTextView: TextView? = null
     private var selectedVehicle: String? = null
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,15 +26,19 @@ class AddVehicleCarbonActivity : AppCompatActivity() {
                 onBackPressed()
             }
 
-            selectedVehicle = "DefaultText"
-            binding.item1.setOnClickListener { handleItemClick(binding.item1, binding.tvVehicle1, "Car") }
-            binding.item2.setOnClickListener { handleItemClick(binding.item2, binding.tvVehicle2, "Bus") }
-            binding.item3.setOnClickListener { handleItemClick(binding.item3, binding.tvVehicle3, "Car") }
-            binding.item4.setOnClickListener { handleItemClick(binding.item4, binding.tvVehicle4, "Bus") }
-            binding.item5.setOnClickListener { handleItemClick(binding.item5, binding.tvVehicle5, "Car") }
-            binding.item6.setOnClickListener { handleItemClick(binding.item6, binding.tvVehicle6, "Bus") }
-            binding.coba.text = selectedVehicle
+            // selectedVehicle = "car"
+            binding.item1.setOnClickListener { handleItemClick(binding.item1, binding.tvVehicle1, "car") }
+            binding.item2.setOnClickListener { handleItemClick(binding.item2, binding.tvVehicle2, "bus") }
+            binding.item3.setOnClickListener { handleItemClick(binding.item3, binding.tvVehicle3, "bike") }
+            binding.item4.setOnClickListener { handleItemClick(binding.item4, binding.tvVehicle4, "ferry") }
+            binding.item5.setOnClickListener { handleItemClick(binding.item5, binding.tvVehicle5, "plane") }
+            binding.item6.setOnClickListener { handleItemClick(binding.item6, binding.tvVehicle6, "train") }
+            // binding.coba.text = selectedVehicle
 
+
+            binding.btnAdd.setOnClickListener {
+
+            }
 
             binding.mainSlider.setLabelFormatter { value ->
                 "${value.toInt()} KM"
@@ -97,19 +101,19 @@ class AddVehicleCarbonActivity : AppCompatActivity() {
             }
             R.id.item3 -> {
                 val imageView = findViewById<ImageView>(R.id.ic_vehicle_3)
-                imageView.setImageResource(R.drawable.ic_vehicle_active)
+                imageView.setImageResource(R.drawable.ic_bike_active)
             }
             R.id.item4 -> {
                 val imageView = findViewById<ImageView>(R.id.ic_vehicle_4)
-                imageView.setImageResource(R.drawable.ic_bus_active)
+                imageView.setImageResource(R.drawable.ic_train_active)
             }
             R.id.item5 -> {
                 val imageView = findViewById<ImageView>(R.id.ic_vehicle_5)
-                imageView.setImageResource(R.drawable.ic_vehicle_active)
+                imageView.setImageResource(R.drawable.ic_plane_active)
             }
             R.id.item6 -> {
             val imageView = findViewById<ImageView>(R.id.ic_vehicle_6)
-            imageView.setImageResource(R.drawable.ic_bus_active)
+            imageView.setImageResource(R.drawable.ic_ferry_active)
         }
         }
         selectedVehicle = vehicleType
@@ -134,19 +138,19 @@ class AddVehicleCarbonActivity : AppCompatActivity() {
             }
             R.id.item3 -> {
                 val imageView = findViewById<ImageView>(R.id.ic_vehicle_3)
-                imageView.setImageResource(R.drawable.ic_vehicle_nonactive)
+                imageView.setImageResource(R.drawable.ic_bike_nonactive)
             }
             R.id.item4 -> {
                 val imageView = findViewById<ImageView>(R.id.ic_vehicle_4)
-                imageView.setImageResource(R.drawable.ic_bus_nonactive)
+                imageView.setImageResource(R.drawable.ic_train_nonactive)
             }
             R.id.item5 -> {
                 val imageView = findViewById<ImageView>(R.id.ic_vehicle_5)
-                imageView.setImageResource(R.drawable.ic_vehicle_nonactive)
+                imageView.setImageResource(R.drawable.ic_plane_nonactive)
             }
             R.id.item6 -> {
                 val imageView = findViewById<ImageView>(R.id.ic_vehicle_6)
-                imageView.setImageResource(R.drawable.ic_bus_nonactive)
+                imageView.setImageResource(R.drawable.ic_ferry_nonactive)
             }
 
         }

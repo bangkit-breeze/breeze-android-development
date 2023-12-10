@@ -12,6 +12,9 @@ class AddVehicleCarbonViewModel(
     private val userRepository: UserRepository,
     private val trackEmissionRepository: TrackEmissionRepository
 ) : ViewModel() {
+
+    fun addTrackEmissionVehicleCarbon(token: String, vehicleType: String, distance: Int)
+        = trackEmissionRepository.addTrackEmissionVehicle(token, vehicleType, distance)
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
 
 }
