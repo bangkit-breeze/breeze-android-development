@@ -57,7 +57,7 @@ class ResultCameraFoodActivity : AppCompatActivity() {
             currentImageUri?.let { uri ->
                  val imageFile = uriToFile(uri, this).reduceFileImage()
                 Log.d("Image File", "showImage: ${imageFile.path}")
-                        viewModel.addTrackEmissionFoodCarbon(dataUser.token, imageFile).observe(this) { result ->
+                        viewModel.predictTrackEmissionFoodCarbon(dataUser.token, imageFile).observe(this) { result ->
                             if (result != null) {
                                 when (result) {
                                     is Result.Loading -> showLoading(true)

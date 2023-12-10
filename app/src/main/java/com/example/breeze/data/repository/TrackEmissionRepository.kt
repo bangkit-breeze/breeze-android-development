@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
 import com.example.breeze.data.model.ErrorResponse
+import com.example.breeze.data.model.TrackFoodRequest
 import com.example.breeze.data.model.TrackVehicleRequest
 import com.example.breeze.data.model.auth.RegisterRequest
 import com.example.breeze.utils.Result
@@ -36,7 +37,21 @@ class TrackEmissionRepository private constructor(
         }
     }
 
-    fun addTrackEmissionFood(token: String, file: File) = liveData {
+    fun addTrackEmissionFood(token: String, foodName: String, totalEmission: Int) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.addTrackEmissionFood("Bearer $token", TrackFoodRequest(foodName, totalEmission))
+            emit(Result.Success(response))
+        }catch (e: HttpException) {
+            emit(handleHttpException(e))
+        } catch (exception: IOException) {
+            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+        } catch (exception: Exception) {
+            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
+        }
+    }
+
+    fun predictTrackEmissionFood(token: String, file: File) = liveData {
         emit(Result.Loading)
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
@@ -45,7 +60,7 @@ class TrackEmissionRepository private constructor(
             requestImageFile
         )
         try {
-            val response = apiService.addTrackEmissionFood("Bearer $token", multipartBody)
+            val response = apiService.predictTrackEmissionFood("Bearer $token", multipartBody)
             emit(Result.Success(response))
         }catch (e: HttpException) {
             emit(handleHttpException(e))

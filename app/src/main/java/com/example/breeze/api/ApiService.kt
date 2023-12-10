@@ -1,8 +1,10 @@
 package com.example.breeze.api
 
+import com.example.breeze.data.model.AddTrackFoodResponse
 import com.example.breeze.data.model.ArticleResponse
 import com.example.breeze.data.model.DataArticle
 import com.example.breeze.data.model.LeaderBoardResponse
+import com.example.breeze.data.model.TrackFoodRequest
 import com.example.breeze.data.model.TrackFoodResponse
 import com.example.breeze.data.model.TrackVehicleRequest
 import com.example.breeze.data.model.TrackVehicleResponse
@@ -98,8 +100,15 @@ interface ApiService {
 
     @Multipart
     @POST("emission/tracking/food/predict")
-    suspend fun addTrackEmissionFood(
+    suspend fun predictTrackEmissionFood(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part
     ): TrackFoodResponse
+
+    @Headers("Content-Type: application/json")
+    @POST("emission/tracking/food/add")
+    suspend fun addTrackEmissionFood(
+        @Header("Authorization") token: String,
+        @Body request: TrackFoodRequest
+    ): AddTrackFoodResponse
 }

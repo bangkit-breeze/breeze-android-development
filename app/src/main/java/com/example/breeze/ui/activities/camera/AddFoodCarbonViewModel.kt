@@ -12,8 +12,10 @@ class AddFoodCarbonViewModel(
     private val trackEmissionRepository: TrackEmissionRepository
 ) : ViewModel() {
 
-    fun addTrackEmissionFoodCarbon(token: String, file: File)
-            = trackEmissionRepository.addTrackEmissionFood(token, file)
+    fun predictTrackEmissionFoodCarbon(token: String, file: File)
+            = trackEmissionRepository.predictTrackEmissionFood(token, file)
+    fun addTrackEmissionFood(token: String, name: String, emision: Int)
+            = trackEmissionRepository.addTrackEmissionFood(token, name, emision)
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
 
 }
