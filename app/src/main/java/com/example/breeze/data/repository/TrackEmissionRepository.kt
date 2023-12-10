@@ -10,7 +10,11 @@ import com.example.breeze.data.model.TrackVehicleRequest
 import com.example.breeze.data.model.auth.RegisterRequest
 import com.example.breeze.utils.Result
 import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
+import java.io.File
 import java.io.IOException
 
 class TrackEmissionRepository private constructor(
@@ -22,6 +26,26 @@ class TrackEmissionRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.addTrackEmissionVehicle("Bearer $token", TrackVehicleRequest(vehicleType, distance))
+            emit(Result.Success(response))
+        }catch (e: HttpException) {
+            emit(handleHttpException(e))
+        } catch (exception: IOException) {
+            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+        } catch (exception: Exception) {
+            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
+        }
+    }
+
+    fun addTrackEmissionFood(token: String, file: File) = liveData {
+        emit(Result.Loading)
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+        val multipartBody = MultipartBody.Part.createFormData(
+            "file",
+            file.name,
+            requestImageFile
+        )
+        try {
+            val response = apiService.addTrackEmissionFood("Bearer $token", multipartBody)
             emit(Result.Success(response))
         }catch (e: HttpException) {
             emit(handleHttpException(e))

@@ -1,6 +1,8 @@
 package com.example.breeze.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class TrackFoodResponse(
 
@@ -13,7 +15,7 @@ data class TrackFoodResponse(
 	@field:SerializedName("message")
 	val message: String? = null
 )
-
+@Parcelize
 data class DataTrackFood(
 
 	@field:SerializedName("image_url")
@@ -21,8 +23,10 @@ data class DataTrackFood(
 
 	@field:SerializedName("predict_result")
 	val predictResult: PredictResult? = null
-)
+) : Parcelable
 
+
+@Parcelize
 data class IngredientsItem(
 
 	@field:SerializedName("bahan")
@@ -33,8 +37,9 @@ data class IngredientsItem(
 
 	@field:SerializedName("carbon_footprint")
 	val carbonFootprint: String? = null
-)
+): Parcelable
 
+@Parcelize
 data class PredictResult(
 
 	@field:SerializedName("food_name")
@@ -57,4 +62,4 @@ data class PredictResult(
 
 	@field:SerializedName("version")
 	val version: String? = null
-)
+): Parcelable
