@@ -47,7 +47,7 @@
                 android:textSize="14sp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Muh Yazid"
+                tools:text="Muh Yazid"
                 />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_points"
@@ -56,7 +56,7 @@
                 android:textSize="14sp"
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/inter"
-                android:text="43 pts"
+                tools:text="43 pts"
                 />
 
         </LinearLayout>
