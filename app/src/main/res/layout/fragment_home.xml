@@ -134,7 +134,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/inter_medium"
-                                        android:text="@string/level_dummy"
+                                        tools:text="@string/level_dummy"
                                         android:textColor="@color/black"
                                         android:textSize="11sp" />
 

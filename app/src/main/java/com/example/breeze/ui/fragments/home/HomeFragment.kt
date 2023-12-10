@@ -40,6 +40,7 @@ import com.google.android.material.button.MaterialButton
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.example.breeze.utils.Result
 import java.lang.Math.floor
+import java.text.DecimalFormat
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
@@ -72,6 +73,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    fun formatAngka(angka: Float): String {
+        val decimalFormat = DecimalFormat("#.##")
+        return decimalFormat.format(angka)
+    }
     private fun handleProfile(result: Result<UserProfileResponse>){
         when(result){
             is Result.Loading ->  return
@@ -83,7 +88,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     binding.tvTotalFood.text = userProfile.foodEmissionCount.toString()
                     binding.tvTotalVehicle.text = userProfile.vehicleEmissionCount.toString()
                     val totalCarbon = (userProfile.totalCo2Removed?.toFloat() ?: 0f) / 1000
-                    binding.tvTotalCarbon.text = totalCarbon.toString()
+                    binding.tvTotalCarbon.text = formatAngka(totalCarbon).toString()
 
 
                     var exp = userProfile.experiences
@@ -98,10 +103,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             var level = floor(exp / 100.0).toInt()
                             binding.tvLevel.text = "Level ${level + 1}"
                             var expNow = exp % (level * 100)
-                            binding.tvExp.text = expNow.toString()
+                            binding.tvExp.text = exp.toString()
                             var expMaxNow = (level + 1) * 100
                             binding.tvExpMax.text = expMaxNow.toString()
-                            binding.progressBarHorizontal.max =  expMaxNow.toInt()
+                            binding.progressBarHorizontal.max =  100
                             binding.progressBarHorizontal.progress = expNow.toInt()
                         }
                     }
