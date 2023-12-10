@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -20,6 +21,7 @@ import com.example.breeze.ui.fragments.event.screen.FinishedEventFragment
 import com.example.breeze.ui.fragments.home.HomeViewModel
 import com.example.breeze.ui.fragments.leaderboard.screen.AllLeaderBoardFragment
 import com.example.breeze.ui.fragments.leaderboard.screen.WeekLeaderBoardFragment
+import com.example.breeze.utils.Result
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -38,6 +40,26 @@ class LeaderBoardFragment : Fragment() {
         _binding =  FragmentLeaderBoardBinding.inflate(inflater, container, false)
 
         return binding.root
+    }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserLogin().observe(viewLifecycleOwner) {
+            dataUser = it
+        }
+        viewModel.getProfile(dataUser.token).observe(this) {
+            when (it) {
+                is Result.Loading -> return@observe
+                is Result.Success -> {
+                    binding.tvName.text = it.data.dataUser?.fullName ?: ""
+                    binding.tvPoints.text = (it.data.dataUser?.points ?: 0).toString()
+                }
+
+                is Result.Error -> {
+                    val message = it.error
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
