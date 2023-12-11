@@ -63,6 +63,20 @@ class EventRepository private constructor(
         }
     }
 
+    fun getEventPopular(token: String) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getEventsPopular("Bearer $token")
+            emit(Result.Success(response))
+        }catch (e: HttpException) {
+            emit(handleHttpException(e))
+        } catch (exception: IOException) {
+            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+        } catch (exception: Exception) {
+            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
+        }
+    }
+
     fun joinEvent(token: String, id: String) = liveData {
         emit(Result.Loading)
         try {
