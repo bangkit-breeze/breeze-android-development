@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.breeze.R
 import com.example.breeze.data.model.response.event.DataEvent
-import com.example.breeze.data.model.response.event.DataEventPopular
 import com.example.breeze.databinding.ItemEventBinding
 import com.example.breeze.databinding.ItemEventPopulerBinding
 import com.example.breeze.ui.activities.details.events.DetailEventActivity
@@ -18,11 +17,11 @@ import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-class EventPopularAdapter: ListAdapter<DataEventPopular, EventPopularAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class EventPopularAdapter: ListAdapter<DataEvent, EventPopularAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     class MyViewHolder(private val binding: ItemEventPopulerBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: DataEventPopular) = with(binding) {
+        fun bind(data: DataEvent) = with(binding) {
             tvTitle.text = data.name
             tvDesc.text = data.description
             tvPoint.text = data.rewardPoints.toString()
@@ -59,11 +58,11 @@ class EventPopularAdapter: ListAdapter<DataEventPopular, EventPopularAdapter.MyV
         )
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataEventPopular>() {
-            override fun areItemsTheSame(oldItem: DataEventPopular, newItem: DataEventPopular): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataEvent>() {
+            override fun areItemsTheSame(oldItem: DataEvent, newItem: DataEvent): Boolean {
                 return oldItem == newItem
             }
-            override fun areContentsTheSame(oldItem: DataEventPopular, newItem: DataEventPopular): Boolean {
+            override fun areContentsTheSame(oldItem: DataEvent, newItem: DataEvent): Boolean {
                 return oldItem == newItem
             }
         }

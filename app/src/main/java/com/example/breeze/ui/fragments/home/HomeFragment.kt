@@ -22,6 +22,7 @@ import com.example.breeze.R
 import com.example.breeze.data.model.response.article.ArticleResponse
 import com.example.breeze.data.model.response.auth.UserProfileResponse
 import com.example.breeze.data.model.response.auth.LoginResult
+import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
 import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
@@ -33,6 +34,8 @@ import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonActivity
 import com.example.breeze.ui.adapter.rv.ArticlesAdapter
 import com.example.breeze.ui.adapter.frag.QuestionAdapter
+import com.example.breeze.ui.adapter.rv.EventAdapter
+import com.example.breeze.ui.adapter.rv.EventPopularAdapter
 import com.example.breeze.ui.factory.ViewModelFactory
 import com.example.breeze.ui.fragments.event.EventFragment
 import com.example.breeze.ui.fragments.home.screen.QuestionScreen
@@ -55,7 +58,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         ViewModelFactory.getInstance(requireActivity().application)
     }
     private lateinit var dataUser: LoginResult
-    private val adapter = ArticlesAdapter()
+    private val adapterArticle = ArticlesAdapter()
+    private val adapterEvent = EventPopularAdapter()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,13 +68,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         alertDialog = AlertDialog.Builder(requireContext())
         setupInfoListeners()
         setupViews()
-        setupRecyclerView(adapter)
+        setupRecyclerViewArticle(adapterArticle)
+        setupRecyclerViewEvent(adapterEvent)
         return binding.root
     }
     override fun onResume() {
         super.onResume()
         homeViewModel.getArticles(dataUser.token).observe(this) { result ->
-            handleArticleResult(result, adapter)
+            handleArticleResult(result, adapterArticle)
+        }
+
+        homeViewModel.getEventsPopular(dataUser.token).observe(this) { result ->
+            handleEventResult(result, adapterEvent)
         }
         homeViewModel.getProfile(dataUser.token).observe(this){
             handleProfile(it)
@@ -145,10 +154,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun setupRecyclerView(adapter: ArticlesAdapter) {
+    private fun handleEventResult(result: Result<EventResponse>, adapter: EventPopularAdapter) {
+        when (result) {
+            is Result.Loading ->  showLoadingArticle(true)
+            is Result.Success -> {
+                showLoadingArticle(false)
+                val events = result.data.dataEvent
+                adapter.submitList(events)
+            }
+            is Result.Error -> {
+                showLoadingArticle(false)
+                val message = result.error
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupRecyclerViewArticle(adapter: ArticlesAdapter) {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvArticle.layoutManager = layoutManager
         binding.rvArticle.adapter = adapter
+    }
+
+    private fun setupRecyclerViewEvent(adapter: EventPopularAdapter) {
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvEvent.layoutManager = layoutManager
+        binding.rvEvent.adapter = adapter
     }
     private fun setupViews() {
         homeViewModel.getUserLogin().observe(viewLifecycleOwner) {
@@ -157,6 +188,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     private fun setupInfoListeners() {
         binding?.apply {
+            tvSeeEventPopuler.setOnClickListener {
+                val eventFragment = EventFragment()
+                (activity as MainActivity).replaceFragment(eventFragment)
+            }
             btnInfoFood.setOnClickListener {
                 animateButtonClick(btnInfoFood)
                 showFoodBottomSheet()
@@ -328,6 +363,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.setContentView(sheetBinding.root)
 
         sheetBinding.btnAddTrackFood.setOnClickListener {
+            sheetDialog.dismiss()
             val intent = Intent(activity, CameraFoodCarbonActivity::class.java)
             startActivity(intent)
         }
@@ -341,6 +377,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.setContentView(sheetBinding.root)
 
         sheetBinding.btnAddTrackVechile.setOnClickListener {
+            sheetDialog.dismiss()
             val intent = Intent(activity, AddVehicleCarbonActivity::class.java)
             startActivity(intent)
         }
@@ -354,6 +391,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.setContentView(sheetBinding.root)
 
         sheetBinding.btnAddEvent.setOnClickListener {
+            sheetDialog.dismiss()
             val eventFragment = EventFragment()
             (activity as MainActivity).replaceFragment(eventFragment)
         }

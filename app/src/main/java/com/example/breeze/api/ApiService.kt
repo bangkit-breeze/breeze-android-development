@@ -12,7 +12,6 @@ import com.example.breeze.data.model.request.LoginRequest
 import com.example.breeze.data.model.response.auth.LoginResponse
 import com.example.breeze.data.model.response.auth.RegisterResponse
 import com.example.breeze.data.model.request.RegisterRequest
-import com.example.breeze.data.model.response.event.EventPopularResponse
 import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.data.model.response.event.JoinEventResponse
 import com.example.breeze.data.model.response.event.UploadEvidenceEventResponse
@@ -63,7 +62,7 @@ interface ApiService {
     @GET("events/popular")
     suspend fun getEventsPopular(
         @Header("Authorization") token: String
-    ): EventPopularResponse
+    ): EventResponse
 
     @POST("events/{id}/join")
     suspend fun joinEvent(
