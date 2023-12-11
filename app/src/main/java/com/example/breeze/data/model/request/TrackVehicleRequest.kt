@@ -1,4 +1,4 @@
-package com.example.breeze.data.model
+package com.example.breeze.data.model.request
 
 
 data class TrackVehicleRequest(

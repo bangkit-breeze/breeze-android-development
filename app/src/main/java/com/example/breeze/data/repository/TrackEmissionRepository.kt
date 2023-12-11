@@ -5,10 +5,9 @@ import android.util.Log
 import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
-import com.example.breeze.data.model.ErrorResponse
-import com.example.breeze.data.model.TrackFoodRequest
-import com.example.breeze.data.model.TrackVehicleRequest
-import com.example.breeze.data.model.auth.RegisterRequest
+import com.example.breeze.data.model.response.ErrorResponse
+import com.example.breeze.data.model.request.TrackFoodRequest
+import com.example.breeze.data.model.request.TrackVehicleRequest
 import com.example.breeze.utils.Result
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType

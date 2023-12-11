@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breeze.R
-import com.example.breeze.data.model.auth.LoginResult
-import com.example.breeze.data.model.event.EventResponse
+import com.example.breeze.data.model.response.auth.LoginResult
+import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.databinding.FragmentExploreEventBinding
 import com.example.breeze.databinding.FragmentFinishedEventBinding
 import com.example.breeze.ui.adapter.EventAdapter

@@ -1,25 +1,25 @@
-package com.example.breeze.data.model
+package com.example.breeze.data.model.response.leaderboard
 
 import com.google.gson.annotations.SerializedName
 
 data class LeaderBoardResponse(
 
-	@field:SerializedName("data")
+    @field:SerializedName("data")
 	val dataLeaderboard: Data? = null,
 
-	@field:SerializedName("success")
+    @field:SerializedName("success")
 	val success: Boolean? = null,
 
-	@field:SerializedName("message")
+    @field:SerializedName("message")
 	val message: String? = null
 )
 
 data class Data(
 
-	@field:SerializedName("leaderboard")
+    @field:SerializedName("leaderboard")
 	val leaderboards: List<LeaderboardItem?>? = null,
 
-	@field:SerializedName("userRank")
+    @field:SerializedName("userRank")
 	val userRank: Int? = null
 )
 

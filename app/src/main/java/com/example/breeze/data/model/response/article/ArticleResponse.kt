@@ -1,4 +1,4 @@
-package com.example.breeze.data.model
+package com.example.breeze.data.model.response.article
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,13 +6,13 @@ import kotlinx.parcelize.Parcelize
 
 data class ArticleResponse(
 
-	@field:SerializedName("data")
+    @field:SerializedName("data")
 	val data: List<DataArticle?>? = null,
 
-	@field:SerializedName("success")
+    @field:SerializedName("success")
 	val success: Boolean? = null,
 
-	@field:SerializedName("message")
+    @field:SerializedName("message")
 	val message: String? = null
 )
 

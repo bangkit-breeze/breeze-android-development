@@ -19,6 +19,5 @@ class ApiConfig {
                 .build()
                 .create(ApiService::class.java)
         }
-
     }
 }

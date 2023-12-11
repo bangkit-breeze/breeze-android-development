@@ -1,4 +1,4 @@
-package com.example.breeze.data.model.event
+package com.example.breeze.data.model.response.event
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,13 +6,13 @@ import kotlinx.parcelize.Parcelize
 
 data class EventResponse(
 
-	@field:SerializedName("data")
+    @field:SerializedName("data")
 	val dataEvent:List<DataEvent?>? = null,
 
-	@field:SerializedName("success")
+    @field:SerializedName("success")
 	val success: Boolean? = null,
 
-	@field:SerializedName("message")
+    @field:SerializedName("message")
 	val message: String? = null
 )
 

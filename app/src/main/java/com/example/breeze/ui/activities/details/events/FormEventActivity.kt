@@ -18,8 +18,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.example.breeze.R
-import com.example.breeze.data.model.auth.LoginResult
-import com.example.breeze.data.model.event.DataEvent
+import com.example.breeze.data.model.response.auth.LoginResult
+import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ActivityFormEventBinding
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.factory.EventViewModelFactory

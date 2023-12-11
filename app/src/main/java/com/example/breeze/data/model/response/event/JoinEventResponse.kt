@@ -1,4 +1,4 @@
-package com.example.breeze.data.model.event
+package com.example.breeze.data.model.response.event
 
 import com.google.gson.annotations.SerializedName
 

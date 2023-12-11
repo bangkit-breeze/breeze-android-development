@@ -1,6 +1,5 @@
 package com.example.breeze.ui.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.breeze.R
-import com.example.breeze.data.model.LeaderboardItem
-import com.example.breeze.data.model.event.DataEvent
-import com.example.breeze.databinding.ItemEventBinding
+import com.example.breeze.data.model.response.leaderboard.LeaderboardItem
 import com.example.breeze.databinding.ItemLeaderboardBinding
-import com.example.breeze.ui.activities.details.events.DetailEventActivity
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.concurrent.TimeUnit
 
 class LeaderBoardAdapter: ListAdapter<LeaderboardItem, LeaderBoardAdapter.MyViewHolder>(DIFF_CALLBACK) {
 

@@ -3,10 +3,8 @@ package com.example.breeze.ui.activities.article
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.breeze.R
-import com.example.breeze.data.model.DataArticle
+import com.example.breeze.data.model.response.article.DataArticle
 import com.example.breeze.databinding.ActivityDetailArticleBinding
-import com.example.breeze.databinding.ActivityLoginBinding
 
 class DetailArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailArticleBinding

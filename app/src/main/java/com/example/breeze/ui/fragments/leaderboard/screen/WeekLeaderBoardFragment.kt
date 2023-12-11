@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.breeze.R
-import com.example.breeze.data.model.LeaderBoardResponse
-import com.example.breeze.data.model.auth.LoginResult
-import com.example.breeze.databinding.FragmentAllLeaderBoardBinding
+import com.example.breeze.data.model.response.leaderboard.LeaderBoardResponse
+import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.FragmentWeekLeaderBoardBinding
 import com.example.breeze.ui.adapter.LeaderBoardAdapter
 import com.example.breeze.ui.factory.LeaderBoardViewModelFactory

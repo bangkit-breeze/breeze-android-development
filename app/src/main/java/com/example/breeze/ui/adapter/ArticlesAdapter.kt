@@ -1,16 +1,14 @@
 package com.example.breeze.ui.adapter
 
-import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.breeze.R
-import com.example.breeze.data.model.DataArticle
+import com.example.breeze.data.model.response.article.DataArticle
 import com.example.breeze.databinding.ItemArticleBinding
 import com.example.breeze.ui.activities.article.DetailArticleActivity
 

@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
-import com.example.breeze.data.model.ErrorResponse
+import com.example.breeze.data.model.response.ErrorResponse
 import retrofit2.HttpException
 import java.io.IOException
 import com.example.breeze.utils.Result

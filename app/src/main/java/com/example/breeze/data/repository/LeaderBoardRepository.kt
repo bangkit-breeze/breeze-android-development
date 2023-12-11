@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
-import com.example.breeze.data.model.ErrorResponse
+import com.example.breeze.data.model.response.ErrorResponse
 import com.example.breeze.utils.Result
 import com.google.gson.Gson
 import retrofit2.HttpException

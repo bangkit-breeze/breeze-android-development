@@ -1,4 +1,4 @@
-package com.example.breeze.data.model
+package com.example.breeze.data.model.response.track
 
 import com.google.gson.annotations.SerializedName
 

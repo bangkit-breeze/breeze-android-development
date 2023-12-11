@@ -1,4 +1,4 @@
-package com.example.breeze.data.model
+package com.example.breeze.data.model.response.track
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,13 +6,13 @@ import kotlinx.parcelize.Parcelize
 
 data class TrackFoodResponse(
 
-	@field:SerializedName("data")
+    @field:SerializedName("data")
 	val dataTrackFood: DataTrackFood? = null,
 
-	@field:SerializedName("success")
+    @field:SerializedName("success")
 	val success: Boolean? = null,
 
-	@field:SerializedName("message")
+    @field:SerializedName("message")
 	val message: String? = null
 )
 @Parcelize
@@ -42,24 +42,24 @@ data class IngredientsItem(
 @Parcelize
 data class PredictResult(
 
-	@field:SerializedName("food_name")
+    @field:SerializedName("food_name")
 	val foodName: String? = null,
 
-	@field:SerializedName("total_emissions")
+    @field:SerializedName("total_emissions")
 	val totalEmissions: String? = null,
 
-	@field:SerializedName("filename")
+    @field:SerializedName("filename")
 	val filename: String? = null,
 
-	@field:SerializedName("confidence")
+    @field:SerializedName("confidence")
 	val confidence: String? = null,
 
-	@field:SerializedName("name")
+    @field:SerializedName("name")
 	val name: String? = null,
 
-	@field:SerializedName("ingredients")
+    @field:SerializedName("ingredients")
 	val ingredients: List<IngredientsItem?>? = null,
 
-	@field:SerializedName("version")
+    @field:SerializedName("version")
 	val version: String? = null
 ): Parcelable

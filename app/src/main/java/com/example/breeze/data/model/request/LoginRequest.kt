@@ -1,4 +1,4 @@
-package com.example.breeze.data.model.auth
+package com.example.breeze.data.model.request
 
 data class LoginRequest(
     val email: String,

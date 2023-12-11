@@ -1,16 +1,16 @@
-package com.example.breeze.data.model
+package com.example.breeze.data.model.response.track
 
 import com.google.gson.annotations.SerializedName
 
 data class TrackVehicleResponse(
 
-	@field:SerializedName("data")
+    @field:SerializedName("data")
 	val dataTrackVehicle: DataTrackVehicle? = null,
 
-	@field:SerializedName("success")
+    @field:SerializedName("success")
 	val success: Boolean? = null,
 
-	@field:SerializedName("message")
+    @field:SerializedName("message")
 	val message: String? = null
 )
 

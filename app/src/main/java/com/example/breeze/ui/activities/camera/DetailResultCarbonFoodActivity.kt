@@ -17,14 +17,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.breeze.R
-import com.example.breeze.data.model.DataTrackFood
-import com.example.breeze.data.model.auth.LoginResult
+import com.example.breeze.data.model.response.track.DataTrackFood
+import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.ActivityDetailResultCarbonFoodBinding
-import com.example.breeze.databinding.ActivityResultCameraFoodBinding
 import com.example.breeze.ui.activities.main.MainActivity
-import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonViewModel
 import com.example.breeze.ui.adapter.FoodCarbonAdapter
-import com.example.breeze.ui.adapter.LeaderBoardAdapter
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
 import com.example.breeze.utils.Result
 import kotlin.math.roundToInt
@@ -54,9 +51,9 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
                 .into(binding.myImageView)
             val acuracy = data.predictResult?.confidence?.toFloat()
             if (acuracy != null) {
-                if(acuracy < 0.6 && acuracy > 0.5){
+                if(acuracy <= 0.6 ){
                     binding.tvAccuacy.text = "Low Accuracy"
-                }else if(acuracy < 0.8 && acuracy > 0.7){
+                }else if(acuracy < 0.9 && acuracy >= 0.61){
                     binding.tvAccuacy.text = "Medium Accuracy"
                 }else if(acuracy > 0.9){
                     binding.tvAccuacy.text = "High Accuracy"

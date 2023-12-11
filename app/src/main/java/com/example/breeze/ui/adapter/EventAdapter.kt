@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.breeze.R
-import com.example.breeze.data.model.event.DataEvent
+import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ItemEventBinding
 import com.example.breeze.ui.activities.details.events.DetailEventActivity
 import java.text.SimpleDateFormat

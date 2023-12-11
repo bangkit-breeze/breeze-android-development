@@ -18,9 +18,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
-import com.example.breeze.data.model.ArticleResponse
-import com.example.breeze.data.model.UserProfileResponse
-import com.example.breeze.data.model.auth.LoginResult
+import com.example.breeze.data.model.response.article.ArticleResponse
+import com.example.breeze.data.model.response.auth.UserProfileResponse
+import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
 import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
@@ -28,12 +28,8 @@ import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
 import com.example.breeze.ui.adapter.ArticlesAdapter
-import com.example.breeze.ui.adapter.OnBoardingAdapter
 import com.example.breeze.ui.adapter.QuestionAdapter
 import com.example.breeze.ui.factory.ViewModelFactory
-import com.example.breeze.ui.fragments.onboarding.screen.FirstScreen
-import com.example.breeze.ui.fragments.onboarding.screen.SecondScreen
-import com.example.breeze.ui.fragments.onboarding.screen.ThirdScreen
 import com.example.breeze.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton

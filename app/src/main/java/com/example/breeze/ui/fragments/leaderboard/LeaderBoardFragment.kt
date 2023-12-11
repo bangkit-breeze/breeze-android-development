@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.R
-import com.example.breeze.data.model.auth.LoginResult
+import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.FragmentEventBinding
 import com.example.breeze.databinding.FragmentLeaderBoardBinding
 import com.example.breeze.ui.adapter.EventPagerAdapter
