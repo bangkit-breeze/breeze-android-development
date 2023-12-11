@@ -60,11 +60,13 @@ class DetailCarbonActivity : AppCompatActivity() {
             is Result.Success -> {
 
                 val data = result.data.dataHistoryTrack
-                if(data != null){
-                    
-                }else{
+                if(data.isNullOrEmpty()){
                     binding.activityDontHave.visibility = View.VISIBLE
                     binding.rvActivity.visibility = View.GONE
+                }else{
+                    binding.activityDontHave.visibility = View.GONE
+                    binding.rvActivity.visibility = View.VISIBLE
+                    adapter.submitList(data)
                 }
             }
             is Result.Error -> {
