@@ -59,6 +59,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var dataUser: LoginResult
     private val adapterArticle = ArticlesAdapter()
     private val adapterEvent = EventPopularAdapter()
+    private var valueProgress: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -102,8 +103,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     val totalCarbon = (userProfile.totalCo2Removed?.toFloat() ?: 0f) / 1000
                     binding.tvTotalCarbon.text = formatAngka(totalCarbon).toString()
                     binding.tvTotalEvent.text = userProfile.totalEvent.toString()
-                    binding.tvProgress.text = "${(userProfile.totalCo2Removed?.div(30000) ?: 0) * 100}%"
-
+                    valueProgress = ((userProfile.totalCo2Removed?.toFloat() ?: 0f) / 30000 * 100).toInt()
+                    binding.tvProgress.text = "${valueProgress}%"
                     binding.progressBarCircular.progress = userProfile.totalCo2Removed!!
                     Glide.with(this)
                         .load(userProfile.avatarUrl)
