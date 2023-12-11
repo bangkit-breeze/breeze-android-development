@@ -23,10 +23,10 @@ data class DataUserStatistic(
 	val vehicleFootprintSum: Int? = null,
 
 	@field:SerializedName("foodEmissionPercentage")
-	val foodEmissionPercentage: Any? = null,
+	val foodEmissionPercentage: String? = null,
 
 	@field:SerializedName("vehicleEmissionPercentage")
-	val vehicleEmissionPercentage: Any? = null,
+	val vehicleEmissionPercentage: String? = null,
 
 	@field:SerializedName("foodFootprintSum")
 	val foodFootprintSum: Int? = null,

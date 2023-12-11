@@ -3,23 +3,31 @@ package com.example.breeze.ui.activities.details.carbon
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.activity.viewModels
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
 import com.example.breeze.R
+import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.ActivityDetailCarbonBinding
-import com.example.breeze.databinding.ActivityMainBinding
 import com.example.breeze.ui.activities.main.MainActivity
+import com.example.breeze.ui.factory.DetailCarbonViewModelFactory
+import com.example.breeze.utils.Result
+import kotlin.math.roundToInt
 
 class DetailCarbonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailCarbonBinding
     private var chart: AnyChartView? = null
-    private val salary = listOf(12, 24)
-    private val month = listOf("Food", "Vehicle")
+    val salary = mutableListOf<Int>()
+    private val month = listOf("Vehicle", "Food")
+    private val viewModel: DetailCarbonViewModel by viewModels{
+        DetailCarbonViewModelFactory.getInstance(application)
+    }
+    private lateinit var dataUser: LoginResult
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCarbonBinding.inflate(layoutInflater)
@@ -27,8 +35,67 @@ class DetailCarbonActivity : AppCompatActivity() {
         binding.topAppBar.setNavigationOnClickListener {
             navigateToMainActivity()
         }
+
         chart = findViewById(R.id.pieChart)
-        configChartView()
+
+
+
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserLogin().observe(this@DetailCarbonActivity) {
+            dataUser = it
+        }
+
+        viewModel.getStatistic(dataUser.token).observe(this@DetailCarbonActivity) { result ->
+            when (result) {
+                is Result.Loading -> return@observe
+                is Result.Success -> {
+                    if(result.data != null){
+                        val statistic = result.data.dataUserStatistic
+                        if (statistic != null) {
+                            val food =  statistic.foodEmissionCount
+                            val vehicle =  statistic.vehicleEmissionCount
+                            if (vehicle != null) {
+                                salary.add(vehicle)
+                            }
+                            if (food != null) {
+                                salary.add(food)
+                            }
+
+                            binding.tvCountFood.text = statistic.foodEmissionCount.toString()
+                            binding.tvCarbonVehicle.text = statistic.vehicleEmissionCount.toString()
+                            val carbon_food_sum = statistic.foodFootprintSum?.toFloat()?.div(1000)?.roundToTwoDecimals()
+                            val carbon_vehicle_sum = statistic.vehicleFootprintSum?.toFloat()?.div(1000)?.roundToTwoDecimals()
+                            binding.tvCarbonFood.text = carbon_food_sum.toString()
+                            binding.tvCarbonVehicle.text = carbon_vehicle_sum.toString()
+                            val carbon_food_persen =  statistic.foodEmissionPercentage?.toFloat()?.roundToOneDecimal()
+                            val carbon_vehicle_persen =  statistic.vehicleEmissionPercentage?.toFloat()?.roundToOneDecimal()
+                             binding.tvPersenFood.text = carbon_food_persen.toString()
+                             binding.tvPersenVehicle.text = carbon_vehicle_persen.toString()
+
+                            configChartView()
+                        }
+                    }
+
+                }
+                is Result.Error -> {
+                    val message = result.error
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    }
+
+    fun Float.roundToTwoDecimals(): Float {
+        return (this * 100).roundToInt() / 100.0f
+    }
+    fun Float.roundToOneDecimal(): Float {
+        return (this * 10).roundToInt() / 10.0f
     }
 
     private fun navigateToMainActivity() {

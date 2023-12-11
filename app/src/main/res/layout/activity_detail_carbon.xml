@@ -78,6 +78,7 @@
                     />
 
             </LinearLayout>
+
            <LinearLayout
                android:id="@+id/carbon_have"
                android:layout_width="match_parent"
