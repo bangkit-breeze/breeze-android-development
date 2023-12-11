@@ -102,6 +102,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     val totalCarbon = (userProfile.totalCo2Removed?.toFloat() ?: 0f) / 1000
                     binding.tvTotalCarbon.text = formatAngka(totalCarbon).toString()
                     binding.tvTotalEvent.text = userProfile.totalEvent.toString()
+                    binding.tvProgress.text = "${(userProfile.totalCo2Removed?.div(30000) ?: 0) * 100}%"
+
+                    binding.progressBarCircular.progress = userProfile.totalCo2Removed!!
                     Glide.with(this)
                         .load(userProfile.avatarUrl)
                         .placeholder(R.drawable.ic_launcher_background)
