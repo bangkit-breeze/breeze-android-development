@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
@@ -13,8 +14,12 @@ import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
+import com.example.breeze.data.model.response.leaderboard.LeaderBoardResponse
+import com.example.breeze.data.model.response.user.HistoryTrackResponse
 import com.example.breeze.databinding.ActivityDetailCarbonBinding
 import com.example.breeze.ui.activities.main.MainActivity
+import com.example.breeze.ui.adapter.rv.HistoryTrackAdapter
+import com.example.breeze.ui.adapter.rv.LeaderBoardAdapter
 import com.example.breeze.ui.factory.DetailCarbonViewModelFactory
 import com.example.breeze.utils.Result
 import kotlin.math.roundToInt
@@ -28,6 +33,7 @@ class DetailCarbonActivity : AppCompatActivity() {
         DetailCarbonViewModelFactory.getInstance(application)
     }
     private lateinit var dataUser: LoginResult
+    private val adapter = HistoryTrackAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCarbonBinding.inflate(layoutInflater)
@@ -38,18 +44,43 @@ class DetailCarbonActivity : AppCompatActivity() {
 
         chart = findViewById(R.id.pieChart)
 
-
+        setupRecyclerView(adapter)
 
 
     }
 
+    private fun setupRecyclerView(adapter: HistoryTrackAdapter) {
+        val layoutManager = LinearLayoutManager(this@DetailCarbonActivity)
+        binding.rvActivity.layoutManager = layoutManager
+        binding.rvActivity.adapter = adapter
+    }
+    private fun handleEventResult(result: Result<HistoryTrackResponse>, adapter: HistoryTrackAdapter) {
+        when (result) {
+            is Result.Loading -> return
+            is Result.Success -> {
 
+                val data = result.data.dataHistoryTrack
+                if(data != null){
+                    
+                }else{
+                    binding.activityDontHave.visibility = View.VISIBLE
+                    binding.rvActivity.visibility = View.GONE
+                }
+            }
+            is Result.Error -> {
+                val message = result.error
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     override fun onResume() {
         super.onResume()
         viewModel.getUserLogin().observe(this@DetailCarbonActivity) {
             dataUser = it
         }
-
+        viewModel.getHistoryTrack(dataUser.token).observe(this) { result ->
+            handleEventResult(result, adapter)
+        }
         viewModel.getStatistic(dataUser.token).observe(this@DetailCarbonActivity) { result ->
             when (result) {
                 is Result.Loading -> return@observe
