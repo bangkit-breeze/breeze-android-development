@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class HistoryTrackResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
+	val dataHistoryTrack: List<DataHistoryTrack?>? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -14,7 +14,7 @@ data class HistoryTrackResponse(
 	val message: String? = null
 )
 
-data class DataItem(
+data class DataHistoryTrack(
 
 	@field:SerializedName("user_id")
 	val userId: String? = null,
