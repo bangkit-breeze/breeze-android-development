@@ -22,9 +22,13 @@ class HistoryTrackAdapter : ListAdapter<DataHistoryTrack, HistoryTrackAdapter.My
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DataHistoryTrack) = with(binding) {
             tvTitle.text = data.name
-            tvCarbon.text = ((data.totalEmission?.toFloat() ?: 0f) / 1000.0).toString()
+            tvCarbon.text = "${((data.totalEmission?.toFloat() ?: 0f) / 1000.0)} kgCO2e"
             tvDate.text = data.createdAt?.let { formatTimestampToCustomDate(it) }
-
+            if(data.category == "FOOD"){
+                ivIcon.setImageResource(R.drawable.ic_food_black)
+            }else{
+                ivIcon.setImageResource(R.drawable.ic_vehicle_black)
+            }
 
         }
         fun formatTimestampToCustomDate(timestamp: String): String {
