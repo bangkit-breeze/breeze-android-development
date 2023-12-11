@@ -11,4 +11,5 @@ class DetailCarbonViewModel(
 ) : ViewModel() {
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
     fun getStatistic(token: String) = userRepository.getStatistic(token)
+    fun getHistoryTrack(token: String) = userRepository.getHistoryTrack(token)
 }
