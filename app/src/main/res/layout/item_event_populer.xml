@@ -91,6 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/number_dummy"
+                        android:id="@+id/tv_point"
                         android:textSize="9dp"
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/inter_medium"
@@ -113,6 +114,7 @@
                         android:layout_height="13dp"
                         android:src="@drawable/ic_location"/>
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dummy_location"
