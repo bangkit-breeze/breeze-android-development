@@ -11,6 +11,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -60,6 +62,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val adapterArticle = ArticlesAdapter()
     private val adapterEvent = EventPopularAdapter()
     private var valueProgress: Int = 0
+    private var totalRemoved: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -105,7 +108,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     binding.tvTotalEvent.text = userProfile.totalEvent.toString()
                     valueProgress = ((userProfile.totalCo2Removed?.toFloat() ?: 0f) / 30000 * 100).toInt()
                     binding.tvProgress.text = "${valueProgress}%"
+                    totalRemoved = userProfile.totalCo2Removed!!
                     binding.progressBarCircular.progress = userProfile.totalCo2Removed!!
+                    binding.tvCo2Removed.text = "0 kg"
                     Glide.with(this)
                         .load(userProfile.avatarUrl)
                         .placeholder(R.drawable.ic_launcher_background)
@@ -330,9 +335,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val alertDialog = AlertDialog.Builder(requireContext())
             .setView(customDialogView)
             .create()
-
+        val progressCarbon = customDialogView.findViewById<TextView>(R.id.tv_progress)
+        val progressBarCarbon = customDialogView.findViewById<ProgressBar>(R.id.progressBar_circular)
         val ivClose = customDialogView.findViewById<ImageView>(R.id.iv_close)
         val btnOkay = customDialogView.findViewById<MaterialButton>(R.id.btn_okay)
+        progressBarCarbon.progress = totalRemoved
+        progressCarbon.text = valueProgress.toString()
 
         ivClose.setOnClickListener {
             alertDialog.dismiss()
