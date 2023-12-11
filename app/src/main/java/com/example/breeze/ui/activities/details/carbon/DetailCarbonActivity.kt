@@ -67,7 +67,7 @@ class DetailCarbonActivity : AppCompatActivity() {
                             }
 
                             binding.tvCountFood.text = statistic.foodEmissionCount.toString()
-                            binding.tvCarbonVehicle.text = statistic.vehicleEmissionCount.toString()
+                            binding.tvCountVehicle.text = statistic.vehicleEmissionCount.toString()
                             val carbon_food_sum = statistic.foodFootprintSum?.toFloat()?.div(1000)?.roundToTwoDecimals()
                             val carbon_vehicle_sum = statistic.vehicleFootprintSum?.toFloat()?.div(1000)?.roundToTwoDecimals()
                             binding.tvCarbonFood.text = carbon_food_sum.toString()
@@ -77,7 +77,19 @@ class DetailCarbonActivity : AppCompatActivity() {
                              binding.tvPersenFood.text = carbon_food_persen.toString()
                              binding.tvPersenVehicle.text = carbon_vehicle_persen.toString()
 
-                            configChartView()
+
+                            if(food == 0 && vehicle == 0 &&
+                                carbon_food_sum?.toInt() == 0 && carbon_vehicle_sum?.toInt() == 0 &&
+                                carbon_food_persen?.toInt() == 0 && carbon_vehicle_persen?.toInt() == 0)
+                            {
+                                binding.carbonDontHave.visibility = View.VISIBLE
+                                binding.pieChart.visibility = View.GONE
+                            }else{
+                                binding.carbonDontHave.visibility = View.GONE
+                                binding.pieChart.visibility = View.VISIBLE
+                                configChartView()
+                            }
+
                         }
                     }
 

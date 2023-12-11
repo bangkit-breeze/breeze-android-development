@@ -15,6 +15,7 @@ import com.example.breeze.data.model.request.RegisterRequest
 import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.data.model.response.event.JoinEventResponse
 import com.example.breeze.data.model.response.event.UploadEvidenceEventResponse
+import com.example.breeze.data.model.response.user.HistoryTrackResponse
 import com.example.breeze.data.model.response.user.UserStatisticResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -89,6 +90,11 @@ interface ApiService {
     suspend fun getStatistic(
         @Header("Authorization") token: String
     ): UserStatisticResponse
+
+    @GET("users/history")
+    suspend fun getHistoryTrack(
+        @Header("Authorization") token: String
+    ): HistoryTrackResponse
 
     @GET("leaderboard/alltime")
     suspend fun getLeaderboardAlltime(
