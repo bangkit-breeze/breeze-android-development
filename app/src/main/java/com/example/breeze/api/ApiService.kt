@@ -7,7 +7,7 @@ import com.example.breeze.data.model.request.TrackFoodRequest
 import com.example.breeze.data.model.response.track.TrackFoodResponse
 import com.example.breeze.data.model.request.TrackVehicleRequest
 import com.example.breeze.data.model.response.track.TrackVehicleResponse
-import com.example.breeze.data.model.response.auth.UserProfileResponse
+import com.example.breeze.data.model.response.user.UserProfileResponse
 import com.example.breeze.data.model.request.LoginRequest
 import com.example.breeze.data.model.response.auth.LoginResponse
 import com.example.breeze.data.model.response.auth.RegisterResponse
@@ -15,6 +15,7 @@ import com.example.breeze.data.model.request.RegisterRequest
 import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.data.model.response.event.JoinEventResponse
 import com.example.breeze.data.model.response.event.UploadEvidenceEventResponse
+import com.example.breeze.data.model.response.user.UserStatisticResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -83,6 +84,11 @@ interface ApiService {
     suspend fun getProfile(
         @Header("Authorization") token: String
     ): UserProfileResponse
+
+    @GET("users/statistic")
+    suspend fun getStatistic(
+        @Header("Authorization") token: String
+    ): UserStatisticResponse
 
     @GET("leaderboard/alltime")
     suspend fun getLeaderboardAlltime(

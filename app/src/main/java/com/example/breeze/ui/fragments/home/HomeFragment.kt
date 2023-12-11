@@ -20,7 +20,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.breeze.R
 import com.example.breeze.data.model.response.article.ArticleResponse
-import com.example.breeze.data.model.response.auth.UserProfileResponse
+import com.example.breeze.data.model.response.user.UserProfileResponse
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
@@ -34,7 +34,6 @@ import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonActivity
 import com.example.breeze.ui.adapter.rv.ArticlesAdapter
 import com.example.breeze.ui.adapter.frag.QuestionAdapter
-import com.example.breeze.ui.adapter.rv.EventAdapter
 import com.example.breeze.ui.adapter.rv.EventPopularAdapter
 import com.example.breeze.ui.factory.ViewModelFactory
 import com.example.breeze.ui.fragments.event.EventFragment
