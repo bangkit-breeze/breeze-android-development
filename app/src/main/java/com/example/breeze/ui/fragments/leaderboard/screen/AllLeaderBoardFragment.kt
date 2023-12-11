@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breeze.data.model.response.leaderboard.LeaderBoardResponse
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.FragmentAllLeaderBoardBinding
-import com.example.breeze.ui.adapter.LeaderBoardAdapter
+import com.example.breeze.ui.adapter.rv.LeaderBoardAdapter
 import com.example.breeze.ui.factory.LeaderBoardViewModelFactory
 import com.example.breeze.ui.fragments.leaderboard.LeaderBoardViewModel
 import com.example.breeze.utils.Result

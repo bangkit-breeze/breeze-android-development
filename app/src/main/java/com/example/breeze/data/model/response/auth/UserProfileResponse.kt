@@ -55,6 +55,9 @@ data class DataUser(
 	@field:SerializedName("vehicle_emission_count")
 	val vehicleEmissionCount: Int? = null,
 
+	@field:SerializedName("total_event")
+	val totalEvent: Int? = null,
+
 	@field:SerializedName("email")
 	val email: String? = null
 ): Parcelable

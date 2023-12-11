@@ -21,7 +21,7 @@ import com.example.breeze.data.model.response.track.DataTrackFood
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.ActivityDetailResultCarbonFoodBinding
 import com.example.breeze.ui.activities.main.MainActivity
-import com.example.breeze.ui.adapter.FoodCarbonAdapter
+import com.example.breeze.ui.adapter.rv.FoodCarbonAdapter
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
 import com.example.breeze.utils.Result
 import kotlin.math.roundToInt

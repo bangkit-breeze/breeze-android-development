@@ -1,4 +1,4 @@
-package com.example.breeze.ui.adapter
+package com.example.breeze.ui.adapter.rv
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

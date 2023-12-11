@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.breeze.databinding.FragmentEventBinding
-import com.example.breeze.ui.adapter.EventPagerAdapter
+import com.example.breeze.ui.adapter.frag.EventPagerAdapter
 import com.example.breeze.ui.fragments.event.screen.ActiveEventFragment
 import com.example.breeze.ui.fragments.event.screen.ExploreEventFragment
 import com.example.breeze.ui.fragments.event.screen.FinishedEventFragment

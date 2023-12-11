@@ -1,4 +1,4 @@
-package com.example.breeze.ui.adapter
+package com.example.breeze.ui.adapter.rv
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,9 @@ import com.example.breeze.R
 import com.example.breeze.data.model.response.leaderboard.LeaderboardItem
 import com.example.breeze.databinding.ItemLeaderboardBinding
 
-class LeaderBoardAdapter: ListAdapter<LeaderboardItem, LeaderBoardAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class LeaderBoardAdapter: ListAdapter<LeaderboardItem, LeaderBoardAdapter.MyViewHolder>(
+    DIFF_CALLBACK
+) {
 
     class MyViewHolder(private val binding: ItemLeaderboardBinding) :
         RecyclerView.ViewHolder(binding.root) {

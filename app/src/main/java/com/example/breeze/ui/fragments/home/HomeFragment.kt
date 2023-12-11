@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.breeze.R
 import com.example.breeze.data.model.response.article.ArticleResponse
 import com.example.breeze.data.model.response.auth.UserProfileResponse
@@ -26,10 +27,17 @@ import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
 import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
+import com.example.breeze.ui.activities.camera.CameraFoodCarbonActivity
 import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
-import com.example.breeze.ui.adapter.ArticlesAdapter
-import com.example.breeze.ui.adapter.QuestionAdapter
+import com.example.breeze.ui.activities.main.MainActivity
+import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonActivity
+import com.example.breeze.ui.adapter.rv.ArticlesAdapter
+import com.example.breeze.ui.adapter.frag.QuestionAdapter
 import com.example.breeze.ui.factory.ViewModelFactory
+import com.example.breeze.ui.fragments.event.EventFragment
+import com.example.breeze.ui.fragments.home.screen.QuestionScreen
+import com.example.breeze.ui.fragments.home.screen.QuestionSecondScreen
+import com.example.breeze.ui.fragments.home.screen.QuestionThirdScreen
 import com.example.breeze.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
@@ -85,7 +93,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     binding.tvTotalVehicle.text = userProfile.vehicleEmissionCount.toString()
                     val totalCarbon = (userProfile.totalCo2Removed?.toFloat() ?: 0f) / 1000
                     binding.tvTotalCarbon.text = formatAngka(totalCarbon).toString()
-
+                    binding.tvTotalEvent.text = userProfile.totalEvent.toString()
+                    Glide.with(this)
+                        .load(userProfile.avatarUrl)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_background)
+                        .fallback(R.drawable.ic_launcher_background)
+                        .into(binding.ivPictureProfile)
 
                     var exp = userProfile.experiences
                     if (exp != null) {
@@ -314,7 +328,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.setContentView(sheetBinding.root)
 
         sheetBinding.btnAddTrackFood.setOnClickListener {
-            displayToast(R.string.feature_not_yet)
+            val intent = Intent(activity, CameraFoodCarbonActivity::class.java)
+            startActivity(intent)
         }
 
         sheetDialog.show()
@@ -326,7 +341,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.setContentView(sheetBinding.root)
 
         sheetBinding.btnAddTrackVechile.setOnClickListener {
-            displayToast(R.string.feature_not_yet)
+            val intent = Intent(activity, AddVehicleCarbonActivity::class.java)
+            startActivity(intent)
         }
 
         sheetDialog.show()
@@ -338,7 +354,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sheetDialog.setContentView(sheetBinding.root)
 
         sheetBinding.btnAddEvent.setOnClickListener {
-            displayToast(R.string.feature_not_yet)
+            val eventFragment = EventFragment()
+            (activity as MainActivity).replaceFragment(eventFragment)
         }
 
         sheetDialog.show()

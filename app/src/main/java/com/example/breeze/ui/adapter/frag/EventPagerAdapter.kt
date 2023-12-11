@@ -1,4 +1,4 @@
-package com.example.breeze.ui.adapter
+package com.example.breeze.ui.adapter.frag
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

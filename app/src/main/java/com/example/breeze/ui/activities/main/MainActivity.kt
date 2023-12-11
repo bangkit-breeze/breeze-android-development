@@ -124,8 +124,10 @@ class MainActivity : AppCompatActivity() {
             sheetdialog.dismiss()
         }
     }
-    private fun replaceFragment(fragment: Fragment){
+    fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit()
     }
+
+
 
 }
