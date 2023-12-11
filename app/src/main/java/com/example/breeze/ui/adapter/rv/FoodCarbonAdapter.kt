@@ -14,7 +14,7 @@ class FoodCarbonAdapter: ListAdapter<IngredientsItem, FoodCarbonAdapter.MyViewHo
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: IngredientsItem) = with(binding) {
             val berat = ((data.berat?.toFloat() ?: 0f) * 1000).toInt()
-            tvTitle.text = "$berat, ${data.bahan}"
+            tvTitle.text = "$berat g, ${data.bahan}"
             tvEmisi.text = "${data.carbonFootprint} kgCO2e"
 
         }

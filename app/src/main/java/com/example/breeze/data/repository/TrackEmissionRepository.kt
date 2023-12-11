@@ -64,7 +64,7 @@ class TrackEmissionRepository private constructor(
         }catch (e: HttpException) {
             emit(handleHttpException(e))
         } catch (exception: IOException) {
-            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+            emit(Result.Error("Please try again. There seems to be a network error. Please check your internet connection."))
         } catch (exception: Exception) {
             emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
         }
