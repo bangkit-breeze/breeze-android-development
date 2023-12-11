@@ -66,7 +66,19 @@ class UserRepository private constructor(
         }
     }
 
- 
+    fun getStatistic(token: String) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getStatistic("Bearer $token")
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            emit(handleHttpException(e))
+        } catch (exception: IOException) {
+            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
+        } catch (exception: Exception) {
+            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
+        }
+    }
 
     suspend fun saveSession(data: LoginResult) = userPref.saveSession(data)
 
