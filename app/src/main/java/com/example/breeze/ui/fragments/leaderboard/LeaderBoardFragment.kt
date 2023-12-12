@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.FragmentLeaderBoardBinding
 import com.example.breeze.ui.adapter.frag.EventPagerAdapter
@@ -45,6 +47,12 @@ class LeaderBoardFragment : Fragment() {
                 is Result.Success -> {
                     binding.tvName.text = it.data.dataUser?.fullName ?: ""
                     binding.tvPoints.text = "${it.data.dataUser?.experiences ?: 0} Exp"
+                    Glide.with(this)
+                        .load(it.data.dataUser?.avatarUrl)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_background)
+                        .fallback(R.drawable.ic_launcher_background)
+                        .into(binding.ivPicture)
                 }
 
                 is Result.Error -> {

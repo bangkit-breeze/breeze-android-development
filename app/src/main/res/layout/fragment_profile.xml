@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
-                android:text="Muh Yazid"
+                tools:text="Muh Yazid"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -101,6 +101,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
@@ -141,12 +142,13 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_rank"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:fontFamily="@font/inter"
                         android:textStyle="bold"
-                        android:text="23"
+                        tools:text="NaN"
                         android:layout_marginTop="3dp"
                         android:textColor="@color/white"
                         />
@@ -181,12 +183,13 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_point"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:fontFamily="@font/inter"
                         android:textStyle="bold"
-                        android:text="300"
+                        tools:text="300"
                         android:layout_marginTop="3dp"
                         android:textColor="@color/white"
                         />
