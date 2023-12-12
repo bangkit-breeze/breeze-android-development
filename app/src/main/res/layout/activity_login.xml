@@ -16,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -176,9 +175,11 @@
                 android:fontFamily="@font/inter"
                 android:text="@string/login_dont_have_account"
                 />
+
             <View
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"/>
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_login_to_register"
                 android:layout_width="wrap_content"

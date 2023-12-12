@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.breeze.R
-import com.example.breeze.ui.activities.login.LoginViewModel
+import com.example.breeze.ui.viewmodel.LoginViewModel
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.factory.AuthViewModelFactory
 import com.example.breeze.ui.viewmodel.OnBoardingViewModel

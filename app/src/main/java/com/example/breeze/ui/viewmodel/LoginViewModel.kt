@@ -1,4 +1,4 @@
-package com.example.breeze.ui.activities.login
+package com.example.breeze.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

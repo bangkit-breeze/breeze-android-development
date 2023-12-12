@@ -1,7 +1,5 @@
 package com.example.breeze.ui.activities.register
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
@@ -12,7 +10,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -20,10 +17,9 @@ import com.example.breeze.R
 import com.example.breeze.databinding.ActivityRegisterBinding
 import com.example.breeze.ui.activities.login.LoginActivity
 import com.example.breeze.ui.factory.AuthViewModelFactory
+import com.example.breeze.utils.AnimationUtils
 import com.example.breeze.utils.Constants
 import com.example.breeze.utils.Result
-
-
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -41,43 +37,42 @@ class RegisterActivity : AppCompatActivity() {
         setupClickListeners()
         playAnimations()
     }
-    private fun setupClickListeners() {
-        binding.tvRegisterToLogin.setOnClickListener {
+    private fun setupClickListeners() = with(binding) {
+        tvRegisterToLogin.setOnClickListener {
             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
             finish()
         }
-        binding.btnRegister.setOnClickListener {
-            handleRegister()
-        }
-    }
-
-    private fun showToast(messageResId: Int) {
-        Toast.makeText(this, getString(messageResId), Toast.LENGTH_SHORT).show()
+        btnRegister.setOnClickListener { handleRegister() }
     }
     private fun handleRegister() {
-        val name = binding.etRegisterName.text.toString().trim()
-        val email = binding.etRegiterEmail.text.toString().trim()
-        val password = binding.etRegisterPassword.text.toString().trim()
-        val passwordConfirm = binding.etRegisterConfirmPassword.text.toString().trim()
-        if (password != passwordConfirm || name.isEmpty() || email.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
-            when {
-                password != passwordConfirm -> showToast(R.string.password_notmatch)
-                name.isEmpty() -> showToast(R.string.fullName_required)
-                email.isEmpty() -> showToast(R.string.email_required)
-                password.isEmpty() -> showToast(R.string.password_required)
-                passwordConfirm.isEmpty() -> showToast(R.string.confirmPassword_required)
-            }
-            return
+        val (name, email, password, passwordConfirm) = binding.run {
+            arrayOf(
+                etRegisterName.text.toString().trim(),
+                etRegiterEmail.text.toString().trim(),
+                etRegisterPassword.text.toString().trim(),
+                etRegisterConfirmPassword.text.toString().trim()
+            )
         }
-
-        viewModel.register(name, email, password, passwordConfirm).observe(this) { result ->
-            when (result) {
-                is Result.Loading ->  showProgressDialog()
-                is Result.Success -> onRegisterSuccess()
-                is Result.Error -> onRegisterError(result.error)
+        when {
+            password != passwordConfirm || arrayOf(name, email, password, passwordConfirm).any { it.isEmpty() } -> {
+                showToast(
+                    when {
+                        password != passwordConfirm -> R.string.password_notmatch
+                        name.isEmpty() -> R.string.fullName_required
+                        email.isEmpty() -> R.string.email_required
+                        password.isEmpty() -> R.string.password_required
+                        else -> R.string.confirmPassword_required
+                    }
+                )
+            }
+            else -> viewModel.register(name, email, password, passwordConfirm).observe(this) { result ->
+                when (result) {
+                    is Result.Loading -> showProgressDialog()
+                    is Result.Success -> onRegisterSuccess()
+                    is Result.Error -> onRegisterError(result.error)
+                }
             }
         }
-
     }
     private fun onRegisterError(errorMessage: String) {
         hideProgressDialog()
@@ -97,7 +92,7 @@ class RegisterActivity : AppCompatActivity() {
         handler.postDelayed({
             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
             finish()
-        }, 3000)
+        }, Constants.DIALOG_DELAY)
     }
 
     private fun showSuccessDialog() {
@@ -119,40 +114,24 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
     private fun playAnimations() {
-        val fadeInDuration = Constants.DURATION_ANIMATION_DELAY
-        val titleAnimator = createFadeInAnimator(binding.tvTitle, fadeInDuration)
-        val titleAnimator2 = createFadeInAnimator(binding.tvTitle2, fadeInDuration)
-        val nameTextAnimator = createFadeInAnimator(binding.tvName, fadeInDuration)
-        val nameEditTextAnimator = createFadeInAnimator(binding.nameEditTextLayout, fadeInDuration)
-        val emailTextAnimator = createFadeInAnimator(binding.tvEmail, fadeInDuration)
-        val emailEditTextAnimator = createFadeInAnimator(binding.emailEditTextLayout, fadeInDuration)
-        val passwordTextAnimator = createFadeInAnimator(binding.tvPassword, fadeInDuration)
-        val passwordEditTextAnimator = createFadeInAnimator(binding.passwordEditTextLayout, fadeInDuration)
-        val passwordConfirmTextAnimator = createFadeInAnimator(binding.tvConfirmPassword, fadeInDuration)
-        val passwordConfirmEditTextAnimator = createFadeInAnimator(binding.confirmPasswordEditTextLayout, fadeInDuration)
-        val registerButtonAnimator = createFadeInAnimator(binding.btnRegister, fadeInDuration)
-        val registerTextAnimator = createFadeInAnimator(binding.textViewToLogin, fadeInDuration)
-
-        AnimatorSet().apply {
-            playSequentially(
-                titleAnimator,
-                titleAnimator2,
-                nameTextAnimator,
-                nameEditTextAnimator,
-                emailTextAnimator,
-                emailEditTextAnimator,
-                passwordTextAnimator,
-                passwordEditTextAnimator,
-                passwordConfirmTextAnimator,
-                passwordConfirmEditTextAnimator,
-                registerButtonAnimator,
-                registerTextAnimator
-            )
-            startDelay = fadeInDuration
-        }.start()
+        AnimationUtils.playSequentialFadeInAnimations(
+            binding.tvTitle,
+            binding.tvTitle2,
+            binding.tvName,
+            binding.nameEditTextLayout,
+            binding.tvEmail,
+            binding.emailEditTextLayout,
+            binding.tvPassword,
+            binding.passwordEditTextLayout,
+            binding.tvConfirmPassword,
+            binding.confirmPasswordEditTextLayout,
+            binding.btnRegister,
+            binding.textViewToLogin,
+            duration = Constants.DURATION_ANIMATION_DELAY
+        )
+    }
+    private fun showToast(messageResId: Int) {
+        Toast.makeText(this, getString(messageResId), Toast.LENGTH_SHORT).show()
     }
 
-    private fun createFadeInAnimator(view: View, duration: Long): ObjectAnimator {
-        return ObjectAnimator.ofFloat(view, View.ALPHA, 1f).setDuration(duration)
-    }
 }

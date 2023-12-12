@@ -176,6 +176,7 @@
             android:alpha="0"
             tools:alpha="100"
             />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordEditTextLayout"
             android:layout_width="match_parent"
@@ -238,9 +239,11 @@
                 android:fontFamily="@font/inter"
                 android:text="@string/register_have_account"
                 />
+
             <View
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"/>
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_register_to_login"
                 android:layout_width="wrap_content"
@@ -251,7 +254,5 @@
                 android:textColor="?attr/colorPrimary"
                 />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
