@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_padding"
+                android:layout_width="match_parent"
+                android:padding="15dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+                <ImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:background="#dddddd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:background="#dddddd"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                <LinearLayout
+                    android:id="@+id/layout_gamification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_logo">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_picture_profile"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@color/shimmer" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                           android:layout_width="100dp"
+                            android:layout_height="15dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:background="@color/shimmer"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/shimmer"  />
+
+                            <LinearLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                   android:layout_width="match_parent"
+                                    android:layout_height="10dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:background="@color/shimmer"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="10dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:background="@color/shimmer"
+                                        android:textColor="@color/black"
+                                        android:textSize="11sp" />
+
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_carbon"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_gamification"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="50dp"
+                            android:layout_height="12dp"
+                            android:fontFamily="@font/inter"
+                            android:textSize="14sp"
+                            android:background="@color/shimmer"
+                           />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="80dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_height="12dp"
+                            android:background="@color/shimmer"
+                            android:fontFamily="@font/inter"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_marginTop="8dp"
+                                android:layout_width="120dp"
+                                android:layout_height="100dp"
+                                android:fontFamily="@font/inter"
+                                android:textSize="45sp"
+                                android:background="@color/shimmer"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+
+                            android:background="@color/shimmer"
+                           android:layout_width="130dp"
+                            android:layout_height="140dp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_explore"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="25dp"
+                    android:padding="6dp"
+                    app:cornerRadius="10dp"
+                    android:backgroundTint="@color/shimmer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_carbon"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_hihglights"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+
+                    android:background="@color/shimmer"
+                    android:layout_marginTop="20dp"
+                   app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_explore"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/layout_content_highlights"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_hihglights"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/btn_info_food"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/shimmer"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/inter"
+                                />
+                            <ImageButton
+                               android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:src="@drawable/ic_baseline_question_mark_24"
+                                android:background="@drawable/bg_question_mark"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="6dp"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp"
+                                android:paddingTop="5dp"
+                                android:layout_gravity="bottom"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/inter_semibold"
+                                />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/btn_info_foods"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/shimmer"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/inter"
+                                />
+                            <ImageButton
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:src="@drawable/ic_baseline_question_mark_24"
+                                android:background="@drawable/bg_question_mark"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="6dp"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp"
+                                android:paddingTop="5dp"
+                                android:layout_gravity="bottom"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/inter_semibold"
+                                />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_content_highlights_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/layout_content_highlights"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/btn_info_fooda"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/shimmer"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/inter"
+                                />
+                            <ImageButton
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:src="@drawable/ic_baseline_question_mark_24"
+                                android:background="@drawable/bg_question_mark"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="6dp"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp"
+                                android:paddingTop="5dp"
+                                android:layout_gravity="bottom"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/inter_semibold"
+                                />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/btn_info_foodz"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/shimmer"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/inter"
+                                />
+                            <ImageButton
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:src="@drawable/ic_baseline_question_mark_24"
+                                android:background="@drawable/bg_question_mark"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="6dp"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp"
+                                android:paddingTop="5dp"
+                                android:layout_gravity="bottom"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/inter_semibold"
+                                />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_event"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:background="@color/shimmer"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_content_highlights_2"
+                    />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/shimmer"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_event" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

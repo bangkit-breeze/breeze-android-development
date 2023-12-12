@@ -76,6 +76,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     override fun onResume() {
         super.onResume()
+        binding.dataMainLayout.visibility = View.GONE
+        binding.shimmerView.visibility = View.VISIBLE
+        binding.shimmerView.startShimmerAnimation()
         refreshData()
     }
     private fun setupViews() {
@@ -111,9 +114,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun handleProfile(result: Result<UserProfileResponse>){
         when(result){
-            is Result.Loading ->  return
-            is Result.Success -> loadProfileSuccess(result.data.dataUser)
-            is Result.Error -> showToastString(requireContext(),result.error)
+            is Result.Loading -> {
+                binding.shimmerView.startShimmerAnimation()
+            }
+            is Result.Success -> {
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
+                binding.dataMainLayout.visibility = View.VISIBLE
+                loadProfileSuccess(result.data.dataUser)
+            }
+            is Result.Error -> {
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
+                binding.dataMainLayout.visibility = View.VISIBLE
+                showToastString(requireContext(),result.error)
+            }
         }
     }
     private fun loadProfileSuccess(userProfile: DataUser?) {
@@ -177,13 +192,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     private fun handleArticleResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
         when (result) {
-            is Result.Loading ->  showLoadingArticle(true)
+            is Result.Loading ->  {
+                binding.shimmerView.startShimmerAnimation()
+                showLoadingArticle(true)
+            }
             is Result.Success -> {
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
+                binding.dataMainLayout.visibility = View.VISIBLE
                 showLoadingArticle(false)
                 val articles = result.data.data
                 adapter.submitList(articles)
             }
             is Result.Error -> {
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
+                binding.dataMainLayout.visibility = View.VISIBLE
                 showLoadingArticle(false)
                 val message = result.error
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

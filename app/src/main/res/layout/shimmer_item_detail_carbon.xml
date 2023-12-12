@@ -24,14 +24,12 @@
 
 
             <LinearLayout
-                android:id="@+id/carbon_have"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp"
                 >
                 <LinearLayout
-                    android:id="@+id/carbon_dont_have"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
@@ -118,7 +116,6 @@
 
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_emisi_food"
                             android:gravity="center"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
@@ -140,8 +137,7 @@
 
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_emisi_vehicle"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:layout_weight="1"
                             android:textSize="13sp"
                             android:layout_width="match_parent"
@@ -179,7 +175,6 @@
 
             <LinearLayout
                 android:visibility="gone"
-                android:id="@+id/activity_dont_have"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -1,275 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.home.HomeFragment">
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.fragments.home.HomeFragment">
+        <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/shimmerView"
+
+            android:visibility="gone"
+            >
+            <include layout="@layout/shimmer_item_fragment_home"/>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/dataMainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_padding"
                 android:layout_width="match_parent"
-                android:padding="15dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
-                <ImageView
-                    android:id="@+id/img_logo"
-                    android:layout_width="80dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/logo_with_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <ImageView
-                    android:id="@+id/img_point"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_point"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="3dp"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_point"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_point"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    tools:text="@string/number_dummy"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="15dp"
-                    app:layout_constraintEnd_toStartOf="@+id/img_mark"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/img_mark"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="3dp"
-                    android:src="@drawable/ic_tanda_tanya"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
-
-
-                <LinearLayout
-                    android:id="@+id/layout_gamification"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_padding"
                     android:layout_width="match_parent"
+                    android:padding="15dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_logo">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+                    <ImageView
+                        android:id="@+id/img_logo"
+                        android:layout_width="80dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/logo_with_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/iv_picture_profile"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/ic_launcher_background" />
+
+                    <ImageView
+                        android:id="@+id/img_point"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_point"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_point"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        tools:text="@string/number_dummy"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="15dp"
+                        app:layout_constraintEnd_toStartOf="@+id/img_mark"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/img_mark"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="3dp"
+                        android:src="@drawable/ic_tanda_tanya"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
 
                     <LinearLayout
+                        android:id="@+id/layout_gamification"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:orientation="vertical">
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_logo">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            tools:text="@string/name_dummy"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_picture_profile"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/ic_launcher_background" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_marginRight="10dp"
-                                android:src="@drawable/ic_bintang" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                tools:text="@string/name_dummy"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:orientation="horizontal">
 
-                                <ProgressBar
-                                    android:id="@+id/progressBar_horizontal"
-                                    style="?android:attr/progressBarStyleHorizontal"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="10dp"
-                                    android:layout_marginTop="3dp"
-                                    android:indeterminate="false"
-                                    android:progressDrawable="@drawable/custom_progressbar" />
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:layout_marginRight="10dp"
+                                    android:src="@drawable/ic_bintang" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="3dp"
-                                    android:orientation="horizontal">
+                                    android:orientation="vertical">
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/tv_level"
+                                    <ProgressBar
+                                        android:id="@+id/progressBar_horizontal"
+                                        style="?android:attr/progressBarStyleHorizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="10dp"
+                                        android:layout_marginTop="3dp"
+                                        android:indeterminate="false"
+                                        android:progressDrawable="@drawable/custom_progressbar" />
+
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:fontFamily="@font/inter_medium"
-                                        tools:text="@string/level_dummy"
-                                        android:textColor="@color/black"
-                                        android:textSize="11sp" />
+                                        android:layout_marginTop="3dp"
+                                        android:orientation="horizontal">
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/tv_exp"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/inter_medium"
-                                        tools:text="@string/exp_dummy"
-                                        android:textColor="@color/black"
-                                        android:textSize="11sp" />
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/tv_level"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/inter_medium"
+                                            tools:text="@string/level_dummy"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/inter_medium"
-                                        android:text="/"
-                                        android:textColor="@color/black"
-                                        android:textSize="11sp" />
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/tv_exp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/inter_medium"
+                                            tools:text="@string/exp_dummy"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/tv_exp_max"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/inter_medium"
-                                        tools:text="@string/exp_max_dummy"
-                                        android:textColor="@color/black"
-                                        android:textSize="11sp" />
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/inter_medium"
+                                            android:text="/"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="3dp"
-                                        android:fontFamily="@font/inter_medium"
-                                        android:text="@string/exp"
-                                        android:textColor="@color/black"
-                                        android:textSize="8sp" />
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/tv_exp_max"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/inter_medium"
+                                            tools:text="@string/exp_max_dummy"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="3dp"
+                                            android:fontFamily="@font/inter_medium"
+                                            android:text="@string/exp"
+                                            android:textColor="@color/black"
+                                            android:textSize="8sp" />
+                                    </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
+
                         </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_carbon"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_gamification"
-                    >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/layout_carbon"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter"
-                            android:textSize="14sp"
-                            android:textColor="@color/black"
-                            android:text="@string/your_total"/>
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter"
-                            android:textSize="14sp"
-                            android:textColor="@color/black"
-                            android:text="@string/carbon_footprint"/>
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_gamification"
+                        >
+
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tv_total_carbon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter"
-                                android:textSize="45sp"
-                                tools:text="6.2"
-                                android:textColor="@color/light_secondary"
-                                android:textStyle="bold"/>
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
-                                android:textSize="11sp"
-                                android:layout_marginLeft="5dp"
+                                android:textSize="14sp"
                                 android:textColor="@color/black"
-                                android:text="@string/kgCO2e"/>
+                                android:text="@string/your_total"/>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                android:textSize="14sp"
+                                android:textColor="@color/black"
+                                android:text="@string/carbon_footprint"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tv_total_carbon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:textColor="@color/light_secondary"
+                                    android:textSize="45sp"
+                                    android:textStyle="bold"
+                                    tools:text="6.2" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:textSize="11sp"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/black"
+                                    android:text="@string/kgCO2e"/>
+                            </LinearLayout>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_details"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                android:textSize="13sp"
+                                android:textColor="?attr/colorPrimary"
+                                android:text="@string/details"/>
                         </LinearLayout>
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_details"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter"
-                            android:textSize="13sp"
-                            android:textColor="?attr/colorPrimary"
-                            android:text="@string/details"/>
-                    </LinearLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                        <ProgressBar
-                            android:id="@+id/progressBar_circular"
-                            android:clickable="true"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
-                            android:progress="0"
-                            android:rotation="-90"
-                            android:max="30000"
-                            style="@style/CircularDeterminateProgressBar"
-                            android:progressDrawable="@drawable/custom_circular_progressbar"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_progress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter"
-                            tools:text="@string/number_dummy_percent"
-                            android:textColor="@color/black"
-                            app:layout_constraintBottom_toBottomOf="@+id/progressBar_circular"
-                            app:layout_constraintEnd_toEndOf="@+id/progressBar_circular"
-                            app:layout_constraintStart_toStartOf="@+id/progressBar_circular"
-                            app:layout_constraintTop_toTopOf="@+id/progressBar_circular"
-                             />
+                            <ProgressBar
+                                android:id="@+id/progressBar_circular"
+                                android:clickable="true"
+                                android:layout_width="130dp"
+                                android:layout_height="130dp"
+                                android:progress="0"
+                                android:rotation="-90"
+                                android:max="30000"
+                                style="@style/CircularDeterminateProgressBar"
+                                android:progressDrawable="@drawable/custom_circular_progressbar"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_progress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                tools:text="@string/number_dummy_percent"
+                                android:textColor="@color/black"
+                                app:layout_constraintBottom_toBottomOf="@+id/progressBar_circular"
+                                app:layout_constraintEnd_toEndOf="@+id/progressBar_circular"
+                                app:layout_constraintStart_toStartOf="@+id/progressBar_circular"
+                                app:layout_constraintTop_toTopOf="@+id/progressBar_circular"
+                                 />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
