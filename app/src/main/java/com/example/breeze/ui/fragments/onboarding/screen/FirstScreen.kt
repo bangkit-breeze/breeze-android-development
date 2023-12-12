@@ -17,7 +17,10 @@ class FirstScreen : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentScreenFirstBinding.inflate(inflater, container, false)
-
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
+        binding.btnNext.setOnClickListener {
+            viewPager?.currentItem = 1
+        }
         return binding.root
     }
     override fun onDestroyView() {
