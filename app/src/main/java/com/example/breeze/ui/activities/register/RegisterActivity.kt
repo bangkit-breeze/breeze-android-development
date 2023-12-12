@@ -114,22 +114,25 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
     private fun playAnimations() {
-        AnimationUtils.playSequentialFadeInAnimations(
-            binding.tvTitle,
-            binding.tvTitle2,
-            binding.tvName,
-            binding.nameEditTextLayout,
-            binding.tvEmail,
-            binding.emailEditTextLayout,
-            binding.tvPassword,
-            binding.passwordEditTextLayout,
-            binding.tvConfirmPassword,
-            binding.confirmPasswordEditTextLayout,
-            binding.btnRegister,
-            binding.textViewToLogin,
-            duration = Constants.DURATION_ANIMATION_DELAY
-        )
+        with(binding) {
+            AnimationUtils.playSequentialFadeInAnimations(
+                tvTitle,
+                tvTitle2,
+                tvName,
+                nameEditTextLayout,
+                tvEmail,
+                emailEditTextLayout,
+                tvPassword,
+                passwordEditTextLayout,
+                tvConfirmPassword,
+                confirmPasswordEditTextLayout,
+                btnRegister,
+                textViewToLogin,
+                duration = Constants.DURATION_ANIMATION_DELAY
+            )
+        }
     }
+
     private fun showToast(messageResId: Int) {
         Toast.makeText(this, getString(messageResId), Toast.LENGTH_SHORT).show()
     }

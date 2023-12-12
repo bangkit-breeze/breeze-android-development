@@ -35,9 +35,11 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var progressDialog: Dialog
     private lateinit var alertDialog: AlertDialog.Builder
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var rootView: View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        val rootView = binding.root
         setContentView(binding.root)
         alertDialog = AlertDialog.Builder(this@LoginActivity)
         setupClickListeners()
@@ -59,10 +61,6 @@ class LoginActivity : AppCompatActivity() {
             }
             btnLogin.setOnClickListener { handleLogin() }
         }
-    }
-    private fun showSnackBar(messageResId: Int) {
-        val rootView = findViewById<View>(android.R.id.content)
-        SnackbarUtils.showWithDismissAction(rootView, messageResId)
     }
     private fun handleLogin() {
         val (email, password) = binding.run {
@@ -116,7 +114,10 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun onLoginError(errorMessage: String) {
         hideProgressDialog()
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        showSnackBar(errorMessage)
+    }
+    private fun showSnackBar(messageResId: Any) {
+        SnackbarUtils.showWithDismissAction(rootView, messageResId)
     }
     private fun showProgressDialog() {
         progressDialog = Dialog(this@LoginActivity)

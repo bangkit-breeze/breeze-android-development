@@ -6,8 +6,14 @@ import com.example.breeze.R
 import com.google.android.material.snackbar.Snackbar
 
 object SnackbarUtils {
-    fun showWithDismissAction(view: View, messageResId: Int) {
-        Snackbar.make(view, messageResId, Snackbar.LENGTH_LONG)
+    fun showWithDismissAction(view: View, message: Any) {
+        val messageText = when (message) {
+            is Int -> view.context.getString(message)
+            is String -> message
+            else -> throw IllegalArgumentException("Unsupported message type")
+        }
+
+        Snackbar.make(view, messageText, Snackbar.LENGTH_LONG)
             .apply {
                 setActionTextColor(ContextCompat.getColor(view.context, R.color.light_primary))
                 setAction("Dismiss") { dismiss() }
