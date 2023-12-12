@@ -33,7 +33,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val  viewModel: ProfileViewModel by viewModels {
         ProfileViewModelFactory.getInstance(requireActivity().application)
     }
-    private lateinit var alertDialog: AlertDialog.Builder
     private lateinit var dataUser: LoginResult
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

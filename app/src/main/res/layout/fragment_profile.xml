@@ -107,7 +107,7 @@
                         android:textSize="12sp"
                         android:fontFamily="@font/inter"
                         android:textStyle="bold"
-                        android:text="3"
+                        tools:text="3"
                         android:layout_marginTop="3dp"
                         android:textColor="@color/white"
                         />
