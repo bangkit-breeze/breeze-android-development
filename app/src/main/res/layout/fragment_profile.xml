@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter"
-                android:text="imaniyazid@gmail.com"
+                tools:text="imaniyazid@gmail.com"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_marginTop="3dp"/>
