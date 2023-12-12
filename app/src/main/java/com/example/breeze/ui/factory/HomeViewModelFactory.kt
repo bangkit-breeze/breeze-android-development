@@ -7,7 +7,7 @@ import com.example.breeze.data.repository.ArticleRepository
 import com.example.breeze.data.repository.EventRepository
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
-import com.example.breeze.ui.fragments.home.HomeViewModel
+import com.example.breeze.ui.viewmodel.HomeViewModel
 
 class HomeViewModelFactory private constructor(
     private val userRepository: UserRepository,

@@ -1,4 +1,4 @@
-package com.example.breeze.ui.fragments.onboarding
+package com.example.breeze.ui.viewmodel
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey

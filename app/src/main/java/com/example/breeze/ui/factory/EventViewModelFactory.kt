@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.breeze.data.repository.EventRepository
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
-import com.example.breeze.ui.activities.details.events.DetailEventViewModel
-import com.example.breeze.ui.activities.details.events.FormEventViewModel
-import com.example.breeze.ui.fragments.event.EventViewModel
+import com.example.breeze.ui.viewmodel.DetailEventViewModel
+import com.example.breeze.ui.viewmodel.FormEventViewModel
+import com.example.breeze.ui.viewmodel.EventViewModel
 
 class EventViewModelFactory private constructor(
     private val userRepository: UserRepository,

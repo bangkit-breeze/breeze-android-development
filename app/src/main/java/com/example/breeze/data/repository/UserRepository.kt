@@ -8,9 +8,9 @@ import com.example.breeze.R
 import com.example.breeze.api.ApiService
 import com.example.breeze.data.local.datastore.UserPreferences
 import com.example.breeze.data.model.response.ErrorResponse
-import com.example.breeze.data.model.request.LoginRequest
+import com.example.breeze.data.model.request.auth.LoginRequest
 import com.example.breeze.data.model.response.auth.LoginResult
-import com.example.breeze.data.model.request.RegisterRequest
+import com.example.breeze.data.model.request.auth.RegisterRequest
 import com.example.breeze.utils.Result
 import com.google.gson.Gson
 import retrofit2.HttpException

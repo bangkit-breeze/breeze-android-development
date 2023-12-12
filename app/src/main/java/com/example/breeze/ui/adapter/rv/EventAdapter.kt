@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.breeze.R
 import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ItemEventBinding
-import com.example.breeze.ui.activities.details.events.DetailEventActivity
+import com.example.breeze.ui.activities.event.DetailEventActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

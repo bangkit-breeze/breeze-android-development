@@ -31,7 +31,7 @@ import com.example.breeze.databinding.BottomDialogInfoFoodBinding
 import com.example.breeze.databinding.BottomDialogInfoVechileBinding
 import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.ui.activities.camera.CameraFoodCarbonActivity
-import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
+import com.example.breeze.ui.activities.carbon.DetailCarbonActivity
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonActivity
 import com.example.breeze.ui.adapter.rv.ArticlesAdapter
@@ -42,6 +42,7 @@ import com.example.breeze.ui.fragments.event.EventFragment
 import com.example.breeze.ui.fragments.home.screen.QuestionScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionSecondScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionThirdScreen
+import com.example.breeze.ui.viewmodel.HomeViewModel
 import com.example.breeze.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
@@ -55,7 +56,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
 
     private lateinit var alertDialog: AlertDialog.Builder
-    private val  homeViewModel:HomeViewModel by viewModels {
+    private val  homeViewModel: HomeViewModel by viewModels {
         HomeViewModelFactory.getInstance(requireActivity().application)
     }
     private lateinit var dataUser: LoginResult

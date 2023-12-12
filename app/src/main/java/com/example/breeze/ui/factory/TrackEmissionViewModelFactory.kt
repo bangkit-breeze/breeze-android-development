@@ -3,17 +3,11 @@ package com.example.breeze.ui.factory
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.breeze.data.repository.EventRepository
-import com.example.breeze.data.repository.LeaderBoardRepository
 import com.example.breeze.data.repository.TrackEmissionRepository
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
-import com.example.breeze.ui.activities.camera.AddFoodCarbonViewModel
-import com.example.breeze.ui.activities.details.events.DetailEventViewModel
-import com.example.breeze.ui.activities.details.events.FormEventViewModel
-import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonViewModel
-import com.example.breeze.ui.fragments.event.EventViewModel
-import com.example.breeze.ui.fragments.leaderboard.LeaderBoardViewModel
+import com.example.breeze.ui.activities.food.AddFoodCarbonViewModel
+import com.example.breeze.ui.viewmodel.AddVehicleCarbonViewModel
 
 class TrackEmissionViewModelFactory private constructor(
     private val userRepository: UserRepository,

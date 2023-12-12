@@ -1,4 +1,4 @@
-package com.example.breeze.ui.activities.camera
+package com.example.breeze.ui.activities.food
 
 import android.app.Dialog
 import android.content.Intent

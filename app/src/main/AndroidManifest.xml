@@ -26,7 +26,7 @@
             android:name=".ui.activities.article.DetailArticleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.camera.DetailResultCarbonFoodActivity"
+            android:name=".ui.activities.food.DetailResultCarbonFoodActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.camera.ResultCameraFoodActivity"
@@ -56,13 +56,13 @@
             android:name=".ui.activities.profile.DetailProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.details.events.FormEventActivity"
+            android:name=".ui.activities.event.FormEventActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activities.details.events.DetailEventActivity"
+            android:name=".ui.activities.event.DetailEventActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.details.carbon.DetailCarbonActivity"
+            android:name=".ui.activities.carbon.DetailCarbonActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.register.RegisterActivity"

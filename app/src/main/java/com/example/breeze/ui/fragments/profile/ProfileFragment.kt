@@ -14,17 +14,13 @@ import com.bumptech.glide.Glide
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.response.user.UserProfileResponse
-import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.databinding.FragmentProfileBinding
-import com.example.breeze.ui.activities.details.carbon.DetailCarbonActivity
 import com.example.breeze.ui.activities.login.LoginActivity
-import com.example.breeze.ui.activities.login.LoginViewModel
 import com.example.breeze.ui.activities.profile.DetailProfileActivity
-import com.example.breeze.ui.activities.profile.EditProfileActivity
 import com.example.breeze.ui.activities.profile.exchange.ExchangeTokenActivity
 import com.example.breeze.ui.activities.profile.help.HelpCenterActivity
-import com.example.breeze.ui.factory.AuthViewModelFactory
 import com.example.breeze.ui.factory.ProfileViewModelFactory
+import com.example.breeze.ui.viewmodel.ProfileViewModel
 import com.example.breeze.utils.Result
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {

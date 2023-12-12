@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.bumptech.glide.Glide
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.response.user.UserProfileResponse
 import com.example.breeze.databinding.ActivityExchangeTokenBinding
-import com.example.breeze.databinding.ActivityHelpCenterBinding
 import com.example.breeze.ui.factory.ProfileViewModelFactory
-import com.example.breeze.ui.fragments.profile.ProfileViewModel
+import com.example.breeze.ui.viewmodel.ProfileViewModel
 import com.example.breeze.utils.Result
 
 class ExchangeTokenActivity : AppCompatActivity() {

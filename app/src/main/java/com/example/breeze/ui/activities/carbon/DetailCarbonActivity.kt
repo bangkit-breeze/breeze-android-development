@@ -1,4 +1,4 @@
-package com.example.breeze.ui.activities.details.carbon
+package com.example.breeze.ui.activities.carbon
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,13 +14,12 @@ import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
-import com.example.breeze.data.model.response.leaderboard.LeaderBoardResponse
 import com.example.breeze.data.model.response.user.HistoryTrackResponse
 import com.example.breeze.databinding.ActivityDetailCarbonBinding
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.adapter.rv.HistoryTrackAdapter
-import com.example.breeze.ui.adapter.rv.LeaderBoardAdapter
 import com.example.breeze.ui.factory.DetailCarbonViewModelFactory
+import com.example.breeze.ui.viewmodel.DetailCarbonViewModel
 import com.example.breeze.utils.Result
 import kotlin.math.roundToInt
 

@@ -1,4 +1,4 @@
-package com.example.breeze.ui.activities.details.events
+package com.example.breeze.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

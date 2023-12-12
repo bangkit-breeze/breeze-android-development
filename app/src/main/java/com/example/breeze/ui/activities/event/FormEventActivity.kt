@@ -1,4 +1,4 @@
-package com.example.breeze.ui.activities.details.events
+package com.example.breeze.ui.activities.event
 
 import android.content.Intent
 import android.graphics.Color
@@ -21,6 +21,7 @@ import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ActivityFormEventBinding
+import com.example.breeze.ui.viewmodel.FormEventViewModel
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.factory.EventViewModelFactory
 import com.example.breeze.utils.getImageUri

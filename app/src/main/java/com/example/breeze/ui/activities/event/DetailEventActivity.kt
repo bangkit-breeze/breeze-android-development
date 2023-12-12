@@ -1,4 +1,4 @@
-package com.example.breeze.ui.activities.details.events
+package com.example.breeze.ui.activities.event
 
 import android.app.Dialog
 import android.content.Intent
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -22,6 +21,7 @@ import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ActivityDetailEventBinding
+import com.example.breeze.ui.viewmodel.DetailEventViewModel
 
 import com.example.breeze.ui.factory.EventViewModelFactory
 import com.example.breeze.utils.Result

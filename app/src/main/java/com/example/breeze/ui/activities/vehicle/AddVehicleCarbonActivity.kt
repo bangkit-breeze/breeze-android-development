@@ -11,7 +11,6 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -21,14 +20,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
-import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ActivityAddVehicleCarbonBinding
-import com.example.breeze.databinding.ActivityLoginBinding
-import com.example.breeze.ui.activities.details.events.DetailEventActivity
-import com.example.breeze.ui.activities.details.events.DetailEventViewModel
 import com.example.breeze.ui.activities.main.MainActivity
-import com.example.breeze.ui.factory.EventViewModelFactory
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
+import com.example.breeze.ui.viewmodel.AddVehicleCarbonViewModel
 import com.example.breeze.utils.Result
 import kotlin.math.roundToInt
 

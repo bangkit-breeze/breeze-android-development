@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.breeze.R
 import com.example.breeze.databinding.FragmentScreenThirdBinding
-import com.example.breeze.ui.fragments.onboarding.OnBoardingViewModel
-import com.example.breeze.ui.fragments.onboarding.OnBoardingViewModelFactory
+import com.example.breeze.ui.viewmodel.OnBoardingViewModel
+import com.example.breeze.ui.viewmodel.OnBoardingViewModelFactory
 import kotlinx.coroutines.launch
 
 

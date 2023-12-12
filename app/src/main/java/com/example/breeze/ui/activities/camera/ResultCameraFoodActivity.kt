@@ -18,14 +18,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
-import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ActivityResultCameraFoodBinding
-import com.example.breeze.ui.activities.details.events.DetailEventActivity
-import com.example.breeze.ui.activities.details.events.FormEventActivity
-import com.example.breeze.ui.activities.details.events.FormEventViewModel
-import com.example.breeze.ui.activities.main.MainActivity
-import com.example.breeze.ui.activities.profile.EditPasswordActivity
-import com.example.breeze.ui.factory.EventViewModelFactory
+import com.example.breeze.ui.activities.food.AddFoodCarbonViewModel
+import com.example.breeze.ui.activities.food.DetailResultCarbonFoodActivity
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
 import com.example.breeze.utils.Result
 import com.example.breeze.utils.reduceFileImage

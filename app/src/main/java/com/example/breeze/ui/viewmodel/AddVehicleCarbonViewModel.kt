@@ -1,21 +1,20 @@
-package com.example.breeze.ui.activities.camera
+package com.example.breeze.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.breeze.data.model.response.auth.LoginResult
+import com.example.breeze.data.repository.LeaderBoardRepository
 import com.example.breeze.data.repository.TrackEmissionRepository
 import com.example.breeze.data.repository.UserRepository
-import java.io.File
 
-class AddFoodCarbonViewModel(
+
+class AddVehicleCarbonViewModel(
     private val userRepository: UserRepository,
     private val trackEmissionRepository: TrackEmissionRepository
 ) : ViewModel() {
 
-    fun predictTrackEmissionFoodCarbon(token: String, file: File)
-            = trackEmissionRepository.predictTrackEmissionFood(token, file)
-    fun addTrackEmissionFood(token: String, name: String, emision: Int)
-            = trackEmissionRepository.addTrackEmissionFood(token, name, emision)
+    fun addTrackEmissionVehicleCarbon(token: String, vehicleType: String, distance: Int)
+        = trackEmissionRepository.addTrackEmissionVehicle(token, vehicleType, distance)
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
 
 }

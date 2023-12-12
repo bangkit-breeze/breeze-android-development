@@ -13,7 +13,7 @@ import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.databinding.FragmentFinishedEventBinding
 import com.example.breeze.ui.adapter.rv.EventAdapter
 import com.example.breeze.ui.factory.EventViewModelFactory
-import com.example.breeze.ui.fragments.event.EventViewModel
+import com.example.breeze.ui.viewmodel.EventViewModel
 import com.example.breeze.utils.Result
 
 class FinishedEventFragment : Fragment() {
