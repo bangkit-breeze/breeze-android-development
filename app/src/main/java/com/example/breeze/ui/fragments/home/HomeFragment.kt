@@ -340,7 +340,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val ivClose = customDialogView.findViewById<ImageView>(R.id.iv_close)
         val btnOkay = customDialogView.findViewById<MaterialButton>(R.id.btn_okay)
         progressBarCarbon.progress = totalRemoved
-        progressCarbon.text = valueProgress.toString()
+        progressCarbon.text = "${valueProgress}%"
 
         ivClose.setOnClickListener {
             alertDialog.dismiss()
