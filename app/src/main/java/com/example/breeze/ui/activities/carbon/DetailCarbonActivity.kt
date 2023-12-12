@@ -3,6 +3,7 @@ package com.example.breeze.ui.activities.carbon
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -37,6 +38,10 @@ class DetailCarbonActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCarbonBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
+
         binding.topAppBar.setNavigationOnClickListener {
             navigateToMainActivity()
         }
@@ -55,9 +60,13 @@ class DetailCarbonActivity : AppCompatActivity() {
     }
     private fun handleEventResult(result: Result<HistoryTrackResponse>, adapter: HistoryTrackAdapter) {
         when (result) {
-            is Result.Loading -> return
+            is Result.Loading -> {
+                binding.shimmerView.startShimmerAnimation()
+            }
             is Result.Success -> {
-
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
+                binding.dataMainLayout.visibility = View.VISIBLE
                 val data = result.data.dataHistoryTrack
                 if(data.isNullOrEmpty()){
                     binding.activityDontHave.visibility = View.VISIBLE
@@ -69,6 +78,9 @@ class DetailCarbonActivity : AppCompatActivity() {
                 }
             }
             is Result.Error -> {
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
+                binding.dataMainLayout.visibility = View.VISIBLE
                 val message = result.error
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }
@@ -76,6 +88,9 @@ class DetailCarbonActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
+        binding.dataMainLayout.visibility = View.GONE
+        binding.shimmerView.visibility = View.VISIBLE
+        binding.shimmerView.startShimmerAnimation()
         viewModel.getUserLogin().observe(this@DetailCarbonActivity) {
             dataUser = it
         }

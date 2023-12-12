@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+   >
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="20dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/carbon_have"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                >
+                <LinearLayout
+                    android:id="@+id/carbon_dont_have"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:orientation="vertical"
+                    android:background="#dddddd"
+                    android:padding="15dp"
+                    android:gravity="center"
+                    >
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pieChart">
+                    <LinearLayout
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        >
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#dddddd"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/black"
+                            />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#dddddd"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/black"
+
+                            />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#dddddd"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/black"
+
+                            />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#dddddd"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/black"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_emisi_food"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#dddddd"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/inter"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_emisi_vehicle"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:textSize="13sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#dddddd"
+                            android:fontFamily="@font/inter"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#dddddd"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+
+                android:background="#dddddd"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/inter"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                />
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/activity_dont_have"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/shape_leaderboard"
+                android:padding="15dp"
+                android:gravity="center"
+                >
+
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/img_feature_not_yet"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="Oops!"
+                    />
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/inter"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="We couldn't find your activity, Try to input your activity"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="vertical"
+                android:background="#dddddd"
+                android:padding="15dp"
+                android:gravity="center"
+                >
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

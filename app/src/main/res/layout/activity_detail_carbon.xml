@@ -25,8 +25,17 @@
             app:title="@string/detail_carbon"
             app:titleTextAppearance="@style/ToolbarTitleText" />
     </com.google.android.material.appbar.AppBarLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/shimmerView"
 
+        >
+        <include layout="@layout/shimmer_item_detail_carbon"/>
+    </com.facebook.shimmer.ShimmerFrameLayout>
     <androidx.core.widget.NestedScrollView
+        android:visibility="gone"
+        android:id="@+id/dataMainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >

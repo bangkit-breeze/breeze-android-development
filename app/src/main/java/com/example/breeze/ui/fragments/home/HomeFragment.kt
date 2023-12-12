@@ -76,20 +76,37 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     override fun onResume() {
         super.onResume()
-        viewModel.getArticles(tokenUser.token).observe(this) { result ->
-            handleArticleResult(result, adapterArticle)
-        }
-        viewModel.getEventsPopular(tokenUser.token).observe(this) { result ->
-            handleEventResult(result, adapterEvent)
-        }
-        viewModel.getProfile(tokenUser.token).observe(this){
-            handleProfile(it)
-        }
+        refreshData()
     }
     private fun setupViews() {
         viewModel.getToken().observe(viewLifecycleOwner) {
             tokenUser = it
         }
+        binding.swipeRefreshLayout.setOnRefreshListener { refreshData() }
+    }
+
+    private fun refreshData() {
+        binding.swipeRefreshLayout.isRefreshing = true
+
+        val token = tokenUser.token
+        viewModel.getArticles(token).observe(viewLifecycleOwner) {
+            handleArticleResult(it, adapterArticle)
+            stopRefreshing()
+        }
+
+        viewModel.getEventsPopular(token).observe(viewLifecycleOwner) {
+            handleEventResult(it, adapterEvent)
+            stopRefreshing()
+        }
+
+        viewModel.getProfile(token).observe(viewLifecycleOwner) {
+            handleProfile(it)
+            stopRefreshing()
+        }
+    }
+
+    private fun stopRefreshing() {
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     private fun handleProfile(result: Result<UserProfileResponse>){
