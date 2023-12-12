@@ -7,11 +7,9 @@ import com.example.breeze.data.repository.ArticleRepository
 import com.example.breeze.data.repository.EventRepository
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
-import com.example.breeze.ui.activities.register.RegisterViewModel
-import com.example.breeze.ui.fragments.event.EventViewModel
 import com.example.breeze.ui.fragments.home.HomeViewModel
 
-class ViewModelFactory private constructor(
+class HomeViewModelFactory private constructor(
     private val userRepository: UserRepository,
     private val articleRepository: ArticleRepository,
     private val eventRepository: EventRepository
@@ -26,10 +24,10 @@ class ViewModelFactory private constructor(
         }
     companion object {
         @Volatile
-        private var instance: ViewModelFactory? = null
-        fun getInstance(application: Application): ViewModelFactory =
+        private var instance: HomeViewModelFactory? = null
+        fun getInstance(application: Application): HomeViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(
+                instance ?: HomeViewModelFactory(
                     Injection.provideUserRepository(application),
                     Injection.provideArticleRepository(application),
                     Injection.provideEventRepository(application))

@@ -37,7 +37,7 @@ import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonActivity
 import com.example.breeze.ui.adapter.rv.ArticlesAdapter
 import com.example.breeze.ui.adapter.frag.QuestionAdapter
 import com.example.breeze.ui.adapter.rv.EventPopularAdapter
-import com.example.breeze.ui.factory.ViewModelFactory
+import com.example.breeze.ui.factory.HomeViewModelFactory
 import com.example.breeze.ui.fragments.event.EventFragment
 import com.example.breeze.ui.fragments.home.screen.QuestionScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionSecondScreen
@@ -56,7 +56,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var alertDialog: AlertDialog.Builder
     private val  homeViewModel:HomeViewModel by viewModels {
-        ViewModelFactory.getInstance(requireActivity().application)
+        HomeViewModelFactory.getInstance(requireActivity().application)
     }
     private lateinit var dataUser: LoginResult
     private val adapterArticle = ArticlesAdapter()
