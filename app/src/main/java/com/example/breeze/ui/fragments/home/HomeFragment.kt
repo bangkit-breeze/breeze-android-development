@@ -25,6 +25,7 @@ import com.example.breeze.data.model.response.article.ArticleResponse
 import com.example.breeze.data.model.response.user.UserProfileResponse
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.response.event.EventResponse
+import com.example.breeze.data.model.response.user.DataUser
 import com.example.breeze.databinding.BottomDialogInfoCarbonBinding
 import com.example.breeze.databinding.BottomDialogInfoEventBinding
 import com.example.breeze.databinding.BottomDialogInfoFoodBinding
@@ -43,6 +44,7 @@ import com.example.breeze.ui.fragments.home.screen.QuestionScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionSecondScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionThirdScreen
 import com.example.breeze.ui.viewmodel.HomeViewModel
+import com.example.breeze.utils.NumberUtils
 import com.example.breeze.utils.constans.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
@@ -90,62 +92,72 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    fun formatAngka(angka: Float): String {
-        val decimalFormat = DecimalFormat("#.##")
-        return decimalFormat.format(angka)
-    }
     private fun handleProfile(result: Result<UserProfileResponse>){
         when(result){
             is Result.Loading ->  return
-            is Result.Success -> {
-                val userProfile = result.data.dataUser
-                if (userProfile != null) {
-                    binding.tvPoint.text = userProfile.points.toString()
-                    binding.tvName.text = "Hi, ${userProfile.fullName.toString()}"
-                    binding.tvTotalFood.text = userProfile.foodEmissionCount.toString()
-                    binding.tvTotalVehicle.text = userProfile.vehicleEmissionCount.toString()
-                    val totalCarbon = (userProfile.totalCo2Removed?.toFloat() ?: 0f) / 1000
-                    binding.tvTotalCarbon.text = formatAngka(totalCarbon).toString()
-                    binding.tvTotalEvent.text = userProfile.totalEvent.toString()
-                    valueProgress = ((userProfile.totalCo2Removed?.toFloat() ?: 0f) / 30000 * 100).toInt()
-                    binding.tvProgress.text = "${valueProgress}%"
-                    totalRemoved = userProfile.totalCo2Removed!!
-                    binding.progressBarCircular.progress = userProfile.totalCo2Removed!!
-                    binding.tvCo2Removed.text = "0 kg"
-                    Glide.with(this)
-                        .load(userProfile.avatarUrl)
-                        .placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.ic_launcher_background)
-                        .fallback(R.drawable.ic_launcher_background)
-                        .into(binding.ivPictureProfile)
-
-                    var exp = userProfile.experiences
-                    if (exp != null) {
-                        if(exp < 100){
-                            binding.tvLevel.text = "Level 1"
-                            binding.tvExpMax.text = "100"
-                            binding.tvExp.text = exp.toString()
-                            binding.progressBarHorizontal.max = 100
-                            binding.progressBarHorizontal.progress = exp.toInt()
-                        }else{
-                            var level = floor(exp / 100.0).toInt()
-                            binding.tvLevel.text = "Level ${level + 1}"
-                            var expNow = exp % (level * 100)
-                            binding.tvExp.text = exp.toString()
-                            var expMaxNow = (level + 1) * 100
-                            binding.tvExpMax.text = expMaxNow.toString()
-                            binding.progressBarHorizontal.max =  100
-                            binding.progressBarHorizontal.progress = expNow.toInt()
-                        }
-                    }
-
+            is Result.Success -> loadProfileSuccess(result.data.dataUser)
+            is Result.Error -> showError(result.error)
+        }
+    }
+    private fun loadProfileSuccess(userProfile: DataUser?) {
+        userProfile?.let {
+            loadAvatar(it.avatarUrl)
+            updateUI(it)
+            var exp = userProfile.experiences
+            exp?.let {
+                val level = NumberUtils.calculateLevel(it.toFloat())
+                val (expNow, expMaxNow) = if (it < 100) {
+                    it to 100
+                } else {
+                    NumberUtils.calculateExpNow(
+                        it.toFloat(),
+                        level
+                    ) to NumberUtils.calculateExpMaxNow(level)
                 }
-            }
-            is Result.Error -> {
-                val message = result.error
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                updateProfileExpAndProgress(
+                    level + 1,
+                    it.toString(),
+                    expMaxNow.toString(),
+                    expNow.toInt()
+                )
             }
         }
+    }
+    private fun updateUI(user: DataUser) {
+        with(binding) {
+            tvPoint.text = user.points.toString()
+            tvName.text = "Hi, ${user.fullName}"
+            tvTotalFood.text = user.foodEmissionCount.toString()
+            tvTotalVehicle.text = user.vehicleEmissionCount.toString()
+            tvTotalCarbon.text = NumberUtils.formatTotalCarbon(user.totalCo2Removed?.toFloat())
+            tvTotalEvent.text = user.totalEvent.toString()
+            tvProgress.text = "${NumberUtils.calculateProgress(user.totalCo2Removed?.toFloat())}%"
+            progressBarCircular.progress = user.totalCo2Removed!!
+            tvCo2Removed.text = "0 kg"
+        }
+    }
+
+    private fun loadAvatar(avatarUrl: String?) {
+        avatarUrl?.let {
+            Glide.with(this)
+                .load(it)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .fallback(R.drawable.ic_launcher_background)
+                .into(binding.ivPictureProfile)
+        }
+    }
+    private fun updateProfileExpAndProgress(level: Int, exp: String, expMax: String, progress: Int) {
+        with(binding) {
+            tvLevel.text = "Level $level"
+            tvExp.text = exp
+            tvExpMax.text = expMax
+            progressBarHorizontal.max = 100
+            progressBarHorizontal.progress = progress
+        }
+    }
+    private fun showError(errorMessage: String) {
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
     private fun handleArticleResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
         when (result) {

@@ -21,7 +21,6 @@ class TrackEmissionRepository private constructor(
     private val apiService: ApiService,
     private val application: Application,
 ) {
-
     private suspend fun <T> apiCall(call: suspend () -> T): Result<T> = try {
         Result.Success(call())
     } catch (e: HttpException) {
@@ -31,7 +30,6 @@ class TrackEmissionRepository private constructor(
     }  catch (exception: Exception) {
         Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error))
     }
-
     fun addTrackEmissionVehicle(token: String, vehicleType: String, distance: Int) = liveData {
         emit(Result.Loading)
         emit(apiCall {
@@ -64,7 +62,7 @@ class TrackEmissionRepository private constructor(
         }catch (e: HttpException) {
             emit(handleHttpException(e))
         } catch (exception: IOException) {
-            emit(Result.Error("Please try again. There seems to be a network error. Please check your internet connection."))
+            emit(Result.Error(application.resources.getString(R.string.track_error_message)))
         } catch (exception: Exception) {
             emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
         }
