@@ -10,9 +10,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -47,13 +44,11 @@ import com.example.breeze.ui.viewmodel.HomeViewModel
 import com.example.breeze.utils.NumberUtils
 import com.example.breeze.utils.constans.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.example.breeze.utils.constans.Result
 import com.example.breeze.utils.dialog.ProgressDialogUtils
 import com.example.breeze.utils.showToast
-import java.lang.Math.floor
-import java.text.DecimalFormat
+import com.example.breeze.utils.showToastString
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
@@ -62,7 +57,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val  viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory.getInstance(requireActivity().application)
     }
-    private lateinit var dataUser: LoginResult
+    private lateinit var tokenUser: LoginResult
     private val adapterArticle = ArticlesAdapter()
     private val adapterEvent = EventPopularAdapter()
     private var valueProgress: Int = 0
@@ -81,14 +76,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     override fun onResume() {
         super.onResume()
-        viewModel.getArticles(dataUser.token).observe(this) { result ->
+        viewModel.getArticles(tokenUser.token).observe(this) { result ->
             handleArticleResult(result, adapterArticle)
         }
-        viewModel.getEventsPopular(dataUser.token).observe(this) { result ->
+        viewModel.getEventsPopular(tokenUser.token).observe(this) { result ->
             handleEventResult(result, adapterEvent)
         }
-        viewModel.getProfile(dataUser.token).observe(this){
+        viewModel.getProfile(tokenUser.token).observe(this){
             handleProfile(it)
+        }
+    }
+    private fun setupViews() {
+        viewModel.getToken().observe(viewLifecycleOwner) {
+            tokenUser = it
         }
     }
 
@@ -96,7 +96,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         when(result){
             is Result.Loading ->  return
             is Result.Success -> loadProfileSuccess(result.data.dataUser)
-            is Result.Error -> showError(result.error)
+            is Result.Error -> showToastString(requireContext(),result.error)
         }
     }
     private fun loadProfileSuccess(userProfile: DataUser?) {
@@ -158,9 +158,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             progressBarHorizontal.progress = progress
         }
     }
-    private fun showError(errorMessage: String) {
-        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-    }
     private fun handleArticleResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
         when (result) {
             is Result.Loading ->  showLoadingArticle(true)
@@ -198,17 +195,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.rvArticle.layoutManager = layoutManager
         binding.rvArticle.adapter = adapter
     }
-
+    private fun showLoadingArticle(isLoading: Boolean) {
+        binding.progressBarArticle.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
     private fun setupRecyclerViewEvent(adapter: EventPopularAdapter) {
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvEvent.layoutManager = layoutManager
         binding.rvEvent.adapter = adapter
     }
-    private fun setupViews() {
-        viewModel.getUserLogin().observe(viewLifecycleOwner) {
-            dataUser = it
-        }
-    }
+
+
     private fun setupInfoListeners() {
         binding?.apply {
             tvSeeEventPopuler.setOnClickListener {
@@ -320,7 +316,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-
     private fun showQuestionDialog() {
         val customDialogView =
             LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog_question, null)
@@ -416,8 +411,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-    private fun showLoadingArticle(isLoading: Boolean) {
-        binding.progressBarArticle.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

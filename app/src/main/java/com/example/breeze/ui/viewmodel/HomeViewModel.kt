@@ -12,7 +12,7 @@ class HomeViewModel(
     private val articleRepository: ArticleRepository,
     private val eventRepository: EventRepository
 ) : ViewModel() {
-    fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
+    fun getToken(): LiveData<LoginResult> =  userRepository.getSession()
     fun getArticles(token: String) = articleRepository.getStories(token)
     fun getProfile(token: String) = userRepository.getProfile(token)
     fun getEventsPopular(token: String) = eventRepository.getEventPopular(token)
