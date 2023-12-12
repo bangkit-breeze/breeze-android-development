@@ -50,15 +50,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.dialog.ProgressDialogUtils
+import com.example.breeze.utils.showToast
 import java.lang.Math.floor
 import java.text.DecimalFormat
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var alertDialog: AlertDialog.Builder
-    private val  homeViewModel: HomeViewModel by viewModels {
+    private val  viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory.getInstance(requireActivity().application)
     }
     private lateinit var dataUser: LoginResult
@@ -80,14 +81,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     override fun onResume() {
         super.onResume()
-        homeViewModel.getArticles(dataUser.token).observe(this) { result ->
+        viewModel.getArticles(dataUser.token).observe(this) { result ->
             handleArticleResult(result, adapterArticle)
         }
-
-        homeViewModel.getEventsPopular(dataUser.token).observe(this) { result ->
+        viewModel.getEventsPopular(dataUser.token).observe(this) { result ->
             handleEventResult(result, adapterEvent)
         }
-        homeViewModel.getProfile(dataUser.token).observe(this){
+        viewModel.getProfile(dataUser.token).observe(this){
             handleProfile(it)
         }
     }
@@ -205,7 +205,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.rvEvent.adapter = adapter
     }
     private fun setupViews() {
-        homeViewModel.getUserLogin().observe(viewLifecycleOwner) {
+        viewModel.getUserLogin().observe(viewLifecycleOwner) {
             dataUser = it
         }
     }
@@ -345,26 +345,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun showProgressBarDialog() {
-        val customDialogView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog_carbon, null)
-        val alertDialog = AlertDialog.Builder(requireContext())
-            .setView(customDialogView)
-            .create()
-        val progressCarbon = customDialogView.findViewById<TextView>(R.id.tv_progress)
-        val progressBarCarbon = customDialogView.findViewById<ProgressBar>(R.id.progressBar_circular)
-        val ivClose = customDialogView.findViewById<ImageView>(R.id.iv_close)
-        val btnOkay = customDialogView.findViewById<MaterialButton>(R.id.btn_okay)
-        progressBarCarbon.progress = totalRemoved
-        progressCarbon.text = "${valueProgress}%"
-
-        ivClose.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        btnOkay.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.show()
+        ProgressDialogUtils.showProgressBarDialog(
+            requireContext(),
+            totalRemoved = totalRemoved,
+            valueProgress = valueProgress
+        )
     }
 
 
@@ -387,13 +372,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val sheetDialog = BottomSheetDialog(requireContext())
         val sheetBinding = BottomDialogInfoFoodBinding.inflate(layoutInflater)
         sheetDialog.setContentView(sheetBinding.root)
-
         sheetBinding.btnAddTrackFood.setOnClickListener {
             sheetDialog.dismiss()
             val intent = Intent(activity, CameraFoodCarbonActivity::class.java)
             startActivity(intent)
         }
-
         sheetDialog.show()
     }
 
@@ -401,13 +384,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val sheetDialog = BottomSheetDialog(requireContext())
         val sheetBinding = BottomDialogInfoVechileBinding.inflate(layoutInflater)
         sheetDialog.setContentView(sheetBinding.root)
-
         sheetBinding.btnAddTrackVechile.setOnClickListener {
             sheetDialog.dismiss()
             val intent = Intent(activity, AddVehicleCarbonActivity::class.java)
             startActivity(intent)
         }
-
         sheetDialog.show()
     }
 
@@ -415,13 +396,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val sheetDialog = BottomSheetDialog(requireContext())
         val sheetBinding = BottomDialogInfoEventBinding.inflate(layoutInflater)
         sheetDialog.setContentView(sheetBinding.root)
-
         sheetBinding.btnAddEvent.setOnClickListener {
             sheetDialog.dismiss()
             val eventFragment = EventFragment()
             (activity as MainActivity).replaceFragment(eventFragment)
         }
-
         sheetDialog.show()
     }
 
@@ -429,19 +408,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val sheetDialog = BottomSheetDialog(requireContext())
         val sheetBinding = BottomDialogInfoCarbonBinding.inflate(layoutInflater)
         sheetDialog.setContentView(sheetBinding.root)
-
         sheetBinding.btnAddRemoveCarbon.setOnClickListener {
-            displayToast(R.string.feature_not_yet)
+            showToast(requireContext(), R.string.feature_not_yet)
         }
-
         sheetDialog.show()
     }
-
-    private fun displayToast(message: Int) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

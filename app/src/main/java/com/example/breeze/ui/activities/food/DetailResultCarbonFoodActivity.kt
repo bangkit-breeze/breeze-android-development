@@ -119,7 +119,7 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alertDialog.show()
         val tvDescription: TextView = customDialogView.findViewById(R.id.tv_description)
-        tvDescription.text = "Gambar terdeteksi"
+        tvDescription.text = "Anda telah menambahkan track food carbon, anda dapat 10xp"
         Handler(Looper.getMainLooper()).postDelayed({
             alertDialog.dismiss()
         }, 3000)
