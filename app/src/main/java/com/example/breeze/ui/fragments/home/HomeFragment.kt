@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -76,16 +77,28 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     override fun onResume() {
         super.onResume()
+        effectShimmer()
+        refreshData()
+    }
+    private fun effectShimmer(){
         binding.dataMainLayout.visibility = View.GONE
         binding.shimmerView.visibility = View.VISIBLE
         binding.shimmerView.startShimmerAnimation()
-        refreshData()
+        Handler().postDelayed({
+            binding.dataMainLayout.visibility = View.VISIBLE
+            binding.shimmerView.stopShimmerAnimation()
+            binding.shimmerView.visibility = View.GONE
+        }, 700)
     }
     private fun setupViews() {
         viewModel.getToken().observe(viewLifecycleOwner) {
             tokenUser = it
         }
-        binding.swipeRefreshLayout.setOnRefreshListener { refreshData() }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+
+            effectShimmer()
+            refreshData()
+        }
     }
 
     private fun refreshData() {
@@ -114,19 +127,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun handleProfile(result: Result<UserProfileResponse>){
         when(result){
-            is Result.Loading -> {
-                binding.shimmerView.startShimmerAnimation()
-            }
+            is Result.Loading -> return
             is Result.Success -> {
-                binding.shimmerView.stopShimmerAnimation()
-                binding.shimmerView.visibility = View.GONE
-                binding.dataMainLayout.visibility = View.VISIBLE
                 loadProfileSuccess(result.data.dataUser)
             }
             is Result.Error -> {
-                binding.shimmerView.stopShimmerAnimation()
-                binding.shimmerView.visibility = View.GONE
-                binding.dataMainLayout.visibility = View.VISIBLE
                 showToastString(requireContext(),result.error)
             }
         }
@@ -193,21 +198,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun handleArticleResult(result: Result<ArticleResponse>, adapter: ArticlesAdapter) {
         when (result) {
             is Result.Loading ->  {
-                binding.shimmerView.startShimmerAnimation()
                 showLoadingArticle(true)
             }
             is Result.Success -> {
-                binding.shimmerView.stopShimmerAnimation()
-                binding.shimmerView.visibility = View.GONE
-                binding.dataMainLayout.visibility = View.VISIBLE
                 showLoadingArticle(false)
                 val articles = result.data.data
                 adapter.submitList(articles)
             }
             is Result.Error -> {
-                binding.shimmerView.stopShimmerAnimation()
-                binding.shimmerView.visibility = View.GONE
-                binding.dataMainLayout.visibility = View.VISIBLE
                 showLoadingArticle(false)
                 val message = result.error
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
