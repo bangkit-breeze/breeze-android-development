@@ -7,109 +7,56 @@ import androidx.lifecycle.liveData
 import com.example.breeze.R
 import com.example.breeze.api.ApiService
 import com.example.breeze.data.local.datastore.UserPreferences
-import com.example.breeze.data.model.response.ErrorResponse
 import com.example.breeze.data.model.request.auth.LoginRequest
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.request.auth.RegisterRequest
+import com.example.breeze.utils.ApiErrorUtils
+import com.example.breeze.utils.AuthUtils
 import com.example.breeze.utils.constans.Result
-import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.IOException
 
 class UserRepository private constructor(
-    private var apiService: ApiService,
+    private val apiService: ApiService,
     private val application: Application,
     private val userPref: UserPreferences
 ) {
-
-    fun register(fullname:String, email:String, password:String, confirmPassword:String) = liveData {
-        emit(Result.Loading)
-
-        try {
-            val response = apiService.register(RegisterRequest(fullname, email, password, confirmPassword))
-            emit(Result.Success(response))
-        }catch (e: HttpException) {
-            emit(handleHttpException(e))
-        }catch (exception: IOException) {
-            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
-        } catch (exception: Exception) {
-            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
-        }
+    private suspend fun <T> apiCall(call: suspend () -> T): Result<T> = try {
+        Result.Success(call())
+    } catch (e: HttpException) {
+        Result.Error(ApiErrorUtils.handleHttpExceptionString(e))
+    } catch (exception: IOException) {
+        Result.Error(application.resources.getString(R.string.network_error_message))
+    } catch (exception: Exception) {
+        Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error))
     }
-
+    fun register(fullname: String, email: String, password: String, confirmPassword: String) = liveData {
+        emit(Result.Loading)
+        emit(apiCall { apiService.register(RegisterRequest(fullname, email, password, confirmPassword)) })
+    }
     fun login(email: String, password: String) = liveData {
         emit(Result.Loading)
-        try {
+        emit(apiCall {
             val response = apiService.login(LoginRequest(email, password))
             saveSession(response.loginResult)
-            emit(Result.Success(response))
-        } catch (e: HttpException) {
-            emit(handleHttpException(e))
-        } catch (exception: IOException) {
-            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
-        } catch (exception: Exception) {
-            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
-        }
+            response
+        })
     }
-
     fun getProfile(token: String) = liveData {
         emit(Result.Loading)
-        try {
-            val response = apiService.getProfile("Bearer $token")
-            emit(Result.Success(response))
-        } catch (e: HttpException) {
-            emit(handleHttpException(e))
-        } catch (exception: IOException) {
-            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
-        } catch (exception: Exception) {
-            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
-        }
+        emit(apiCall { apiService.getProfile(AuthUtils.getAuthToken(token)) })
     }
-
     fun getStatistic(token: String) = liveData {
         emit(Result.Loading)
-        try {
-            val response = apiService.getStatistic("Bearer $token")
-            emit(Result.Success(response))
-        } catch (e: HttpException) {
-            emit(handleHttpException(e))
-        } catch (exception: IOException) {
-            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
-        } catch (exception: Exception) {
-            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
-        }
+        emit(apiCall { apiService.getStatistic(AuthUtils.getAuthToken(token)) })
     }
-
     fun getHistoryTrack(token: String) = liveData {
         emit(Result.Loading)
-        try {
-            val response = apiService.getHistoryTrack("Bearer $token")
-            emit(Result.Success(response))
-        } catch (e: HttpException) {
-            emit(handleHttpException(e))
-        } catch (exception: IOException) {
-            emit(Result.Error(application.resources.getString(R.string.network_error_message)))
-        } catch (exception: Exception) {
-            emit(Result.Error(exception.message ?: application.resources.getString(R.string.unknown_error)))
-        }
+        emit(apiCall { apiService.getHistoryTrack(AuthUtils.getAuthToken(token)) })
     }
-
     suspend fun saveSession(data: LoginResult) = userPref.saveSession(data)
-
     fun getSession(): LiveData<LoginResult> = userPref.getSession().asLiveData()
-
     suspend fun deleteSession() = userPref.deleteSession()
-
-    private fun handleHttpException(exception: HttpException): Result.Error {
-        val jsonInString = exception.response()?.errorBody()?.string()
-        val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
-        val errorMessage = errorBody.message
-        return Result.Error(errorMessage)
-    }
-
-
-
-
     companion object {
         @Volatile
         private var instance: UserRepository? = null
@@ -122,5 +69,4 @@ class UserRepository private constructor(
                 instance ?: UserRepository(apiService, application, pref)
             }.also { instance = it }
     }
-
 }

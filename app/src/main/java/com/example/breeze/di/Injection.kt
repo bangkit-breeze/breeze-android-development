@@ -12,26 +12,16 @@ import com.example.breeze.data.repository.UserRepository
 
 object Injection {
     private fun provideApiService() = ApiConfig.getApiService()
-
-    fun provideUserRepository(application: Application): UserRepository {
-        val pref = UserPreferences.getInstance(application.dataStore)
-        return UserRepository.getInstance(provideApiService(), application, pref)
-    }
-    fun provideArticleRepository(application: Application): ArticleRepository {
-        return ArticleRepository.getInstance(provideApiService(), application)
-    }
-
-    fun provideEventRepository(application: Application): EventRepository {
-        return EventRepository.getInstance(provideApiService(), application)
-    }
-
-    fun provideLeaderBoardRepository(application: Application): LeaderBoardRepository {
-        return LeaderBoardRepository.getInstance(provideApiService(), application)
-    }
-
-    fun provideTrackEmissionRepository(application: Application): TrackEmissionRepository {
-        return TrackEmissionRepository.getInstance(provideApiService(), application)
-    }
-
-
+    private fun provideUserPreferences(application: Application) =
+        UserPreferences.getInstance(application.dataStore)
+    fun provideUserRepository(application: Application) =
+        UserRepository.getInstance(provideApiService(), application, provideUserPreferences(application))
+    fun provideArticleRepository(application: Application) =
+        ArticleRepository.getInstance(provideApiService(), application)
+    fun provideEventRepository(application: Application) =
+        EventRepository.getInstance(provideApiService(), application)
+    fun provideLeaderBoardRepository(application: Application) =
+        LeaderBoardRepository.getInstance(provideApiService(), application)
+    fun provideTrackEmissionRepository(application: Application) =
+        TrackEmissionRepository.getInstance(provideApiService(), application)
 }

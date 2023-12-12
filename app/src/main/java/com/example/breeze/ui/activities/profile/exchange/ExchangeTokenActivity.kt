@@ -31,7 +31,7 @@ class ExchangeTokenActivity : AppCompatActivity() {
         setupViews()
     }
     private fun setupViews() {
-        viewModel.getUserLogin().observe(this) {
+        viewModel.getToken().observe(this) {
             dataUser = it
         }
     }
