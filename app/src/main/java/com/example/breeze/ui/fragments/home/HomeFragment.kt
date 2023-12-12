@@ -84,19 +84,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.dataMainLayout.visibility = View.GONE
         binding.shimmerView.visibility = View.VISIBLE
         binding.shimmerView.startShimmerAnimation()
-        Handler().postDelayed({
-            binding.dataMainLayout.visibility = View.VISIBLE
-            binding.shimmerView.stopShimmerAnimation()
-            binding.shimmerView.visibility = View.GONE
-        }, 700)
+
     }
     private fun setupViews() {
         viewModel.getToken().observe(viewLifecycleOwner) {
             tokenUser = it
         }
         binding.swipeRefreshLayout.setOnRefreshListener {
-
-            effectShimmer()
             refreshData()
         }
     }
@@ -127,11 +121,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun handleProfile(result: Result<UserProfileResponse>){
         when(result){
-            is Result.Loading -> return
+            is Result.Loading -> {
+                binding.shimmerView.startShimmerAnimation()
+            }
             is Result.Success -> {
+                binding.dataMainLayout.visibility = View.VISIBLE
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
                 loadProfileSuccess(result.data.dataUser)
             }
             is Result.Error -> {
+                binding.dataMainLayout.visibility = View.VISIBLE
+                binding.shimmerView.stopShimmerAnimation()
+                binding.shimmerView.visibility = View.GONE
                 showToastString(requireContext(),result.error)
             }
         }
