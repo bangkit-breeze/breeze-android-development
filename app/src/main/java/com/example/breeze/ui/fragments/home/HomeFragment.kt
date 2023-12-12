@@ -131,8 +131,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             tvTotalVehicle.text = user.vehicleEmissionCount.toString()
             tvTotalCarbon.text = NumberUtils.formatTotalCarbon(user.totalCo2Removed?.toFloat())
             tvTotalEvent.text = user.totalEvent.toString()
-            tvProgress.text = "${NumberUtils.calculateProgress(user.totalCo2Removed?.toFloat())}%"
-            progressBarCircular.progress = user.totalCo2Removed!!
+            valueProgress = NumberUtils.calculateProgress(user.totalCo2Removed?.toFloat())
+            tvProgress.text = "$valueProgress%"
+            totalRemoved =  user.totalCo2Removed!!
+            progressBarCircular.progress = totalRemoved
             tvCo2Removed.text = "0 kg"
         }
     }
