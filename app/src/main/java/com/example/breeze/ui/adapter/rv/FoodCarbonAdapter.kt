@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.breeze.data.model.response.track.IngredientsItem
 import com.example.breeze.databinding.ItemIngredientsBinding
+import com.example.breeze.utils.NumberUtils.formatDecimalNumber
+import com.example.breeze.utils.NumberUtils.formatDecimalTwoNumber
 
 class FoodCarbonAdapter: ListAdapter<IngredientsItem, FoodCarbonAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
@@ -14,7 +16,7 @@ class FoodCarbonAdapter: ListAdapter<IngredientsItem, FoodCarbonAdapter.MyViewHo
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: IngredientsItem) = with(binding) {
             val berat = ((data.berat?.toFloat() ?: 0f) * 1000).toInt()
-            tvTitle.text = "$berat g, ${data.bahan}"
+            tvTitle.text = "${formatDecimalNumber(berat.toFloat(), 3)} g, ${data.bahan}"
             tvEmisi.text = "${data.carbonFootprint} kgCO2e"
 
         }

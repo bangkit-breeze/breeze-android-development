@@ -3,6 +3,16 @@ package com.example.breeze.utils
 import java.text.DecimalFormat
 
 object NumberUtils {
+    fun formatDecimalNumber(number: Float, decimalPlaces: Int): String {
+        val pattern = buildString {
+            append("#.")
+            repeat(decimalPlaces) {
+                append("#")
+            }
+        }
+        val decimalFormat = DecimalFormat(pattern)
+        return decimalFormat.format(number)
+    }
     fun formatDecimalTwoNumber(number: Float): String {
         val decimalFormat = DecimalFormat("#.##")
         return decimalFormat.format(number)
