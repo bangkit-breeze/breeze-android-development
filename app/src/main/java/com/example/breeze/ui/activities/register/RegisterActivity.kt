@@ -1,39 +1,32 @@
 package com.example.breeze.ui.activities.register
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.breeze.R
 import com.example.breeze.databinding.ActivityRegisterBinding
 import com.example.breeze.ui.activities.login.LoginActivity
 import com.example.breeze.ui.factory.AuthViewModelFactory
+import com.example.breeze.ui.viewmodel.RegisterViewModel
 import com.example.breeze.utils.AnimationUtils
-import com.example.breeze.utils.Constants
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Constants
+import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.SnackbarUtils
+import com.example.breeze.utils.dialog.DialogUtils
+import com.example.breeze.utils.dialog.ProgressDialogUtils
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private val viewModel: RegisterViewModel by viewModels {
         AuthViewModelFactory.getInstance(application)
     }
-    private lateinit var progressDialog: Dialog
-    private lateinit var alertDialog: AlertDialog.Builder
-    private val handler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        alertDialog = AlertDialog.Builder(this@RegisterActivity)
         setupClickListeners()
         playAnimations()
     }
@@ -55,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         when {
             password != passwordConfirm || arrayOf(name, email, password, passwordConfirm).any { it.isEmpty() } -> {
-                showToast(
+                showSnackBar(
                     when {
                         password != passwordConfirm -> R.string.password_notmatch
                         name.isEmpty() -> R.string.fullName_required
@@ -67,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
             }
             else -> viewModel.register(name, email, password, passwordConfirm).observe(this) { result ->
                 when (result) {
-                    is Result.Loading -> showProgressDialog()
+                    is Result.Loading -> ProgressDialogUtils.showProgressDialog(this@RegisterActivity)
                     is Result.Success -> onRegisterSuccess()
                     is Result.Error -> onRegisterError(result.error)
                 }
@@ -75,44 +68,22 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
     private fun onRegisterError(errorMessage: String) {
-        hideProgressDialog()
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        ProgressDialogUtils.hideProgressDialog()
+        showSnackBar(errorMessage)
     }
-    private fun showProgressDialog() {
-        progressDialog = Dialog(this@RegisterActivity)
-        progressDialog.setContentView(R.layout.custom_progressbar)
-        val progressBar: ProgressBar = progressDialog.findViewById(R.id.progressBar)
-        progressBar.isIndeterminate = true
-        progressDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        progressDialog.show()
-    }
+
     private fun onRegisterSuccess() {
-        hideProgressDialog()
-        showSuccessDialog()
-        handler.postDelayed({
+        ProgressDialogUtils.hideProgressDialog()
+        DialogUtils.showCustomDialog(this@RegisterActivity, R.layout.alert_dialog_success) { alertDialogBuilder, tvDescription ->
+            tvDescription.text = getString(R.string.register_success_desc)
+        }
+        Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
             finish()
         }, Constants.DIALOG_DELAY)
     }
 
-    private fun showSuccessDialog() {
-        val customDialogView = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null)
-        val alertDialog = AlertDialog.Builder(this)
-            .setView(customDialogView)
-            .create()
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.show()
-        handler.postDelayed({
-            alertDialog.dismiss()
-        }, 3000)
-    }
 
-
-    private fun hideProgressDialog() {
-        if (::progressDialog.isInitialized && progressDialog.isShowing) {
-            progressDialog.dismiss()
-        }
-    }
     private fun playAnimations() {
         with(binding) {
             AnimationUtils.playSequentialFadeInAnimations(
@@ -133,8 +104,8 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(messageResId: Int) {
-        Toast.makeText(this, getString(messageResId), Toast.LENGTH_SHORT).show()
+    private fun showSnackBar(messageResId: Any) {
+        SnackbarUtils.showWithDismissAction(binding.root, messageResId)
     }
 
 }

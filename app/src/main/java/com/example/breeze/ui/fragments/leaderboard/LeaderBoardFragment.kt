@@ -17,7 +17,7 @@ import com.example.breeze.ui.factory.LeaderBoardViewModelFactory
 import com.example.breeze.ui.fragments.leaderboard.screen.AllLeaderBoardFragment
 import com.example.breeze.ui.fragments.leaderboard.screen.WeekLeaderBoardFragment
 import com.example.breeze.ui.viewmodel.LeaderBoardViewModel
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

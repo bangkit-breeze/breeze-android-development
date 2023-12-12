@@ -14,7 +14,7 @@ import com.example.breeze.databinding.FragmentAllLeaderBoardBinding
 import com.example.breeze.ui.adapter.rv.LeaderBoardAdapter
 import com.example.breeze.ui.factory.LeaderBoardViewModelFactory
 import com.example.breeze.ui.viewmodel.LeaderBoardViewModel
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 
 
 class AllLeaderBoardFragment : Fragment() {

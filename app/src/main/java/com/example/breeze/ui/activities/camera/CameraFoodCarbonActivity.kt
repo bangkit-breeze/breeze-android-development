@@ -13,10 +13,8 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.example.breeze.R
 import com.example.breeze.databinding.ActivityCameraFoodCarbonBinding
-import com.example.breeze.databinding.ActivityDetailCarbonBinding
-import com.example.breeze.utils.createCustomTempFile
+import com.example.breeze.utils.camera.createCustomTempFile
 import android.os.Build
 import android.view.WindowInsets
 import android.view.WindowManager

@@ -15,5 +15,4 @@ class LeaderBoardViewModel(
     fun getLeaderBordWeekly(token: String) = leaderBoardRepository.getLeaderBoardWeekly(token)
     fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
     fun getProfile(token: String) = userRepository.getProfile(token)
-
 }

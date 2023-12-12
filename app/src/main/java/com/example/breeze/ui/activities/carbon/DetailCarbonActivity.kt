@@ -20,7 +20,7 @@ import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.adapter.rv.HistoryTrackAdapter
 import com.example.breeze.ui.factory.DetailCarbonViewModelFactory
 import com.example.breeze.ui.viewmodel.DetailCarbonViewModel
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import kotlin.math.roundToInt
 
 class DetailCarbonActivity : AppCompatActivity() {

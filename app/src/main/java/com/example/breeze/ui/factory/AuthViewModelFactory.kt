@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
 import com.example.breeze.ui.viewmodel.LoginViewModel
-import com.example.breeze.ui.activities.register.RegisterViewModel
+import com.example.breeze.ui.viewmodel.RegisterViewModel
 
 class AuthViewModelFactory private constructor(private val userRepository: UserRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -27,5 +27,4 @@ class AuthViewModelFactory private constructor(private val userRepository: UserR
                 instance ?: AuthViewModelFactory(Injection.provideUserRepository(application))
             }.also { instance = it }
     }
-
 }

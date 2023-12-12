@@ -32,11 +32,8 @@ class OnBoardingFragment : Fragment() {
         binding.dotsIndicator.attachTo(binding.viewPager)
         return binding.root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

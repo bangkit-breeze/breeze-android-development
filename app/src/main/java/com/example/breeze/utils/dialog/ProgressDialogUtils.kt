@@ -1,4 +1,4 @@
-package com.example.breeze.utils
+package com.example.breeze.utils.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -18,7 +18,7 @@ object ProgressDialogUtils {
     }
 
     fun hideProgressDialog() {
-        if (::progressDialog.isInitialized && progressDialog.isShowing) {
+        if (ProgressDialogUtils::progressDialog.isInitialized && progressDialog.isShowing) {
             progressDialog.dismiss()
         }
     }

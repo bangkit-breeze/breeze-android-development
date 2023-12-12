@@ -14,7 +14,7 @@ import com.example.breeze.databinding.FragmentFinishedEventBinding
 import com.example.breeze.ui.adapter.rv.EventAdapter
 import com.example.breeze.ui.factory.EventViewModelFactory
 import com.example.breeze.ui.viewmodel.EventViewModel
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 
 class FinishedEventFragment : Fragment() {
     private var _binding: FragmentFinishedEventBinding? = null

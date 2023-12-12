@@ -24,7 +24,7 @@ import com.example.breeze.databinding.ActivityAddVehicleCarbonBinding
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
 import com.example.breeze.ui.viewmodel.AddVehicleCarbonViewModel
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import kotlin.math.roundToInt
 
 class AddVehicleCarbonActivity : AppCompatActivity() {

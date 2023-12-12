@@ -24,7 +24,6 @@ import com.example.breeze.ui.activities.camera.CameraFoodCarbonActivity
 class MainActivity : AppCompatActivity() {
     private var prevSelectedItemId: Int = R.id.bottom_home
     private  val binding by lazy {ActivityMainBinding.inflate(layoutInflater)}
-
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -40,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             this,
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
-
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
@@ -79,7 +77,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         if (intent.getBooleanExtra("return_to_home", false)) {
             returnToHomeFragment()
         } else if (intent.getBooleanExtra("return_to_profile", false)) {
@@ -87,11 +84,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             replaceFragment(HomeFragment())
         }
-
         replaceFragment(HomeFragment())
     }
-
-
     private fun returnToHomeFragment() {
         binding.bottomNavigation.selectedItemId = R.id.bottom_home
         replaceFragment(HomeFragment())
@@ -112,7 +106,6 @@ class MainActivity : AppCompatActivity() {
             }
             show()
         }
-
         sheetBinding.btnFood.setOnClickListener {
             startActivity(Intent(this@MainActivity, CameraFoodCarbonActivity::class.java))
         }
@@ -127,7 +120,4 @@ class MainActivity : AppCompatActivity() {
     fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit()
     }
-
-
-
 }

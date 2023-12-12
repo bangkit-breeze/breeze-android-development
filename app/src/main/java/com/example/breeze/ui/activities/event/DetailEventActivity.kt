@@ -24,7 +24,7 @@ import com.example.breeze.databinding.ActivityDetailEventBinding
 import com.example.breeze.ui.viewmodel.DetailEventViewModel
 
 import com.example.breeze.ui.factory.EventViewModelFactory
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import java.text.SimpleDateFormat
 import java.util.Locale
 

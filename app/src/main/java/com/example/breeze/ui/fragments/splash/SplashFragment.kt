@@ -17,7 +17,7 @@ import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.factory.AuthViewModelFactory
 import com.example.breeze.ui.viewmodel.OnBoardingViewModel
 import com.example.breeze.ui.viewmodel.OnBoardingViewModelFactory
-import com.example.breeze.utils.Constants
+import com.example.breeze.utils.constans.Constants
 import kotlinx.coroutines.launch
 
 class SplashFragment : Fragment() {
@@ -46,13 +46,11 @@ class SplashFragment : Fragment() {
                     MainActivity::class.java
                 }
             )
-
             Handler(Looper.getMainLooper()).postDelayed({
                 startActivity(delayIntent)
                 requireActivity().finish()
             }, Constants.SPLASH_SCREEN_DELAY)
         }
-
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
     private suspend fun getDestination(): Int {

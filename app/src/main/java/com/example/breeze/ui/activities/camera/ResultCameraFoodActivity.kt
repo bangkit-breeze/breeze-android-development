@@ -22,9 +22,9 @@ import com.example.breeze.databinding.ActivityResultCameraFoodBinding
 import com.example.breeze.ui.activities.food.AddFoodCarbonViewModel
 import com.example.breeze.ui.activities.food.DetailResultCarbonFoodActivity
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
-import com.example.breeze.utils.Result
-import com.example.breeze.utils.reduceFileImage
-import com.example.breeze.utils.uriToFile
+import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.camera.reduceFileImage
+import com.example.breeze.utils.camera.uriToFile
 
 class ResultCameraFoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultCameraFoodBinding

@@ -24,10 +24,10 @@ import com.example.breeze.databinding.ActivityFormEventBinding
 import com.example.breeze.ui.viewmodel.FormEventViewModel
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.factory.EventViewModelFactory
-import com.example.breeze.utils.getImageUri
-import com.example.breeze.utils.reduceFileImage
-import com.example.breeze.utils.uriToFile
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.camera.getImageUri
+import com.example.breeze.utils.camera.reduceFileImage
+import com.example.breeze.utils.camera.uriToFile
+import com.example.breeze.utils.constans.Result
 
 class FormEventActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormEventBinding

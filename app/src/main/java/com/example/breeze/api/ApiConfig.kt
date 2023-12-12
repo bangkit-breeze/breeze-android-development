@@ -1,6 +1,6 @@
 package com.example.breeze.api
 
-import com.example.breeze.utils.Constants
+import com.example.breeze.utils.constans.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

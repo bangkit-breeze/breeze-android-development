@@ -13,18 +13,15 @@ import kotlinx.coroutines.flow.first
 val Context.dataStore by preferencesDataStore(name = "onboarding")
 class OnBoardingViewModel(private val context: Context) : ViewModel() {
     private val dataStoreKey = booleanPreferencesKey("finished")
-
     suspend fun saveOnBoardingFinished() {
         context.dataStore.edit { settings ->
             settings[dataStoreKey] = true
         }
     }
-
     suspend fun isOnBoardingFinished(): Boolean {
         return context.dataStore.data.first()[dataStoreKey] ?: false
     }
 }
-
 class OnBoardingViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(OnBoardingViewModel::class.java)) {

@@ -23,7 +23,7 @@ import com.example.breeze.databinding.ActivityDetailResultCarbonFoodBinding
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.adapter.rv.FoodCarbonAdapter
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import kotlin.math.roundToInt
 
 class DetailResultCarbonFoodActivity : AppCompatActivity() {

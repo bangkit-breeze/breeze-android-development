@@ -43,11 +43,11 @@ import com.example.breeze.ui.fragments.home.screen.QuestionScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionSecondScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionThirdScreen
 import com.example.breeze.ui.viewmodel.HomeViewModel
-import com.example.breeze.utils.Constants
+import com.example.breeze.utils.constans.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import java.lang.Math.floor
 import java.text.DecimalFormat
 

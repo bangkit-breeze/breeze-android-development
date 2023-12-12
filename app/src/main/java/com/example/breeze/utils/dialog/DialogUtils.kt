@@ -1,4 +1,4 @@
-package com.example.breeze.utils
+package com.example.breeze.utils.dialog
 
 import android.app.AlertDialog
 import android.content.Context
@@ -15,12 +15,8 @@ object DialogUtils {
         alertDialogBuilder.setView(customDialogView)
         val alertDialog = alertDialogBuilder.create()
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        // Mendapatkan referensi ke TextView di dalam layout
         val tvDescription: TextView = customDialogView.findViewById(R.id.tv_description)
-        // Menjalankan fungsi konfigurasi
         configure(alertDialogBuilder, tvDescription)
-
         alertDialog.show()
     }
 }

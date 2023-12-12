@@ -1,4 +1,4 @@
-package com.example.breeze.utils
+package com.example.breeze.utils.camera
 
 import android.content.ContentValues
 import android.content.Context

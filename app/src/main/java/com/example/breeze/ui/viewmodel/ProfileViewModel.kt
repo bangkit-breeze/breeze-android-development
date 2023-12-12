@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
-    fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
+    fun getToken(): LiveData<LoginResult> =  userRepository.getSession()
     fun deleteUserLogin() = viewModelScope.launch { userRepository.deleteSession() }
     fun getProfile(token: String) = userRepository.getProfile(token)
 }

@@ -21,7 +21,7 @@ import com.example.breeze.ui.activities.profile.exchange.ExchangeTokenActivity
 import com.example.breeze.ui.activities.profile.help.HelpCenterActivity
 import com.example.breeze.ui.factory.ProfileViewModelFactory
 import com.example.breeze.ui.viewmodel.ProfileViewModel
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding? = null
@@ -29,7 +29,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val  viewModel: ProfileViewModel by viewModels {
         ProfileViewModelFactory.getInstance(requireActivity().application)
     }
-    private lateinit var dataUser: LoginResult
+    private lateinit var tokenUser: LoginResult
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,8 +40,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         return binding.root
     }
     private fun setupViews() {
-        viewModel.getUserLogin().observe(viewLifecycleOwner) {
-            dataUser = it
+        viewModel.getToken().observe(viewLifecycleOwner) {
+            tokenUser = it
         }
     }
     private fun handleProfile(result: Result<UserProfileResponse>) {
@@ -79,7 +79,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
     override fun onResume() {
         super.onResume()
-        viewModel.getProfile(dataUser.token).observe(this) {
+        viewModel.getProfile(tokenUser.token).observe(this) {
             handleProfile(it)
         }
     }

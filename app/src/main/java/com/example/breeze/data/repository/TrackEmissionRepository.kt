@@ -8,7 +8,7 @@ import com.example.breeze.api.ApiService
 import com.example.breeze.data.model.response.ErrorResponse
 import com.example.breeze.data.model.request.track.TrackFoodRequest
 import com.example.breeze.data.model.request.track.TrackVehicleRequest
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody

@@ -10,7 +10,7 @@ import com.example.breeze.data.model.response.user.UserProfileResponse
 import com.example.breeze.databinding.ActivityExchangeTokenBinding
 import com.example.breeze.ui.factory.ProfileViewModelFactory
 import com.example.breeze.ui.viewmodel.ProfileViewModel
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 
 class ExchangeTokenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExchangeTokenBinding

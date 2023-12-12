@@ -12,7 +12,6 @@ object SnackbarUtils {
             is String -> message
             else -> throw IllegalArgumentException("Unsupported message type")
         }
-
         Snackbar.make(view, messageText, Snackbar.LENGTH_LONG)
             .apply {
                 setActionTextColor(ContextCompat.getColor(view.context, R.color.light_primary))

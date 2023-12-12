@@ -11,7 +11,7 @@ import com.example.breeze.data.model.response.ErrorResponse
 import com.example.breeze.data.model.request.auth.LoginRequest
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.request.auth.RegisterRequest
-import com.example.breeze.utils.Result
+import com.example.breeze.utils.constans.Result
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.IOException
