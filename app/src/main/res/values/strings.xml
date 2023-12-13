@@ -68,6 +68,7 @@
     <string name="unknown_error">Unknown Error</string>
     <string name="password_notmatch">Password does not match</string>
     <string name="success">SUCCESS</string>
+    <string name="failed">FAILED</string>
     <string name="register_success_desc">Congratulations, your account has been successfully created.</string>
     <string name="login_success_desc">You have successfully logged in, welcome</string>
     <string name="logout">Log Out</string>

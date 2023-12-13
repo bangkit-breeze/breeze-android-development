@@ -32,78 +32,113 @@ import kotlin.math.roundToInt
 class DetailResultCarbonFoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailResultCarbonFoodBinding
     private val adapter = FoodCarbonAdapter()
-    private val  viewModel: AddFoodCarbonViewModel by viewModels {
+    private val viewModel: AddFoodCarbonViewModel by viewModels {
         TrackEmissionViewModelFactory.getInstance(application)
     }
     private lateinit var dataUser: LoginResult
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailResultCarbonFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initViews()
+    }
+
+    private fun initViews() {
         viewModel.getUserLogin().observe(this@DetailResultCarbonFoodActivity) {
             dataUser = it
         }
 
         val data = intent.getParcelableExtra<DataTrackFood>(STORY_INTENT_DATA)
-        if (data != null) {
-            val foodName = data.predictResult?.foodName
-            binding.tvTitle.text = foodName
-            Glide.with(this)
+        data?.let {
+            setupUIWithData(it)
+            setListeners(it)
+        }
+    }
+
+    private fun setupUIWithData(data: DataTrackFood) {
+        with(binding) {
+            tvTitle.text = data.predictResult?.foodName
+            Glide.with(this@DetailResultCarbonFoodActivity)
                 .load(data.imageUrl)
-                .into(binding.myImageView)
-            val confidence = data.predictResult?.confidence?.toFloat()
-            confidence?.let {
-                binding.tvAccuacy.text = when {
-                    it <= 0.6 -> "Low Accuracy"
-                    it < 0.9 -> "Medium Accuracy"
-                    else -> "High Accuracy"
-                }
+                .into(myImageView)
+            data.predictResult?.let {
+                updateAccuracyText(it.confidence?.toFloat())
+                updateCarbonText(it.totalEmissions?.toFloat())
             }
 
-            val emision = data.predictResult?.totalEmissions?.toFloat()
-            val totalEmision = emision?.let { (it * 1000).roundToInt() } ?: 0
-            binding.tvCarbon.text = "${data.predictResult?.totalEmissions} kgCO2e"
-            val layoutManager = LinearLayoutManager(this)
-            binding.rvIngredients.layoutManager = layoutManager
-            binding.rvIngredients.adapter = adapter
+            val layoutManager = LinearLayoutManager(this@DetailResultCarbonFoodActivity)
+            rvIngredients.layoutManager = layoutManager
+            rvIngredients.adapter = adapter
             adapter.submitList(data.predictResult?.ingredients)
-            binding.btnAdd.setOnClickListener {
-                viewModel.addTrackEmissionFood(dataUser.token, foodName!!, totalEmision).observe(this@DetailResultCarbonFoodActivity) { result ->
-                    when (result) {
-                        is Result.Loading -> ProgressDialogUtils.showProgressDialog(this@DetailResultCarbonFoodActivity)
-                        is Result.Success -> {
-                            ProgressDialogUtils.hideProgressDialog()
-                            showSuccessDialog()
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                val intent = Intent(this, MainActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            }, 3000)
-                        }
-                        is Result.Error -> onLoginError(result.error)
-                    }
-                }
+        }
+    }
+
+    private fun updateAccuracyText(accuracy: Float?) {
+        accuracy?.let {
+            binding.tvAccuacy.text = when {
+                it <= 0.6 -> "Low Accuracy"
+                it < 0.9 -> "Medium Accuracy"
+                else -> "High Accuracy"
             }
         }
+    }
 
-        binding.btnCancel.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+    private fun updateCarbonText(emission: Float?) {
+        emission?.let {
+            val totalEmission = (it * 1000).roundToInt()
+            binding.tvCarbon.text = "$totalEmission kgCO2e"
         }
+    }
 
+    private fun setListeners(data: DataTrackFood) {
+        with(binding) {
+            btnAdd.setOnClickListener {
+                handleAddButtonClick(data)
+            }
 
+            btnCancel.setOnClickListener {
+                navigateToMainActivity()
+            }
+        }
+    }
+
+    private fun handleAddButtonClick(data: DataTrackFood) {
+        viewModel.addTrackEmissionFood(
+            dataUser.token,
+            data.predictResult?.foodName!!,
+            ((data.predictResult?.totalEmissions?.toFloat() ?: 0f) * 1000).toInt()
+        ).observe(this@DetailResultCarbonFoodActivity) { result ->
+                when (result) {
+                    is Result.Loading -> ProgressDialogUtils.showProgressDialog(this@DetailResultCarbonFoodActivity)
+                    is Result.Success -> {
+                        ProgressDialogUtils.hideProgressDialog()
+                        showSuccessDialog()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            navigateToMainActivity()
+                        }, 3000)
+                    }
+                    is Result.Error -> onLoginError(result.error)
+                }
+            }
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun onLoginError(errorMessage: String) {
         ProgressDialogUtils.hideProgressDialog()
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
     }
+
     private fun showSuccessDialog() {
-        DialogUtils.showCustomDialogWithDelay(this@DetailResultCarbonFoodActivity,getString(R.string.text_success_add_food))
+        DialogUtils.showCustomDialogWithDelay(this@DetailResultCarbonFoodActivity, getString(R.string.text_success_add_food))
     }
+
     companion object {
         const val STORY_INTENT_DATA = "STORY_INTENT_DATA"
     }
-
 }
