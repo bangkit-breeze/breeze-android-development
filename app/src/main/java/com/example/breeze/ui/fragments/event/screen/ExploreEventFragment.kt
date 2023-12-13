@@ -59,9 +59,9 @@ class ExploreEventFragment : Fragment() {
                 showLoading(false)
                 val events= result.data.dataEvent
                 if (events.isNullOrEmpty()) {
-                    binding.tvEmptyData.visibility = View.VISIBLE
+                    binding.dataEmpty.visibility = View.VISIBLE
                 } else {
-                    binding.tvEmptyData.visibility = View.GONE
+                    binding.dataEmpty.visibility = View.GONE
                     adapter.submitList(events)
                 }
             }

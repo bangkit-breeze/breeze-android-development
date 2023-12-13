@@ -18,6 +18,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+
+    <LinearLayout
+        android:id="@+id/data_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="17dp"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_marginTop="-20dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="2dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/event_dont_finished"/>
+
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="-30dp"
+            android:fontFamily="@font/inter"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="22dp"
+            android:text="@string/event_dont_finished"/>
+    </LinearLayout>
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -28,16 +58,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-    <TextView
-        android:id="@+id/tv_empty_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data Anda Kosong"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+
     <View
         android:layout_width="wrap_content"
         android:layout_height="80dp"
