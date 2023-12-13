@@ -55,4 +55,8 @@ object NumberUtils {
     fun calculateCarbonPercentage(value: Float?): Float? {
         return value?.roundToOneDecimal()
     }
+    fun calculateEmission(totalEmission: Int?): Double {
+        return (totalEmission?.toFloat() ?: 0f) / 1000.0
+    }
+
 }

@@ -17,7 +17,6 @@ class FoodCarbonAdapter: ListAdapter<IngredientsItem, FoodCarbonAdapter.MyViewHo
             val berat = ((data.berat?.toFloat() ?: 0f) * 1000).toInt()
             tvTitle.text = "${formatDecimalNumber(berat.toFloat(), 3)} g, ${data.bahan}"
             tvEmisi.text = "${data.carbonFootprint} kgCO2e"
-
         }
     }
 

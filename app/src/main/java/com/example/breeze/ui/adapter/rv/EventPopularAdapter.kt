@@ -21,15 +21,12 @@ class EventPopularAdapter: ListAdapter<DataEvent, EventPopularAdapter.MyViewHold
             tvDesc.text = data.description
             tvPoint.text = data.rewardPoints.toString()
             tvLocation.text = data.location
-
-
             Glide.with(itemView.context)
                 .load(data.eventImageUrl)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)
                 .fallback(R.drawable.ic_launcher_foreground)
                 .into(ivEvent)
-
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailEventActivity::class.java).apply {
                     putExtra(DetailEventActivity.STORY_INTENT_DATA, data)

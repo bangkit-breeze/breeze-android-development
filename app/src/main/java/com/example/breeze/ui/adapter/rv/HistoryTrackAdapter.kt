@@ -1,20 +1,15 @@
 package com.example.breeze.ui.adapter.rv
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.breeze.R
-import com.example.breeze.data.model.response.article.DataArticle
 import com.example.breeze.data.model.response.user.DataHistoryTrack
-import com.example.breeze.databinding.ItemArticleBinding
 import com.example.breeze.databinding.ItemCarbonBinding
-import com.example.breeze.ui.activities.article.DetailArticleActivity
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.example.breeze.utils.number.DateUtils.formatDateWithMonthName
+import com.example.breeze.utils.number.NumberUtils.calculateEmission
 
 class HistoryTrackAdapter : ListAdapter<DataHistoryTrack, HistoryTrackAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
@@ -22,21 +17,9 @@ class HistoryTrackAdapter : ListAdapter<DataHistoryTrack, HistoryTrackAdapter.My
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DataHistoryTrack) = with(binding) {
             tvTitle.text = data.name
-            tvCarbon.text = "${((data.totalEmission?.toFloat() ?: 0f) / 1000.0)} kgCO2e"
-            tvDate.text = data.createdAt?.let { formatTimestampToCustomDate(it) }
-            if(data.category == "FOOD"){
-                ivIcon.setImageResource(R.drawable.ic_food_black)
-            }else{
-                ivIcon.setImageResource(R.drawable.ic_vehicle_black)
-            }
-
-        }
-        fun formatTimestampToCustomDate(timestamp: String): String {
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
-
-            val date = inputFormat.parse(timestamp)
-            return outputFormat.format(date)
+            tvCarbon.text = "${calculateEmission(data.totalEmission)} kgCO2e"
+            tvDate.text = data.createdAt?.let { formatDateWithMonthName(it) }
+            ivIcon.setImageResource(if (data.category == "FOOD") R.drawable.ic_food_black else R.drawable.ic_vehicle_black)
         }
     }
 
