@@ -11,6 +11,7 @@ import com.example.breeze.R
 import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ItemEventBinding
 import com.example.breeze.ui.activities.event.DetailEventActivity
+import com.example.breeze.utils.DateUtils
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -24,25 +25,9 @@ class EventAdapter: ListAdapter<DataEvent, EventAdapter.MyViewHolder>(DIFF_CALLB
             tvTitle.text = data.name
             tvLocation.text = data.location
             tvPoints.text = data.rewardPoints.toString()
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val date = inputFormat.parse(data.startAt)
-
-            val outputFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            // val formattedDate = outputFormat.format(date)
-
-            val currentDate = Date()
-            val diffInMillies = date.time - currentDate.time
-            val diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)
-
-            val dayDifference = Math.abs(diffInDays)
-            val dayText = if (diffInDays > 0) {
-                "$dayDifference days left"
-            } else if (diffInDays < 0) {
-                "$dayDifference days ago"
-            } else {
-                "Today"
+            tvDate.text = data.startAt?.let {
+                DateUtils.calculateDaysDifference(it)
             }
-            tvDate.text = dayText
 
             Glide.with(itemView.context)
                 .load(data.eventImageUrl)

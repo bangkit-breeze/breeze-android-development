@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import com.example.breeze.utils.showLoading
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breeze.data.model.response.auth.LoginResult
@@ -15,6 +15,7 @@ import com.example.breeze.ui.adapter.rv.EventAdapter
 import com.example.breeze.ui.factory.EventViewModelFactory
 import com.example.breeze.ui.viewmodel.EventViewModel
 import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.showToastString
 
 class FinishedEventFragment : Fragment() {
     private var _binding: FragmentFinishedEventBinding? = null
@@ -40,7 +41,7 @@ class FinishedEventFragment : Fragment() {
         }
     }
     private fun setupViews() {
-        viewModel.getUserLogin().observe(viewLifecycleOwner) {
+        viewModel.getSession().observe(viewLifecycleOwner) {
             dataUser = it
         }
     }
@@ -50,25 +51,23 @@ class FinishedEventFragment : Fragment() {
         binding.rvArticle.adapter = adapter
     }
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding?.progressBar?.let { showLoading(it, isLoading) }
     }
     private fun handleEventResult(result: Result<EventResponse>, adapter: EventAdapter) {
         when (result) {
             is Result.Loading ->   showLoading(true)
             is Result.Success -> {
                 showLoading(false)
-                val events = result.data.dataEvent
-                if (events.isNullOrEmpty()) {
-                    binding.dataEmpty.visibility = View.VISIBLE
-                } else {
-                    binding.dataEmpty.visibility = View.GONE
-                    adapter.submitList(events)
+                with(binding) {
+                    dataEmpty.visibility = if (result.data.dataEvent.isNullOrEmpty()) View.VISIBLE else View.GONE
+                    if (!result.data.dataEvent.isNullOrEmpty()) {
+                        adapter.submitList(result.data.dataEvent)
+                    }
                 }
             }
             is Result.Error -> {
                 showLoading(false)
-                val message = result.error
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                showToastString(requireContext(), result.error)
             }
         }
     }
