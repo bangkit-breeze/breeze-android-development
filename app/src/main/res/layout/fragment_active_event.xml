@@ -19,16 +19,35 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <TextView
-        android:id="@+id/tv_empty_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data Anda Kosong"
+    <LinearLayout
+        android:id="@+id/data_empty"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="17dp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="230dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="2dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_joined_event_not_found"/>
+
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/inter"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="28dp"
+            android:text="@string/event_dont_joined"/>
+        </LinearLayout>
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"

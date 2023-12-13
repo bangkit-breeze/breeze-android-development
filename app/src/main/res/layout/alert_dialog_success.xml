@@ -26,7 +26,7 @@
                 android:layout_height="180dp"
                 app:lottie_autoPlay="true"
                 app:lottie_cacheComposition="true"
-                app:lottie_rawRes="@raw/success"
+                app:lottie_rawRes="@raw/successs_versi_two"
                 app:lottie_speed="1"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"

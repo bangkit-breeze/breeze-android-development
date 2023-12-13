@@ -42,6 +42,7 @@ import com.example.breeze.ui.fragments.home.screen.QuestionScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionSecondScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionThirdScreen
 import com.example.breeze.ui.viewmodel.HomeViewModel
+import com.example.breeze.utils.AnimationUtils
 import com.example.breeze.utils.NumberUtils
 import com.example.breeze.utils.constans.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -50,6 +51,10 @@ import com.example.breeze.utils.constans.Result
 import com.example.breeze.utils.dialog.ProgressDialogUtils
 import com.example.breeze.utils.showToast
 import com.example.breeze.utils.showToastString
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.emitter.Emitter
+import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
@@ -73,6 +78,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupViews()
         setupRecyclerViewArticle(adapterArticle)
         setupRecyclerViewEvent(adapterEvent)
+
         return binding.root
     }
     override fun onResume() {
@@ -80,6 +86,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         effectShimmer()
         refreshData()
     }
+
     private fun effectShimmer(){
         binding.dataMainLayout.visibility = View.GONE
         binding.shimmerView.visibility = View.VISIBLE
@@ -358,6 +365,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun showQuestionDialog() {
+
         val customDialogView =
             LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog_question, null)
         val alertDialog = AlertDialog.Builder(requireContext())
@@ -378,6 +386,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         dotsIndicator.attachTo(viewPager)
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alertDialog.show()
+        binding.konfettiView.start(AnimationUtils.party)
     }
 
     private fun showProgressBarDialog() {
