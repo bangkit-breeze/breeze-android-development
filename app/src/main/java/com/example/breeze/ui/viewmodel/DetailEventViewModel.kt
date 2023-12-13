@@ -10,7 +10,7 @@ class DetailEventViewModel(
     private val userRepository: UserRepository,
     private val eventRepository: EventRepository
 ) : ViewModel() {
-    fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
+    fun getSession(): LiveData<LoginResult> =  userRepository.getSession()
     fun joinEvent(token: String, id: String) = eventRepository.joinEvent(token, id)
 
 }

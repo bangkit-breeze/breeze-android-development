@@ -12,10 +12,6 @@ import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ItemEventBinding
 import com.example.breeze.ui.activities.event.DetailEventActivity
 import com.example.breeze.utils.DateUtils
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.concurrent.TimeUnit
 
 class EventAdapter: ListAdapter<DataEvent, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
 

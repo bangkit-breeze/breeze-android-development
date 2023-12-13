@@ -2,8 +2,6 @@ package com.example.breeze.ui.activities.event
 
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,9 +9,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
@@ -22,11 +17,13 @@ import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ActivityDetailEventBinding
 import com.example.breeze.ui.viewmodel.DetailEventViewModel
-
 import com.example.breeze.ui.factory.EventViewModelFactory
+import com.example.breeze.utils.DateUtils
+import com.example.breeze.utils.SnackbarUtils
+import com.example.breeze.utils.constans.Constants
 import com.example.breeze.utils.constans.Result
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.example.breeze.utils.dialog.DialogUtils
+import com.example.breeze.utils.dialog.ProgressDialogUtils
 
 class DetailEventActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailEventBinding
@@ -44,163 +41,119 @@ class DetailEventActivity : AppCompatActivity() {
         binding.icBack.setOnClickListener {
             onBackPressed()
         }
-        viewModel.getUserLogin().observe(this@DetailEventActivity) { result ->
+        setupUI()
+    }
+    private fun setupUI() {
+        setupUserDataObserver()
+        alertDialog = AlertDialog.Builder(this@DetailEventActivity)
+        val storyData = intent.getParcelableExtra<DataEvent>(STORY_INTENT_DATA)
+        storyData?.let {
+            setupEventDetails(it)
+        }
+    }
+    private fun setupUserDataObserver() {
+        viewModel.getSession().observe(this@DetailEventActivity) { result ->
             result?.let {
                 dataUser = it
             }
         }
-
-
-        alertDialog = AlertDialog.Builder(this@DetailEventActivity)
-        val storyData = intent.getParcelableExtra<DataEvent>(STORY_INTENT_DATA)
-
-        storyData?.let {
-            binding.tvPoints.text = it.rewardPoints.toString()
-            binding.tvTitle.text = it.name
-            binding.tvLocation.text = it.location
-            binding.tvDesc.text = it.description
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
-
-            val startDate = inputFormat.parse(it.startAt)
-            val formattedDate = outputFormat.format(startDate)
-
-            binding.tvDate.text = formattedDate
-
-            id = it.id.toString()
-            Glide.with(this)
-                .load(it.eventImageUrl)
-                .into(binding.ivEvent)
-
-
-            when (storyData?.status) {
+    }
+    private fun setupEventDetails(storyData: DataEvent) {
+        with(binding) {
+            tvPoints.text = storyData.rewardPoints.toString()
+            tvTitle.text = storyData.name
+            tvLocation.text = storyData.location
+            tvDesc.text = storyData.description
+            tvDate.text = storyData.startAt?.let {
+                DateUtils.formatDateWithMonthName(it)
+            }
+            id = storyData.id.toString()
+            Glide.with(this@DetailEventActivity)
+                .load(storyData.eventImageUrl)
+                .into(ivEvent)
+        }
+        handleEventStatus(storyData)
+    }
+    private fun handleEventStatus(storyData: DataEvent) {
+        with(binding) {
+            when (storyData.status) {
                 "ACTIVE" -> {
-                    binding.btnJoinEvent.visibility = View.VISIBLE
-                    binding.btnUploadEvidence.visibility = View.GONE
-                    binding.btnFinished.visibility = View.GONE
-                    binding.tvJoined.visibility = View.GONE
-                    binding.tvFinished.visibility = View.GONE
-                    binding.btnJoinEvent.setOnClickListener {
+                    btnJoinEvent.visibility = View.VISIBLE
+                    btnJoinEvent.setOnClickListener {
                         showEventDialog()
                     }
+                    btnUploadEvidence.visibility = View.GONE
+                    btnFinished.visibility = View.GONE
                 }
                 "JOINED" -> {
-                    binding.btnJoinEvent.visibility = View.GONE
-                    binding.btnUploadEvidence.visibility = View.VISIBLE
-                    binding.btnFinished.visibility = View.GONE
-                    binding.tvJoined.visibility = View.VISIBLE
-                    binding.tvFinished.visibility = View.GONE
-                    binding.btnUploadEvidence.setOnClickListener {
-                        val intent = Intent(this@DetailEventActivity, FormEventActivity::class.java)
-                        intent.putExtra(STORY_INTENT_DATA, storyData)
-                        startActivity(intent)
+                    btnUploadEvidence.visibility = View.VISIBLE
+                    tvJoined.visibility = View.VISIBLE
+                    btnUploadEvidence.setOnClickListener {
+                        startActivity(Intent(this@DetailEventActivity, FormEventActivity::class.java).apply {
+                            putExtra(STORY_INTENT_DATA, storyData)
+                        })
                         finish()
                     }
+                    btnJoinEvent.visibility = View.GONE
+                    btnFinished.visibility = View.GONE
                 }
                 "FINISHED" -> {
-                    binding.btnJoinEvent.visibility = View.GONE
-                    binding.btnUploadEvidence.visibility = View.GONE
-                    binding.btnFinished.visibility = View.VISIBLE
-                    binding.tvJoined.visibility = View.GONE
-                    binding.tvFinished.visibility = View.VISIBLE
-                    binding.btnFinished.setOnClickListener {
-                        Toast.makeText(this, "Anda sudah menyelesaikan event ini", Toast.LENGTH_SHORT).show()
+                    btnFinished.visibility = View.VISIBLE
+                    tvFinished.visibility = View.VISIBLE
+                    btnFinished.setOnClickListener {
+                        SnackbarUtils.showWithDismissAction(binding.root,  R.string.text_event_finished)
                     }
+                    btnJoinEvent.visibility = View.GONE
+                    btnUploadEvidence.visibility = View.GONE
                 }
+                else -> return
             }
-
         }
-
-
     }
-
-
-
-
-
-
     private fun showEventDialog() {
         val customDialogView = LayoutInflater.from(this@DetailEventActivity).inflate(R.layout.alert_dialog_event, null)
         val alertDialog = buildAlertDialog(customDialogView)
-        val yesButton = customDialogView.findViewById<Button>(R.id.btn_okay)
-        val noButton = customDialogView.findViewById<Button>(R.id.btn_cancel)
-        yesButton.setOnClickListener {
-            handleYesButtonClick()
-        }
-        noButton.setOnClickListener {
+        customDialogView.findViewById<Button>(R.id.btn_okay).setOnClickListener {
             alertDialog.dismiss()
+            handleYesButtonClick(alertDialog)
         }
+        customDialogView.findViewById<Button>(R.id.btn_cancel).setOnClickListener { alertDialog.dismiss() }
         alertDialog.show()
     }
-    private fun buildAlertDialog(customDialogView: View): AlertDialog {
-        return AlertDialog.Builder(this)
-            .setView(customDialogView)
-            .create()
-    }
-    private fun handleYesButtonClick() {
-        viewModel.getUserLogin().observe(this@DetailEventActivity) { result ->
+    private fun buildAlertDialog(customDialogView: View): AlertDialog =
+        AlertDialog.Builder(this).setView(customDialogView).create()
+    private fun handleYesButtonClick(alertDialog: AlertDialog) {
+        viewModel.getSession().observe(this@DetailEventActivity) { result ->
             result?.let {
                 viewModel.joinEvent(it.token, id).observe(this@DetailEventActivity) { result ->
                     when (result) {
-                        is Result.Loading -> showProgressDialog()
-                        is Result.Success -> {
-                            var storyData = intent.getParcelableExtra<DataEvent>(STORY_INTENT_DATA)
-
-                            storyData?.let {
-                                it.status = "JOINED"
-                            }
-                            hideProgressDialog()
-                            showSuccessDialog()
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                val intent = Intent(this@DetailEventActivity, DetailEventActivity::class.java)
-                                intent.putExtra(STORY_INTENT_DATA, storyData)
-                                startActivity(intent)
-                                finish()
-                            }, 3000)
-                        }
+                        is Result.Loading -> ProgressDialogUtils.showProgressDialog(this@DetailEventActivity)
+                        is Result.Success -> handleJoinEventSuccess()
                         is Result.Error -> onLoginError(result.error)
                     }
                 }
             }
         }
-
-
-
     }
-    private fun showProgressDialog() {
-        progressDialog = Dialog(this)
-        progressDialog.setContentView(R.layout.custom_progressbar)
-        val progressBar: ProgressBar = progressDialog.findViewById(R.id.progressBar)
-        progressBar.isIndeterminate = true
-        progressDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        progressDialog.show()
+    private fun handleJoinEventSuccess() {
+        var storyData = intent.getParcelableExtra<DataEvent>(STORY_INTENT_DATA)
+        storyData?.status = "JOINED"
+        ProgressDialogUtils.hideProgressDialog()
+        showSuccessDialog()
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this@DetailEventActivity, DetailEventActivity::class.java).putExtra(STORY_INTENT_DATA, storyData))
+            finish()
+        }, Constants.DIALOG_DELAY)
     }
-    private fun hideProgressDialog() {
-        if (::progressDialog.isInitialized && progressDialog.isShowing) {
-            progressDialog.dismiss()
+    private fun showSuccessDialog() {
+        DialogUtils.showCustomDialog(this@DetailEventActivity, R.layout.alert_dialog_success) { _, tvDescription ->
+            tvDescription.text = getString(R.string.text_event_joined_done)
         }
     }
-
-
-    private fun showSuccessDialog() {
-        val customDialogView = LayoutInflater.from(this@DetailEventActivity).inflate(R.layout.alert_dialog_success, null)
-        val alertDialog = android.app.AlertDialog.Builder(this@DetailEventActivity)
-            .setView(customDialogView)
-            .create()
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.show()
-
-        val tvDescription: TextView = customDialogView.findViewById(R.id.tv_description)
-        tvDescription.text = "Selamat anda telah ebrhasil bergabung dalam event ini"
-        Handler(Looper.getMainLooper()).postDelayed({
-            alertDialog.dismiss()
-        }, 3000)
-    }
     private fun onLoginError(errorMessage: String) {
-        hideProgressDialog()
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        ProgressDialogUtils.hideProgressDialog()
+        SnackbarUtils.showWithDismissAction(binding.root, errorMessage)
     }
-
     companion object {
         const val STORY_INTENT_DATA = "STORY_INTENT_DATA"
     }
