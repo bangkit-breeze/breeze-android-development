@@ -10,8 +10,8 @@ import com.example.breeze.data.local.datastore.UserPreferences
 import com.example.breeze.data.model.request.auth.LoginRequest
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.data.model.request.auth.RegisterRequest
-import com.example.breeze.utils.ApiErrorUtils
-import com.example.breeze.utils.AuthUtils
+import com.example.breeze.utils.api.ApiErrorUtils
+import com.example.breeze.utils.api.AuthUtils
 import com.example.breeze.utils.constans.Result
 import retrofit2.HttpException
 import java.io.IOException

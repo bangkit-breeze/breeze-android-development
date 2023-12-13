@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.breeze.data.model.response.track.IngredientsItem
 import com.example.breeze.databinding.ItemIngredientsBinding
-import com.example.breeze.utils.NumberUtils.formatDecimalNumber
-import com.example.breeze.utils.NumberUtils.formatDecimalTwoNumber
+import com.example.breeze.utils.number.NumberUtils.formatDecimalNumber
 
 class FoodCarbonAdapter: ListAdapter<IngredientsItem, FoodCarbonAdapter.MyViewHolder>(DIFF_CALLBACK) {
 

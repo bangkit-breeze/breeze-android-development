@@ -12,7 +12,7 @@ import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.activities.register.RegisterActivity
 import com.example.breeze.ui.factory.AuthViewModelFactory
 import com.example.breeze.ui.viewmodel.LoginViewModel
-import com.example.breeze.utils.AnimationUtils
+import com.example.breeze.utils.animation.AnimationUtils
 import com.example.breeze.utils.constans.Constants
 import com.example.breeze.utils.dialog.DialogUtils
 import com.example.breeze.utils.dialog.ProgressDialogUtils

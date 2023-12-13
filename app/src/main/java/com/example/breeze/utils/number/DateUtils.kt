@@ -1,6 +1,5 @@
-package com.example.breeze.utils
+package com.example.breeze.utils.number
 
-import com.example.breeze.utils.DateUtils.outputFormatWithMonthName
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

@@ -11,7 +11,7 @@ import com.example.breeze.R
 import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ItemEventBinding
 import com.example.breeze.ui.activities.event.DetailEventActivity
-import com.example.breeze.utils.DateUtils
+import com.example.breeze.utils.number.DateUtils
 
 class EventAdapter: ListAdapter<DataEvent, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
 

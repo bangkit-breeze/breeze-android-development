@@ -11,7 +11,7 @@ import com.example.breeze.databinding.ActivityRegisterBinding
 import com.example.breeze.ui.activities.login.LoginActivity
 import com.example.breeze.ui.factory.AuthViewModelFactory
 import com.example.breeze.ui.viewmodel.RegisterViewModel
-import com.example.breeze.utils.AnimationUtils
+import com.example.breeze.utils.animation.AnimationUtils
 import com.example.breeze.utils.constans.Constants
 import com.example.breeze.utils.constans.Result
 import com.example.breeze.utils.SnackbarUtils

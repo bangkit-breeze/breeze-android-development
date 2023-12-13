@@ -1,4 +1,4 @@
-package com.example.breeze.utils
+package com.example.breeze.utils.animation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator

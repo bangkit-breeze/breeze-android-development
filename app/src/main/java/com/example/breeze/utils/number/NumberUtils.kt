@@ -1,4 +1,4 @@
-package com.example.breeze.utils
+package com.example.breeze.utils.number
 
 import java.text.DecimalFormat
 

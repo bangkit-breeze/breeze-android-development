@@ -1,4 +1,4 @@
-package com.example.breeze.utils
+package com.example.breeze.utils.api
 
 import com.example.breeze.data.model.response.ErrorResponse
 import retrofit2.HttpException

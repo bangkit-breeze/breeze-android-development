@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -42,8 +41,8 @@ import com.example.breeze.ui.fragments.home.screen.QuestionScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionSecondScreen
 import com.example.breeze.ui.fragments.home.screen.QuestionThirdScreen
 import com.example.breeze.ui.viewmodel.HomeViewModel
-import com.example.breeze.utils.AnimationUtils
-import com.example.breeze.utils.NumberUtils
+import com.example.breeze.utils.animation.AnimationUtils
+import com.example.breeze.utils.number.NumberUtils
 import com.example.breeze.utils.constans.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
@@ -51,10 +50,6 @@ import com.example.breeze.utils.constans.Result
 import com.example.breeze.utils.dialog.ProgressDialogUtils
 import com.example.breeze.utils.showToast
 import com.example.breeze.utils.showToastString
-import nl.dionsegijn.konfetti.core.Party
-import nl.dionsegijn.konfetti.core.Position
-import nl.dionsegijn.konfetti.core.emitter.Emitter
-import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null

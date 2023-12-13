@@ -18,7 +18,7 @@ import com.example.breeze.data.model.response.event.DataEvent
 import com.example.breeze.databinding.ActivityDetailEventBinding
 import com.example.breeze.ui.viewmodel.DetailEventViewModel
 import com.example.breeze.ui.factory.EventViewModelFactory
-import com.example.breeze.utils.DateUtils
+import com.example.breeze.utils.number.DateUtils
 import com.example.breeze.utils.SnackbarUtils
 import com.example.breeze.utils.constans.Constants
 import com.example.breeze.utils.constans.Result
