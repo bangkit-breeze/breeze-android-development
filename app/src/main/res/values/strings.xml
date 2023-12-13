@@ -74,6 +74,8 @@
     <string name="logout_desc">Are you sure want to log out?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="empty_vehicle_distance">Please fill in the vehicle distance!</string>
+    <string name="empty_vehicle">Please select a vehicle first!</string>
     <string name="fullName_required">Full must not be empty</string>
     <string name="fill_all_fields">Fill all required</string>
     <string name="email_required">Email must not be empty</string>
@@ -88,4 +90,5 @@
     <string name="text_event_finished">You have completed this event</string>
     <string name="text_event_joined_done">Congratulations on successfully joining this event.</string>
     <string name="text_event_evidence_done">Congratulations, you have successfully uploaded the evidence</string>
+    <string name="text_add_vehicle_done">You have added a carbon vehcle track, you get 10xp</string>
 </resources>

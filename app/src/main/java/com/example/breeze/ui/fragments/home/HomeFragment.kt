@@ -264,12 +264,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             btnInfoEvent.setOnClickListener {
-                animateButtonClick( btnInfoEvent)
+                animateButtonClick(btnInfoEvent)
                 showEventBottomSheet()
             }
 
             btnInfoCarbon.setOnClickListener {
-                animateButtonClick( btnInfoCarbon)
+                animateButtonClick(btnInfoCarbon)
                 showCarbonBottomSheet()
             }
             progressBarCircular.setOnClickListener {

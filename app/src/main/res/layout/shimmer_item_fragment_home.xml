@@ -217,7 +217,7 @@
                     >
 
                     <LinearLayout
-                        android:id="@+id/btn_info_food"
+                        android:id="@+id/btn_info_foodza"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:layout_weight="1"
