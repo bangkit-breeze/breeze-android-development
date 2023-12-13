@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
+import com.example.breeze.data.model.response.user.DataUser
 import com.example.breeze.data.model.response.user.UserProfileResponse
 import com.example.breeze.databinding.FragmentProfileBinding
 import com.example.breeze.ui.activities.login.LoginActivity
@@ -22,6 +23,7 @@ import com.example.breeze.ui.activities.profile.help.HelpCenterActivity
 import com.example.breeze.ui.factory.ProfileViewModelFactory
 import com.example.breeze.ui.viewmodel.ProfileViewModel
 import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.number.NumberUtils
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding? = null
@@ -39,54 +41,44 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         setupViews()
         return binding.root
     }
+
     private fun setupViews() {
         viewModel.getToken().observe(viewLifecycleOwner) {
             tokenUser = it
+            tokenUser.token?.let { token -> viewModel.getProfile(token).observe(viewLifecycleOwner, ::handleProfile) }
         }
     }
+
     private fun handleProfile(result: Result<UserProfileResponse>) {
         when (result) {
             is Result.Loading -> return
-            is Result.Success -> {
-                val userProfile = result.data.dataUser
-                if (userProfile != null) {
-                    binding.tvName.text = userProfile.fullName.toString()
-                    binding.tvEmail.text = userProfile.email.toString()
-                    var exp = userProfile.experiences
-                    if (exp != null) {
-                        if(exp < 100){
-                            binding.tvLevel.text = "1"
-                        }else{
-                            var level = Math.floor(exp / 100.0).toInt()
-                            binding.tvLevel.text = "${level + 1}"
-                        }
-                    }
-                    binding.tvPoint.text = userProfile.points.toString()
-                    Glide.with(this)
-                        .load(userProfile.avatarUrl)
-                        .placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.ic_launcher_background)
-                        .fallback(R.drawable.ic_launcher_background)
-                        .into(binding.ivPicture)
-                    binding.tvRank.text = "NaN"
-                }
-            }
-            is Result.Error -> {
-                val message = result.error
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }
+            is Result.Success -> result.data.dataUser?.let { showUserProfile(it) }
+            is Result.Error -> showToast(result.error)
         }
     }
-    override fun onResume() {
-        super.onResume()
-        viewModel.getProfile(tokenUser.token).observe(this) {
-            handleProfile(it)
+
+    private fun showUserProfile(userProfile: DataUser) {
+        with(binding) {
+            tvName.text = userProfile.fullName.toString()
+            tvEmail.text = userProfile.email.toString()
+            userProfile.experiences?.let {
+                tvLevel.text = NumberUtils.calculateLevelProfile(it).toString()
+            }
+            tvPoint.text = userProfile.points.toString()
+            Glide.with(this@ProfileFragment)
+                .load(userProfile.avatarUrl)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .fallback(R.drawable.ic_launcher_background)
+                .into(ivPicture)
+            tvRank.text = "NaN"
         }
     }
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
 
     private fun setupInfoListeners() {
         binding?.apply {

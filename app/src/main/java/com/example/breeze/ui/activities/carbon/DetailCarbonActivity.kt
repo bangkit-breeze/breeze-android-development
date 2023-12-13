@@ -3,8 +3,6 @@ package com.example.breeze.ui.activities.carbon
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.widget.ProgressBar
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,6 +14,8 @@ import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
+import com.example.breeze.data.model.response.user.DataHistoryTrack
+import com.example.breeze.data.model.response.user.DataUserStatistic
 import com.example.breeze.data.model.response.user.HistoryTrackResponse
 import com.example.breeze.databinding.ActivityDetailCarbonBinding
 import com.example.breeze.ui.activities.main.MainActivity
@@ -23,13 +23,17 @@ import com.example.breeze.ui.adapter.rv.HistoryTrackAdapter
 import com.example.breeze.ui.factory.DetailCarbonViewModelFactory
 import com.example.breeze.ui.viewmodel.DetailCarbonViewModel
 import com.example.breeze.utils.constans.Result
-import kotlin.math.roundToInt
+import com.example.breeze.utils.number.NumberUtils.calculateCarbonPercentage
+import com.example.breeze.utils.number.NumberUtils.calculateCarbonSum
+import com.example.breeze.utils.number.NumberUtils.roundToOneDecimal
+import com.example.breeze.utils.number.NumberUtils.roundToTwoDecimals
+import com.example.breeze.utils.showToastString
 
 class DetailCarbonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailCarbonBinding
     private var chart: AnyChartView? = null
-    val salary = mutableListOf<Int>()
-    private val month = listOf("Vehicle", "Food")
+    val dataCarbon = mutableListOf<Int>()
+    private val category = listOf("Vehicle", "Food")
     private val viewModel: DetailCarbonViewModel by viewModels{
         DetailCarbonViewModelFactory.getInstance(application)
     }
@@ -39,125 +43,117 @@ class DetailCarbonActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCarbonBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
-
         binding.topAppBar.setNavigationOnClickListener {
             navigateToMainActivity()
         }
-
         chart = findViewById(R.id.pieChart)
-
         setupRecyclerView(adapter)
-
-
+    }
+    private fun setupLoadingUI() {
+        binding.dataMainLayout.visibility = View.GONE
+        binding.shimmerView.visibility = View.VISIBLE
+        binding.shimmerView.startShimmerAnimation()
+    }
+    private fun stopLoadingUI() {
+        binding.shimmerView.stopShimmerAnimation()
+        binding.shimmerView.visibility = View.GONE
+        binding.dataMainLayout.visibility = View.VISIBLE
+    }
+    private fun observeUserData() {
+        viewModel.getUserLogin().observe(this@DetailCarbonActivity) {
+            dataUser = it
+        }
     }
 
+    private fun observeHistoryTrack() {
+        viewModel.getHistoryTrack(dataUser.token).observe(this) { result ->
+            handleTrackHistoryResult(result, adapter)
+        }
+    }
     private fun setupRecyclerView(adapter: HistoryTrackAdapter) {
         val layoutManager = LinearLayoutManager(this@DetailCarbonActivity)
         binding.rvActivity.layoutManager = layoutManager
         binding.rvActivity.adapter = adapter
     }
-    private fun handleEventResult(result: Result<HistoryTrackResponse>, adapter: HistoryTrackAdapter) {
+    private fun handleTrackHistoryResult(result: Result<HistoryTrackResponse>, adapter: HistoryTrackAdapter) {
+        binding.shimmerView.startShimmerAnimation()
+
         when (result) {
-            is Result.Loading -> {
-                binding.shimmerView.startShimmerAnimation()
-            }
-            is Result.Success -> {
-                binding.shimmerView.stopShimmerAnimation()
-                binding.shimmerView.visibility = View.GONE
-                binding.dataMainLayout.visibility = View.VISIBLE
-                val data = result.data.dataHistoryTrack
-                if(data.isNullOrEmpty()){
-                    binding.activityDontHave.visibility = View.VISIBLE
-                    binding.rvActivity.visibility = View.GONE
-                }else{
-                    binding.activityDontHave.visibility = View.GONE
-                    binding.rvActivity.visibility = View.VISIBLE
-                    adapter.submitList(data)
-                }
-            }
-            is Result.Error -> {
-                binding.shimmerView.stopShimmerAnimation()
-                binding.shimmerView.visibility = View.GONE
-                binding.dataMainLayout.visibility = View.VISIBLE
-                val message = result.error
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-            }
+            is Result.Loading ->  binding.shimmerView.startShimmerAnimation()
+            is Result.Success -> handleSuccessHistoryResult(result.data.dataHistoryTrack, adapter)
+            is Result.Error -> handleFailureHistoryResult(result.error)
         }
+    }
+
+    private fun handleSuccessHistoryResult(data: List<DataHistoryTrack?>?, adapter: HistoryTrackAdapter) {
+        stopLoadingUI()
+        with(binding) {
+            activityDontHave.visibility = if (data.isNullOrEmpty()) View.VISIBLE else View.GONE
+            rvActivity.visibility = if (data.isNullOrEmpty()) View.GONE else View.VISIBLE
+        }
+        data?.takeIf { it.isNotEmpty() }?.let {
+            adapter.submitList(it)
+        }
+    }
+    private fun handleFailureHistoryResult(errorMessage: String) {
+        stopLoadingUI()
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
     }
     override fun onResume() {
         super.onResume()
-        binding.dataMainLayout.visibility = View.GONE
-        binding.shimmerView.visibility = View.VISIBLE
-        binding.shimmerView.startShimmerAnimation()
-        viewModel.getUserLogin().observe(this@DetailCarbonActivity) {
-            dataUser = it
-        }
-        viewModel.getHistoryTrack(dataUser.token).observe(this) { result ->
-            handleEventResult(result, adapter)
-        }
+        setupLoadingUI()
+        observeUserData()
+        observeHistoryTrack()
+        observeStatistic()
+    }
+    private fun observeStatistic() {
         viewModel.getStatistic(dataUser.token).observe(this@DetailCarbonActivity) { result ->
             when (result) {
                 is Result.Loading -> return@observe
-                is Result.Success -> {
-                    if(result.data != null){
-                        val statistic = result.data.dataUserStatistic
-                        if (statistic != null) {
-                            val food =  statistic.foodEmissionCount
-                            val vehicle =  statistic.vehicleEmissionCount
-                            if (vehicle != null) {
-                                salary.add(vehicle)
-                            }
-                            if (food != null) {
-                                salary.add(food)
-                            }
+                is Result.Success -> handleSuccessStatistic(result.data?.dataUserStatistic)
+                is Result.Error -> showError(result.error)
+            }
+        }
+    }
+    private fun handleSuccessStatistic(statistic: DataUserStatistic?) {
+        statistic?.let { stats ->
+            val food = stats.foodEmissionCount
+            val vehicle = stats.vehicleEmissionCount
+            updateDataCarbon(vehicle, food)
+            with(binding) {
+                tvCountFood.text = food?.toString()
+                tvCountVehicle.text = vehicle?.toString()
+                val carbonFoodSum = calculateCarbonSum(stats.foodFootprintSum?.toFloat())
+                val carbonVehicleSum = calculateCarbonSum(stats.vehicleFootprintSum?.toFloat())
+                tvCarbonFood.text = carbonFoodSum.toString()
+                tvCarbonVehicle.text = carbonVehicleSum.toString()
+                val carbonFoodPercentage = calculateCarbonPercentage(stats.foodEmissionPercentage?.toFloat())
+                val carbonVehiclePercentage = calculateCarbonPercentage(stats.vehicleEmissionPercentage?.toFloat())
+                tvPersenFood.text = carbonFoodPercentage.toString()
+                tvPersenVehicle.text = carbonVehiclePercentage.toString()
+                val isDataZero = (food == 0 && vehicle == 0 &&
+                        carbonFoodSum?.toInt() == 0 && carbonVehicleSum?.toInt() == 0 &&
+                        carbonFoodPercentage?.toInt() == 0 && carbonVehiclePercentage?.toInt() == 0)
 
-                            binding.tvCountFood.text = statistic.foodEmissionCount.toString()
-                            binding.tvCountVehicle.text = statistic.vehicleEmissionCount.toString()
-                            val carbon_food_sum = statistic.foodFootprintSum?.toFloat()?.div(1000)?.roundToTwoDecimals()
-                            val carbon_vehicle_sum = statistic.vehicleFootprintSum?.toFloat()?.div(1000)?.roundToTwoDecimals()
-                            binding.tvCarbonFood.text = carbon_food_sum.toString()
-                            binding.tvCarbonVehicle.text = carbon_vehicle_sum.toString()
-                            val carbon_food_persen =  statistic.foodEmissionPercentage?.toFloat()?.roundToOneDecimal()
-                            val carbon_vehicle_persen =  statistic.vehicleEmissionPercentage?.toFloat()?.roundToOneDecimal()
-                             binding.tvPersenFood.text = carbon_food_persen.toString()
-                             binding.tvPersenVehicle.text = carbon_vehicle_persen.toString()
-
-
-                            if(food == 0 && vehicle == 0 &&
-                                carbon_food_sum?.toInt() == 0 && carbon_vehicle_sum?.toInt() == 0 &&
-                                carbon_food_persen?.toInt() == 0 && carbon_vehicle_persen?.toInt() == 0)
-                            {
-                                binding.carbonDontHave.visibility = View.VISIBLE
-                                binding.pieChart.visibility = View.GONE
-                            }else{
-                                binding.carbonDontHave.visibility = View.GONE
-                                binding.pieChart.visibility = View.VISIBLE
-                                configChartView()
-                            }
-
-                        }
-                    }
-
-                }
-                is Result.Error -> {
-                    val message = result.error
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                updateViewsVisibility(isDataZero)
+                if (!isDataZero) {
+                    configChartView()
                 }
             }
         }
-
     }
-
-    fun Float.roundToTwoDecimals(): Float {
-        return (this * 100).roundToInt() / 100.0f
+    private fun updateDataCarbon(vehicle: Int?, food: Int?) {
+        dataCarbon.addAll(listOfNotNull(vehicle, food))
     }
-    fun Float.roundToOneDecimal(): Float {
-        return (this * 10).roundToInt() / 10.0f
+    private fun updateViewsVisibility(isDataZero: Boolean) {
+        with(binding) {
+            carbonDontHave.visibility = if (isDataZero) View.VISIBLE else View.GONE
+            pieChart.visibility = if (isDataZero) View.GONE else View.VISIBLE
+        }
     }
-
+    private fun showError(errorMessage: String) {
+        showToastString(this, errorMessage)
+    }
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -165,13 +161,12 @@ class DetailCarbonActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
     private fun configChartView() {
         val pie: Pie = AnyChart.pie()
         val colors = listOf("#1BD15D", "#FBBC05")
         val dataPieChart: MutableList<DataEntry> = mutableListOf()
-        for (index in salary.indices) {
-            dataPieChart.add(ValueDataEntry(month.elementAt(index), salary.elementAt(index)))
+        for (index in dataCarbon.indices) {
+            dataPieChart.add(ValueDataEntry(category.elementAt(index), dataCarbon.elementAt(index)))
         }
         pie.palette(colors.toTypedArray())
         pie.data(dataPieChart)

@@ -1,6 +1,7 @@
 package com.example.breeze.utils.number
 
 import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
 object NumberUtils {
     fun formatDecimalNumber(number: Float, decimalPlaces: Int): String {
@@ -33,5 +34,25 @@ object NumberUtils {
     fun calculateProgress(totalCo2Removed: Float?): Int {
         val valueProgress = ((totalCo2Removed?.toFloat() ?: 0f) / 30000 * 100).toInt()
         return valueProgress
+    }
+    fun calculateLevelProfile(exp: Int): Int {
+        return if (exp < 100) {
+            1
+        } else {
+            Math.floor(exp / 100.0).toInt() + 1
+        }
+    }
+    fun Float.roundToTwoDecimals(): Float {
+        return (this * 100).roundToInt() / 100.0f
+    }
+
+    fun Float.roundToOneDecimal(): Float {
+        return (this * 10).roundToInt() / 10.0f
+    }
+    fun calculateCarbonSum(value: Float?): Float? {
+        return value?.div(1000)?.roundToTwoDecimals()
+    }
+    fun calculateCarbonPercentage(value: Float?): Float? {
+        return value?.roundToOneDecimal()
     }
 }

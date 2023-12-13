@@ -15,6 +15,7 @@ import com.example.breeze.ui.adapter.rv.LeaderBoardAdapter
 import com.example.breeze.ui.factory.LeaderBoardViewModelFactory
 import com.example.breeze.ui.viewmodel.LeaderBoardViewModel
 import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.showLoading
 
 
 class WeekLeaderBoardFragment : Fragment() {
@@ -44,7 +45,7 @@ class WeekLeaderBoardFragment : Fragment() {
         }
     }
     private fun setupViews() {
-        viewModel.getUserLogin().observe(viewLifecycleOwner) {
+        viewModel.getSession().observe(viewLifecycleOwner) {
             dataUser = it
         }
     }
@@ -54,7 +55,7 @@ class WeekLeaderBoardFragment : Fragment() {
         binding.rvLeaderboard.adapter = adapter
     }
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding?.progressBar?.let { showLoading(it, isLoading) }
     }
     private fun handleEventResult(result: Result<LeaderBoardResponse>, adapter: LeaderBoardAdapter) {
         when (result) {

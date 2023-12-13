@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breeze.data.model.response.leaderboard.LeaderBoardResponse
@@ -15,6 +14,8 @@ import com.example.breeze.ui.adapter.rv.LeaderBoardAdapter
 import com.example.breeze.ui.factory.LeaderBoardViewModelFactory
 import com.example.breeze.ui.viewmodel.LeaderBoardViewModel
 import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.showLoading
+import com.example.breeze.utils.showToastString
 
 
 class AllLeaderBoardFragment : Fragment() {
@@ -44,7 +45,7 @@ class AllLeaderBoardFragment : Fragment() {
         }
     }
     private fun setupViews() {
-        viewModel.getUserLogin().observe(viewLifecycleOwner) {
+        viewModel.getSession().observe(viewLifecycleOwner) {
             dataUser = it
         }
     }
@@ -54,7 +55,7 @@ class AllLeaderBoardFragment : Fragment() {
         binding.rvLeaderboard.adapter = adapter
     }
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding?.progressBar?.let { showLoading(it, isLoading) }
     }
     private fun handleEventResult(result: Result<LeaderBoardResponse>, adapter: LeaderBoardAdapter) {
         when (result) {
@@ -71,8 +72,7 @@ class AllLeaderBoardFragment : Fragment() {
             }
             is Result.Error -> {
                 showLoading(false)
-                val message = result.error
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                showToastString(requireContext(), result.error)
             }
         }
     }
