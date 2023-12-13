@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.breeze.data.repository.TrackEmissionRepository
 import com.example.breeze.data.repository.UserRepository
 import com.example.breeze.di.Injection
-import com.example.breeze.ui.activities.food.AddFoodCarbonViewModel
+import com.example.breeze.ui.viewmodel.AddFoodCarbonViewModel
 import com.example.breeze.ui.viewmodel.AddVehicleCarbonViewModel
 
 class TrackEmissionViewModelFactory private constructor(

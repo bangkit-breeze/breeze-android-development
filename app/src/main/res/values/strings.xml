@@ -91,4 +91,7 @@
     <string name="text_event_joined_done">Congratulations on successfully joining this event.</string>
     <string name="text_event_evidence_done">Congratulations, you have successfully uploaded the evidence</string>
     <string name="text_add_vehicle_done">You have added a carbon vehcle track, you get 10xp</string>
+    <string name="text_image_detection">Image was detected successfully</string>
+    <string name="text_image_detection_failed">Image failed to be detected</string>
+    <string name="text_success_add_food">Congratulations you have added the food carbon track, you have earned 10xp!</string>
 </resources>

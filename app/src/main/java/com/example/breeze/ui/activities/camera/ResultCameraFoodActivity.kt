@@ -1,30 +1,26 @@
 package com.example.breeze.ui.activities.camera
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import com.example.breeze.R
 import com.example.breeze.data.model.response.auth.LoginResult
 import com.example.breeze.databinding.ActivityResultCameraFoodBinding
-import com.example.breeze.ui.activities.food.AddFoodCarbonViewModel
+import com.example.breeze.ui.viewmodel.AddFoodCarbonViewModel
 import com.example.breeze.ui.activities.food.DetailResultCarbonFoodActivity
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
 import com.example.breeze.utils.constans.Result
 import com.example.breeze.utils.camera.reduceFileImage
 import com.example.breeze.utils.camera.uriToFile
+import com.example.breeze.utils.dialog.DialogUtils
+import com.example.breeze.utils.dialog.ProgressDialogUtils
 
 class ResultCameraFoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultCameraFoodBinding
@@ -33,8 +29,6 @@ class ResultCameraFoodActivity : AppCompatActivity() {
         TrackEmissionViewModelFactory.getInstance(application)
     }
     private lateinit var dataUser: LoginResult
-    private lateinit var alertDialog: AlertDialog.Builder
-    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +49,9 @@ class ResultCameraFoodActivity : AppCompatActivity() {
                         viewModel.predictTrackEmissionFoodCarbon(dataUser.token, imageFile).observe(this) { result ->
                             if (result != null) {
                                 when (result) {
-                                    is Result.Loading -> showLoading(true)
+                                    is Result.Loading -> ProgressDialogUtils.showProgressDialog(this@ResultCameraFoodActivity)
                                     is Result.Success -> {
-                                        showLoading(false)
+                                        ProgressDialogUtils.hideProgressDialog()
                                         val data = result.data.dataTrackFood
                                         showSuccessDialog()
                                         Handler(Looper.getMainLooper()).postDelayed({
@@ -69,8 +63,8 @@ class ResultCameraFoodActivity : AppCompatActivity() {
                                     }
 
                                     is Result.Error -> {
-                                        showToast(result.error)
-                                        showLoading(false)
+                                        ProgressDialogUtils.hideProgressDialog()
+                                       showFailedDialog()
                                     }
                                 }
                             }
@@ -93,22 +87,15 @@ class ResultCameraFoodActivity : AppCompatActivity() {
     }
 
     private fun showSuccessDialog() {
-        val customDialogView = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null)
-        val alertDialog = AlertDialog.Builder(this)
-            .setView(customDialogView)
-            .create()
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.show()
-        val tvDescription: TextView = customDialogView.findViewById(R.id.tv_description)
-        tvDescription.text = "Gambar terdeteksi"
-        handler.postDelayed({
-            alertDialog.dismiss()
-        }, 3000)
+         DialogUtils.showCustomDialog(this@ResultCameraFoodActivity, R.layout.alert_dialog_success) { alertDialogBuilder, tvDescription ->
+            tvDescription.text = getString(R.string.text_image_detection)
+        }
+    }
+    private fun showFailedDialog() {
+        DialogUtils.showCustomDialogFailedWithDelay(this@ResultCameraFoodActivity,getString(R.string.text_image_detection_failed))
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
+
 
     private fun showImage() {
         currentImageUri?.let {

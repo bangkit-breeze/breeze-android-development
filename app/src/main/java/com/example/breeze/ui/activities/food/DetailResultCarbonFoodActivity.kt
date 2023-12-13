@@ -23,7 +23,10 @@ import com.example.breeze.databinding.ActivityDetailResultCarbonFoodBinding
 import com.example.breeze.ui.activities.main.MainActivity
 import com.example.breeze.ui.adapter.rv.FoodCarbonAdapter
 import com.example.breeze.ui.factory.TrackEmissionViewModelFactory
+import com.example.breeze.ui.viewmodel.AddFoodCarbonViewModel
 import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.dialog.DialogUtils
+import com.example.breeze.utils.dialog.ProgressDialogUtils
 import kotlin.math.roundToInt
 
 class DetailResultCarbonFoodActivity : AppCompatActivity() {
@@ -32,7 +35,6 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
     private val  viewModel: AddFoodCarbonViewModel by viewModels {
         TrackEmissionViewModelFactory.getInstance(application)
     }
-    private lateinit var progressDialog: Dialog
     private lateinit var dataUser: LoginResult
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,14 +51,12 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(data.imageUrl)
                 .into(binding.myImageView)
-            val acuracy = data.predictResult?.confidence?.toFloat()
-            if (acuracy != null) {
-                if(acuracy <= 0.6 ){
-                    binding.tvAccuacy.text = "Low Accuracy"
-                }else if(acuracy < 0.9 && acuracy >= 0.61){
-                    binding.tvAccuacy.text = "Medium Accuracy"
-                }else if(acuracy > 0.9){
-                    binding.tvAccuacy.text = "High Accuracy"
+            val confidence = data.predictResult?.confidence?.toFloat()
+            confidence?.let {
+                binding.tvAccuacy.text = when {
+                    it <= 0.6 -> "Low Accuracy"
+                    it < 0.9 -> "Medium Accuracy"
+                    else -> "High Accuracy"
                 }
             }
 
@@ -70,9 +70,9 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
             binding.btnAdd.setOnClickListener {
                 viewModel.addTrackEmissionFood(dataUser.token, foodName!!, totalEmision).observe(this@DetailResultCarbonFoodActivity) { result ->
                     when (result) {
-                        is Result.Loading -> showProgressDialog()
+                        is Result.Loading -> ProgressDialogUtils.showProgressDialog(this@DetailResultCarbonFoodActivity)
                         is Result.Success -> {
-                            hideProgressDialog()
+                            ProgressDialogUtils.hideProgressDialog()
                             showSuccessDialog()
                             Handler(Looper.getMainLooper()).postDelayed({
                                 val intent = Intent(this, MainActivity::class.java)
@@ -94,35 +94,13 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
 
 
     }
-    private fun showProgressDialog() {
-        progressDialog = Dialog(this)
-        progressDialog.setContentView(R.layout.custom_progressbar)
-        val progressBar: ProgressBar = progressDialog.findViewById(R.id.progressBar)
-        progressBar.isIndeterminate = true
-        progressDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        progressDialog.show()
-    }
-    private fun hideProgressDialog() {
-        if (::progressDialog.isInitialized && progressDialog.isShowing) {
-            progressDialog.dismiss()
-        }
-    }
+
     private fun onLoginError(errorMessage: String) {
-        hideProgressDialog()
+        ProgressDialogUtils.hideProgressDialog()
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
     }
     private fun showSuccessDialog() {
-        val customDialogView = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null)
-        val alertDialog = AlertDialog.Builder(this)
-            .setView(customDialogView)
-            .create()
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.show()
-        val tvDescription: TextView = customDialogView.findViewById(R.id.tv_description)
-        tvDescription.text = "Anda telah menambahkan track food carbon, anda dapat 10xp"
-        Handler(Looper.getMainLooper()).postDelayed({
-            alertDialog.dismiss()
-        }, 3000)
+        DialogUtils.showCustomDialogWithDelay(this@DetailResultCarbonFoodActivity,getString(R.string.text_success_add_food))
     }
     companion object {
         const val STORY_INTENT_DATA = "STORY_INTENT_DATA"

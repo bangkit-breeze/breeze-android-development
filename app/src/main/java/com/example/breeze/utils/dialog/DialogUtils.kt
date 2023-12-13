@@ -32,5 +32,15 @@ object DialogUtils {
         }
     }
 
+    fun showCustomDialogFailedWithDelay(context: Context, description: String) {
+        showCustomDialog(context, R.layout.alert_dialog_failed) { builder, textView ->
+            textView.text = description
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                builder.create().dismiss()
+            }, 3000)
+        }
+    }
+
 
 }
