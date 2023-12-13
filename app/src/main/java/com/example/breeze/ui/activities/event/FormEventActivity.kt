@@ -1,18 +1,12 @@
 package com.example.breeze.ui.activities.event
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -28,6 +22,9 @@ import com.example.breeze.utils.camera.getImageUri
 import com.example.breeze.utils.camera.reduceFileImage
 import com.example.breeze.utils.camera.uriToFile
 import com.example.breeze.utils.constans.Result
+import com.example.breeze.utils.dialog.DialogUtils
+import com.example.breeze.utils.showToastString
+import com.example.breeze.utils.showLoading
 
 class FormEventActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormEventBinding
@@ -42,7 +39,7 @@ class FormEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFormEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel.getUserLogin().observe(this@FormEventActivity) {
+        viewModel.getSession().observe(this@FormEventActivity) {
             dataUser = it
         }
         alertDialog = AlertDialog.Builder(this@FormEventActivity)
@@ -88,73 +85,57 @@ class FormEventActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         val desc = binding.edAddDescription.text.toString().trim()
-        if ( desc.isEmpty() ) {
-            when {
-                desc.isEmpty() -> showToast("Descripiton harus diisi")
-            }
+        if (desc.isEmpty()) {
+            showToast(getString(R.string.empty_desc_warning))
             return
         }
-        if (currentImageUri == null) {
-            showToast("Please select an image")
-            return
-        }
+
         currentImageUri?.let { uri ->
             val storyData = intent.getParcelableExtra<DataEvent>(STORY_INTENT_DATA)
             val imageFile = uriToFile(uri, this).reduceFileImage()
-            Log.d("Image File", "showImage: ${imageFile.path}")
-            val description = binding.edAddDescription.text.toString()
-            storyData?.let {
-                it.id?.let { id ->
-                    viewModel.uploadEvidenceEvent(dataUser.token,
-                        id, imageFile, description).observe(this) { result ->
-                        if (result != null) {
-                            when (result) {
-                                is Result.Loading -> showLoading(true)
-                                is Result.Success -> {
-                                    showLoading(false)
-                                    showSuccessDialog()
-                                    storyData?.let {
-                                        it.status = "FINISHED"
-                                    }
 
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        val intent = Intent(this@FormEventActivity, MainActivity::class.java)
-                                        // intent.putExtra(DetailEventActivity.STORY_INTENT_DATA, storyData)
-                                        startActivity(intent)
-                                        finish()
-                                    }, 3000)
-                                }
-
-                                is Result.Error -> {
-                                    showToast(result.error)
-                                    showLoading(false)
-                                }
-                            }
-                        }
-                    }
+            viewModel.uploadEvidenceEvent(
+                dataUser.token,
+                storyData?.id ?: return,
+                imageFile,
+                desc
+            ).observe(this) { result ->
+                when (result) {
+                    is Result.Loading -> showLoading(true)
+                    is Result.Success -> handleUploadSuccess(storyData)
+                    is Result.Error -> handleUploadError(result.error)
                 }
             }
         } ?: showToast(getString(R.string.empty_image_warning))
     }
-    private fun showSuccessDialog() {
-        val customDialogView = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null)
-        val alertDialog = AlertDialog.Builder(this)
-            .setView(customDialogView)
-            .create()
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.show()
-        val tvDescription: TextView = customDialogView.findViewById(R.id.tv_description)
-        tvDescription.text = "Congratulations, you have successfully uploaded the evidence"
-        handler.postDelayed({
-            alertDialog.dismiss()
+
+    private fun handleUploadSuccess(storyData: DataEvent?) {
+        showLoading(false)
+        showSuccessDialog()
+        storyData?.status = "FINISHED"
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this@FormEventActivity, MainActivity::class.java))
+            finish()
         }, 3000)
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    private fun handleUploadError(errorMessage: String) {
+        showToast(errorMessage)
+        showLoading(false)
     }
+
+    private fun showSuccessDialog() {
+        DialogUtils.showCustomDialog(this@FormEventActivity, R.layout.alert_dialog_success) { _, tvDescription ->
+            tvDescription.text = getString(R.string.text_event_evidence_done)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding?.progressBar?.let { showLoading(it, isLoading) }
+    }
+
     private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        showToastString(this, message)
     }
     companion object {
         const val STORY_INTENT_DATA = "STORY_INTENT_DATA"

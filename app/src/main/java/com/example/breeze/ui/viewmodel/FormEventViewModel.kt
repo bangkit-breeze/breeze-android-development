@@ -11,7 +11,7 @@ class FormEventViewModel(
     private val userRepository: UserRepository,
     private val eventRepository: EventRepository
 ) : ViewModel() {
-    fun getUserLogin(): LiveData<LoginResult> =  userRepository.getSession()
+    fun getSession(): LiveData<LoginResult> =  userRepository.getSession()
     fun uploadEvidenceEvent(token: String, id: String, file: File, description: String) =
         eventRepository.uploadEvidenceEvent(token, id, file, description)
 

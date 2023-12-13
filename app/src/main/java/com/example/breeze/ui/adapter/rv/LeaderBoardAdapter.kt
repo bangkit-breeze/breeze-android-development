@@ -18,7 +18,6 @@ class LeaderBoardAdapter: ListAdapter<LeaderboardItem, LeaderBoardAdapter.MyView
     class MyViewHolder(private val binding: ItemLeaderboardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: LeaderboardItem) = with(binding) {
-            // Assuming data.rank is the user's rank
             when (data.rank) {
                 1 -> {
                     binding.rank1.visibility = View.VISIBLE
