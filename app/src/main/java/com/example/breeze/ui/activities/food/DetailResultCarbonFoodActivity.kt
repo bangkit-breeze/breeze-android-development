@@ -86,8 +86,7 @@ class DetailResultCarbonFoodActivity : AppCompatActivity() {
 
     private fun updateCarbonText(emission: Float?) {
         emission?.let {
-            val totalEmission = (it * 1000).roundToInt()
-            binding.tvCarbon.text = "$totalEmission kgCO2e"
+            binding.tvCarbon.text = "${it} kgCO2e"
         }
     }
 
