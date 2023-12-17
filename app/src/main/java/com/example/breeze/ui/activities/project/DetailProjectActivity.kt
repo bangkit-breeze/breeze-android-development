@@ -7,6 +7,7 @@ import com.example.breeze.R
 import com.example.breeze.data.model.response.project.DataProject
 import com.example.breeze.databinding.ActivityDetailProjectBinding
 import com.example.breeze.databinding.ActivityProjectBinding
+import com.example.breeze.utils.SnackbarUtils
 
 class DetailProjectActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailProjectBinding
@@ -17,8 +18,10 @@ class DetailProjectActivity : AppCompatActivity() {
         binding.icBack.setOnClickListener {
             onBackPressed()
         }
+        binding.btnPurchase.setOnClickListener {
+            SnackbarUtils.showWithDismissAction(binding.root, R.string.feature_not_yet)
+        }
         val dataProject: DataProject? = intent.getParcelableExtra(STORY_INTENT_DATA)
-
         dataProject?.let { displayProjectDetails(it) }
     }
     private fun displayProjectDetails(dataProject: DataProject) {
