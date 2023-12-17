@@ -60,7 +60,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/inter"
             android:textColor="@color/black"
-            android:text="We are all here on earth to help others; what on earth the others are here for i don’t know."/>
+            android:text="Feel free to ask us anything; we're here to help and provide answers."/>
 
         <LinearLayout
             android:id="@+id/btn_chat"

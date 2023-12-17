@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:fontFamily="@font/inter_medium"
-            android:text="What vehicle are you using?"
+            android:text="@string/title_track_vehicle"
             android:layout_marginBottom="10dp"
             />
         <HorizontalScrollView

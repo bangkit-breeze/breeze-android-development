@@ -20,7 +20,8 @@
     <string name="create_account">Create Account</string>
     <string name="unknown_viewmodel">Unknown ViewModel class</string>
     <string name="add_food_carbon">Add Food Carbon</string>
-    <string name="add_vechile_carbon">Add Vechile Carbon</string>
+    <string name="title_track_vehicle">What vehicle had you been using?</string>
+    <string name="add_vechile_carbon">Add Vehicle Carbon</string>
     <string name="text_onboarding1">Welcome to BREEZE! We\'re ready to step up together to measure your carbon footprint. Thank you for joining and let\'s explore the sustainable journey together!</string>
     <string name="text_onboarding2">Then, join our fun events to reduce your carbon emissions and win great prizes. Join us now on this sustainable journey!</string>
     <string name="text_onboarding3">Let\'s actively participate and together help Indonesia achieve the ambitious target of 29% emission reduction by 2030. Start now!</string>
@@ -47,11 +48,13 @@
     <string name="text_title_event">Total Event</string>
     <string name="text_title_carbon">CO2e Removed</string>
     <string name="text_title_highlights">Highlights</string>
-    <string name="text_title_event_popular">Event Popular</string>
+    <string name="text_title_event_popular">Popular Events</string>
     <string name="text_see_all">See All</string>
-    <string name="text_title_article">Tips for sustainability</string>
+    <string name="text_title_article">Artikel Tips for sustainability</string>
+    <string name="text_desc_event">Share and invite people to join your environmental initiative to earn points</string>
+    <string name="text_title_event_fragment">Join Our Event</string>
     <string name="text_questione_one">You’re on a good way! Your day is going amazing</string>
-    <string name="text_questione_two">Track you’re food and your vehicle for carbon</string>
+    <string name="text_questione_two">Track your food and your vehicle for carbon</string>
     <string name="text_questione_tree">Achieving and sustaining carbon calorie goals</string>
     <string name="text_food">food</string>
     <string name="text_calorie">calorie</string>
@@ -59,7 +62,10 @@
     <string name="text_carbon">carbon</string>
     <string name="good_way">good way</string>
     <string name="amazing">amazing</string>
-    <string name="base_goal_escription">The base goal represets the monthly cc we shoul all aspire to. The figure (30,000 CC = 30kg CO2e emissions) is calculated in accordance with the paris climate targets, which wew set to prevent the wors effects of climate change</string>
+    <string name="text_vehicle_bs">Your total number of vehicle  you’ve tracked. Keep up the good work!</string>
+    <string name="text_food_bs">Your total number of food you’ve tracked. Keep up the good work!</string>
+    <string name="text_event_bs">Join event and smashing your climate  goals to earn more points</string>
+    <string name="base_goal_escription">The base goal represents the monthly carbon copy (CC) we should aim for. The figure (30,000g CC = 30kg CO2 emissions) is calculated in line with the Paris climate targets, which we set to prevent the worst effects of climate chang</string>
     <string name="detail_carbon">Detail Carbon</string>
     <string name="text_question_two_desc">Keep tracking the food and vehicles you consume.</string>
     <string name="text_question_one_desc">Welcome to the Breeze app. Swipe to find out more!</string>
@@ -85,7 +91,7 @@
     <string name="empty_image_warning">Please insert the image file first.</string>
     <string name="empty_desc_warning">Description must be filled</string>
     <string name="track_error_message">Please try again. Select a different picture or check your internet connection.</string>
-    <string name="event_dont_joined">"You haven't joined the event, let's join the event immediately"</string>
+    <string name="event_dont_joined">"You haven't joined any events yet, let's join one immediately"</string>
     <string name="event_dont_explore">The event is currently unavailable, please wait for a few more days</string>
     <string name="project_dont_explore">The project is currently unavailable, please wait for a few more days</string>
     <string name="event_dont_finished">You have not finished the event</string>

@@ -29,7 +29,7 @@
         android:fontFamily="@font/inter"
         android:gravity="center"
         android:layout_marginHorizontal="10dp"
-        android:text="Your total number of vechile  you’ve tracked. Keep up the good work!"
+        android:text="@string/text_vehicle_bs"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:lineSpacingExtra="4dp"/>

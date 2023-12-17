@@ -416,7 +416,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Vechile Tracked"
+                                android:text="Vehicle Tracked"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/inter"
