@@ -31,6 +31,7 @@ import com.example.breeze.databinding.FragmentHomeBinding
 import com.example.breeze.ui.activities.camera.CameraFoodCarbonActivity
 import com.example.breeze.ui.activities.carbon.DetailCarbonActivity
 import com.example.breeze.ui.activities.main.MainActivity
+import com.example.breeze.ui.activities.project.ProjectActivity
 import com.example.breeze.ui.activities.vehicle.AddVehicleCarbonActivity
 import com.example.breeze.ui.adapter.rv.ArticlesAdapter
 import com.example.breeze.ui.adapter.frag.QuestionAdapter
@@ -300,6 +301,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             tvDetails.setOnClickListener {
                 val intent = Intent(activity, DetailCarbonActivity::class.java)
+                startActivity(intent)
+            }
+            btnExplore.setOnClickListener {
+                val intent = Intent(activity, ProjectActivity::class.java)
                 startActivity(intent)
             }
 

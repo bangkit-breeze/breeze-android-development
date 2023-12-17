@@ -45,7 +45,61 @@
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
+                <LinearLayout
+                    android:id="@+id/data_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="17dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <ImageView
+                        android:layout_width="110dp"
+                        android:layout_marginTop="-20dp"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:src="@drawable/event_explore_dont_have"/>
 
+
+                    <TextView
+                        android:id="@+id/tv_desc"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:layout_marginTop="-30dp"
+                        android:fontFamily="@font/inter"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="22dp"
+                        android:text="@string/project_dont_explore"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_article"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    tools:listitem="@layout/item_project"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="?android:attr/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="40dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

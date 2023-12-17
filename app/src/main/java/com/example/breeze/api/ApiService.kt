@@ -15,6 +15,7 @@ import com.example.breeze.data.model.request.auth.RegisterRequest
 import com.example.breeze.data.model.response.event.EventResponse
 import com.example.breeze.data.model.response.event.JoinEventResponse
 import com.example.breeze.data.model.response.event.UploadEvidenceEventResponse
+import com.example.breeze.data.model.response.project.ProjectResponse
 import com.example.breeze.data.model.response.user.HistoryTrackResponse
 import com.example.breeze.data.model.response.user.UserStatisticResponse
 import okhttp3.MultipartBody
@@ -48,6 +49,11 @@ interface ApiService {
     suspend fun getEventsExplore(
         @Header("Authorization") token: String
     ): EventResponse
+
+    @GET("projects")
+    suspend fun getProjects(
+        @Header("Authorization") token: String
+    ): ProjectResponse
 
     @GET("events")
     suspend fun getEventsJoined(

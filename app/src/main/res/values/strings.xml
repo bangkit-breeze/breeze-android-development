@@ -87,6 +87,7 @@
     <string name="track_error_message">Please try again. Select a different picture or check your internet connection.</string>
     <string name="event_dont_joined">"You haven't joined the event, let's join the event immediately"</string>
     <string name="event_dont_explore">The event is currently unavailable, please wait for a few more days</string>
+    <string name="project_dont_explore">The project is currently unavailable, please wait for a few more days</string>
     <string name="event_dont_finished">You have not finished the event</string>
     <string name="text_event_finished">You have completed this event</string>
     <string name="text_event_joined_done">Congratulations on successfully joining this event.</string>

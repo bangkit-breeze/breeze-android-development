@@ -7,6 +7,7 @@ import com.example.breeze.data.local.datastore.dataStore
 import com.example.breeze.data.repository.ArticleRepository
 import com.example.breeze.data.repository.EventRepository
 import com.example.breeze.data.repository.LeaderBoardRepository
+import com.example.breeze.data.repository.ProjectRepository
 import com.example.breeze.data.repository.TrackEmissionRepository
 import com.example.breeze.data.repository.UserRepository
 
@@ -18,6 +19,8 @@ object Injection {
         UserRepository.getInstance(provideApiService(), application, provideUserPreferences(application))
     fun provideArticleRepository(application: Application) =
         ArticleRepository.getInstance(provideApiService(), application)
+    fun provideProjectRepository(application: Application) =
+        ProjectRepository.getInstance(provideApiService(), application)
     fun provideEventRepository(application: Application) =
         EventRepository.getInstance(provideApiService(), application)
     fun provideLeaderBoardRepository(application: Application) =

@@ -31,7 +31,6 @@ class DetailEventActivity : AppCompatActivity() {
         EventViewModelFactory.getInstance(application)
     }
     private lateinit var dataUser: LoginResult
-    private lateinit var progressDialog: Dialog
     private lateinit var id: String
     private lateinit var alertDialog: AlertDialog.Builder
     override fun onCreate(savedInstanceState: Bundle?) {
