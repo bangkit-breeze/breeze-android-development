@@ -6,7 +6,7 @@
 <div align="center">
   
   ![Banner App](https://github.com/bangkit-breeze/.github/blob/main/profile/public/Application%20showcase.png)
-  <h1 align="center">BREEZE</h1>
+  <h1 align="center">Breeze</h1>
   <p align="center">Bio Reward Engagement and Eco Zero Emission
 </p>
 </div>
@@ -40,6 +40,8 @@ For logs HTTP request and response data
 
 <!-- GETTING STARTED -->
 ## Getting Started
+
+To get started with the Ternaku mobile app, follow the instructions below.
 
 ### Prerequisites
 
