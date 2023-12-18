@@ -19,21 +19,27 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_desc_carbon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis aliquet turpis, eu accumsan enim venenatis sit amet. Donec et mollis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis aliquet turpis, eu accumsan enim venenatis sit amet. Donec et mollis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis aliquet turpis, Fusce convallis aliquet turpis, eu accumsan enim venenatis sit amet. Donec et mollis. consectetur adipiscing elit. Fusce convallis aliquet turpis, Fusce convallis aliquet turpis, eu accumsan enim venenatis sit amet. Donec et mollis.consectetur adipiscing elit. Fusce convallis aliquet turpis, Fusce convallis aliquet turpis, eu accumsan enim venenatis sit amet. Donec et mollis"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/inter"
-        android:textSize="12sp"
-        android:lineSpacingExtra="4dp"
+    <ScrollView
+        android:id="@+id/tv_desc_carbon2"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
-        />
+        >
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_desc_carbon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_term"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
+            android:textSize="12sp"
+            android:lineSpacingExtra="4dp"
+           />
+    </ScrollView>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_okay"
@@ -49,7 +55,7 @@
         app:iconGravity="textEnd"
         app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_desc_carbon" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_desc_carbon2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel"
@@ -66,5 +72,5 @@
         app:iconGravity="textStart"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_desc_carbon" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_desc_carbon2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
