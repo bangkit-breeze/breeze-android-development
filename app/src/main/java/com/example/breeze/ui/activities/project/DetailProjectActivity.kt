@@ -35,7 +35,7 @@ class DetailProjectActivity : AppCompatActivity() {
 
             tvTitle.text = dataProject.title
             tvLocation.text = dataProject.location
-            tvCarbon.text = "${dataProject.totalCo2?.div(1000)}"
+            tvCarbon.text = "${dataProject.totalCo2?.div(1000)} tCO2e"
             tvHarga.text = "Rp. ${dataProject.price}"
             tvTree.text = "/ Tree"
             tvDesc.text = dataProject.description
