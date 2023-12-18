@@ -53,21 +53,59 @@ For logs HTTP request and response data
 - JRE (Java Runtime Environment) or JDK (Java Development Kit)
   
 ### Installation
-Install on phone
-1. Go to realease 
-2. Choose the lastest
-3. Click on apk
-4. The apps will be downloaded
-5. Install on your phone
+- Install on phone
+	1. Go to realease 
+	2. Choose the lastest
+	3. Click on apk
+	4. The apps will be downloaded
+	5. Install on your phone
 
-Android Studio
+- Android Studio
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/bangkit-breeze/breeze-android-development.git
-   ```
-2. Build the apps
-   ```sh
-   Run app or Shift + F10
-   ```
+	1. Clone the repo
+	   ```sh
+	   git clone https://github.com/bangkit-breeze/breeze-android-development.git
+	   ```
+	2. Build the apps
+	   ```sh
+	   Run app or Shift + F10
+	   ```
 
+## Usage
+
+Apps Demo
+*coming soon*
+
+
+## Contributing
+
+Contributions to the Ternaku mobile app development are welcome. If you would like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your contribution.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Open a pull request in the original repository.
+
+<!-- CONTACT -->
+## Contact
+
+| Member |  |
+|--|--|
+| Muhamad Yazid Imani |[Github](https://github.com/pierreviences)  |
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+Thanks to
+
+- Backend team
+- Machine Learning team
+- Open source library
+
+## License
+
+*coming soon*
+
+## Disclaimer
+-   This project is created for educational purpose as the requirement to graduate from [**_Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka_**.](https://www.linkedin.com/company/bangkit-academy/mycompany/)
